@@ -4,7 +4,7 @@ import { ROUTER_PATH } from '../../../models/enums';
 
 const NotFound = () => {
   return (
-    <section className="error h-full flex justify-center items-center flex-col gap-5">
+    <section className="error h-full flex justify-center items-center flex-col gap-5 mx-2">
       <h2 className="title text-4xl">404</h2>
       <p className="text-gray-600">Something goes wrong. Page Not Found</p>
       <NavLink
