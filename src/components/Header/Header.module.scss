@@ -1,6 +1,9 @@
 .header {
   &LogoImage {
     display: block;
-    width: 150px;
+    height: 50px;
+    @media (max-width: (512px)) {
+      height: 40px;
+    }
   }
 }

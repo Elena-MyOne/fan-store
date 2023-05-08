@@ -4,9 +4,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        socialBg: '#f7f9fc',
+        // socialBg: '#f7f9fc',
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/container-queries')],
 };
