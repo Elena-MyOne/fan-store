@@ -10,6 +10,7 @@ import NotFound from './components/pages/NotFound/NotFound';
 import Login from './components/pages/Login/Login';
 import Logout from './components/pages/Logout/Logout';
 import Registration from './components/pages/Registration/Registration';
+import Checkout from './components/pages/Checkout/Checkout';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route index element={<Home />}></Route>
         <Route path={ROUTER_PATH.PRODUCT} element={<Product />} />
         <Route path={ROUTER_PATH.CART} element={<Cart />} />
+        <Route path={ROUTER_PATH.CHECKOUT} element={<Checkout />} />
         <Route path={ROUTER_PATH.LOGIN} element={<Login />} />
         <Route path={ROUTER_PATH.LOGOUT} element={<Logout />} />
         <Route path={ROUTER_PATH.REGISTRATION} element={<Registration />} />
