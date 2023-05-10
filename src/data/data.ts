@@ -4,7 +4,7 @@ export const data: IData = {
   products: [
     {
       id: 1,
-      category: 'wands',
+      category: 'Wands',
       faculty: 'Gryffindor',
       name: 'Elder wand',
       image: '../assets/wands/elder-wand.webp',
@@ -18,7 +18,7 @@ export const data: IData = {
     },
     {
       id: 2,
-      category: 'wands',
+      category: 'Wands',
       name: 'Dolores Umbridge wand',
       faculty: 'Slytherin',
       image: '../assets/wands/dolores-umbridge-wand.webp',
@@ -235,7 +235,8 @@ export const data: IData = {
       length: '18 ins',
       core: 'dragon heartstring',
       wood: 'elm',
-      description: '',
+      description:
+        'A wand is made of fir wood with a dragon heartstring core. It is a sturdy and powerful wand, capable of performing complex magic with precision and skill',
       price: 27.85,
       rate: 4.6,
     },
@@ -462,7 +463,7 @@ export const data: IData = {
       category: 'Sweaters',
       faculty: 'Gryffindor',
       name: 'H For Harry Adult Sweater',
-      image: '../assets/sweaters/for-harry-adult-sweater.web',
+      image: '../assets/sweaters/for-harry-adult-sweater.webp',
       description:
         'Replica H For Harry Sweater as seen in the films from The Wizarding World Of Harry Potter. Made from the same wool and silk mixture as the movie garment and in the same Scottish mill as the school wear from the films. 90% British Wool/ 10% Silk',
       price: 90.0,

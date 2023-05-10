@@ -7,7 +7,7 @@ interface ProductsDataProps {
 
 const Categories = (props: ProductsDataProps) => {
   const styleCategoryItem =
-    'px-4 py-1 bg-gray-100 hover:bg-gray-200 duration-300 rounded-3xl cursor-pointer';
+    'px-4 py-1 bg-gray-200 hover:bg-gray-200 duration-300 rounded-3xl cursor-pointer';
   const styleCategoryItemActive =
     'px-4 py-1 text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl cursor-pointer';
 
