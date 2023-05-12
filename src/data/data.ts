@@ -61,7 +61,7 @@ export const data: IData = {
     {
       id: 5,
       category: 'wands',
-      faculty: 'Beauxbatons Academy of Magic',
+      faculty: 'Beauxbatons',
       name: 'Fleur Delacour wand',
       image: '../assets/wands/fleur-delacour-wand.webp',
       length: '9 1/2 ins',

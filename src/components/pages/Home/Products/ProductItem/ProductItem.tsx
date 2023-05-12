@@ -27,7 +27,7 @@ const ProductItem = (props: ProductItemProps) => {
     : 'flex gap-1 items-center cart absolute top-3 left-3 p-2 text-black hover:text-white bg-gray-200 hover:bg-gray-900 duration-300 rounded-2xl bg-gray-200';
 
   return (
-    <div className="flex flex-col items-center border border-gray-300 pt-7 pb-2 px-4 rounded mb-2 hover:shadow-lg duration-300 relative">
+    <div className="flex flex-col items-center border border-gray-300 pt-7 pb-3 px-4 rounded mb-2 hover:shadow-lg duration-300 relative">
       <button onClick={() => setCartAdd((prev) => !prev)} className={buttonCartStyles}>
         <svg className="w-[20px] h-[20px]" viewBox="0 96 960 960">
           <path
