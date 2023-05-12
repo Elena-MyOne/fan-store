@@ -23,7 +23,7 @@ const Products = ({ products }: ProductProps) => {
     );
   });
 
-  return <div className="products grid grid-cols-4 gap-5 my-5">{productItems}</div>;
+  return <div className="products grid grid-cols-4 gap-6 my-5">{productItems}</div>;
 };
 
 export default Products;
