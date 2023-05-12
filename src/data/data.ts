@@ -117,7 +117,7 @@ export const data: IData = {
     {
       id: 9,
       category: 'wands',
-      faculty: 'Durmstrang Institute',
+      faculty: 'Durmstrang',
       name: 'Viktor Krum wand',
       image: '../assets/wands/viktor-krum-wand.png',
       length: '10 1/4 ins',
