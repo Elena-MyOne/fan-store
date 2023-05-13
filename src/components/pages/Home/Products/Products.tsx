@@ -8,19 +8,8 @@ interface ProductProps {
 
 const Products = ({ products }: ProductProps) => {
   const productItems = products.map((product: ProductsData) => {
-    return (
-      <ProductItem
-        image={product.image}
-        category={product.category}
-        faculty={product.faculty}
-        name={product.name}
-        rate={product.rate}
-        price={product.price}
-        description={product.description}
-        key={product.id}
-        id={product.id}
-      />
-    );
+    // eslint-disable-next-line react/jsx-key
+    return <ProductItem {...product} />;
   });
 
   return <div className="products grid grid-cols-4 gap-6 my-5">{productItems}</div>;
