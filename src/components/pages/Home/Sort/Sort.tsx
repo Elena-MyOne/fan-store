@@ -11,7 +11,7 @@ const Sort = (props: ProductsDataProps) => {
 
   const activePopupItemStyles =
     'font-semibold py-2 px-5 text-orange-400 bg-orange-100 cursor-pointer';
-  const popupItemStyles = 'py-2 px-5 cursor-pointer';
+  const popupItemStyles = 'py-2 px-5 cursor-pointer hover:text-orange-400 duration-300';
 
   const allFaculties = props.products.map((product) => product.faculty);
   const faculties = [...new Set(allFaculties)].map((faculty, index) => (

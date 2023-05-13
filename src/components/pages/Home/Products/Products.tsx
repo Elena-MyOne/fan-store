@@ -8,8 +8,7 @@ interface ProductProps {
 
 const Products = ({ products }: ProductProps) => {
   const productItems = products.map((product: ProductsData) => {
-    // eslint-disable-next-line react/jsx-key
-    return <ProductItem {...product} />;
+    return <ProductItem key={product.id} {...product} />;
   });
 
   return <div className="products grid grid-cols-4 gap-6 my-5">{productItems}</div>;

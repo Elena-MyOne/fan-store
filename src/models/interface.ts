@@ -14,4 +14,5 @@ export interface ProductsData {
   description: string;
   price: number;
   rate: number;
+  sale: number;
 }

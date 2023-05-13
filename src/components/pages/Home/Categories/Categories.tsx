@@ -9,9 +9,9 @@ const Categories = (props: ProductsDataProps) => {
   const [activeCategory, setActiveCategory] = useState('all');
 
   const styleCategoryItem =
-    'px-4 py-1 bg-gray-200 hover:bg-gray-200 duration-300 rounded-3xl cursor-pointer';
+    'px-5 py-2 bg-gray-200 hover:bg-gray-200 duration-300 rounded-3xl cursor-pointer';
   const styleCategoryItemActive =
-    'px-4 py-1 text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl cursor-pointer';
+    'px-5 py-2 text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl cursor-pointer';
 
   const allCategories = props.products.map((product) => product.category.toLowerCase());
   const categories = ['all', ...new Set(allCategories)].map((category, index) => (
