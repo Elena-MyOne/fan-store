@@ -5,6 +5,7 @@ export enum ROUTER_PATH {
   CHECKOUT = 'cart/checkout',
   LOGIN = 'login',
   LOGOUT = 'logout',
-  REGISTRATION = 'registration',
+  SIGNUP = 'signup',
+  PROFILE = 'profile',
   NOTFOUND = '*',
 }

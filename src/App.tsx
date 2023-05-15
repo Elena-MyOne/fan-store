@@ -9,7 +9,8 @@ import Cart from './components/pages/Cart/Cart';
 import NotFound from './components/pages/NotFound/NotFound';
 import Login from './components/pages/Login/Login';
 import Logout from './components/pages/Logout/Logout';
-import Registration from './components/pages/Registration/Registration';
+import SignUp from './components/pages/SignUp/SignUp';
+import Profile from './components/pages/Profile/Profile';
 import Checkout from './components/pages/Checkout/Checkout';
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
         <Route path={ROUTER_PATH.CHECKOUT} element={<Checkout />} />
         <Route path={ROUTER_PATH.LOGIN} element={<Login />} />
         <Route path={ROUTER_PATH.LOGOUT} element={<Logout />} />
-        <Route path={ROUTER_PATH.REGISTRATION} element={<Registration />} />
+        <Route path={ROUTER_PATH.SIGNUP} element={<SignUp />} />
+        <Route path={ROUTER_PATH.PROFILE} element={<Profile />} />
         <Route path={ROUTER_PATH.NOTFOUND} element={<NotFound />} />
       </Route>
     </Routes>

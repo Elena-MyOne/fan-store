@@ -120,7 +120,7 @@ export const data: IData = {
         'A wand made of elder wood and unicorn hair, which was wielded by the duplicitous and treacherous Hogwarts professor Quirinus Quirrell. It is known for being highly effective in the casting of Dark Magic".',
       price: 28.69,
       rate: 4.5,
-      sale: 0,
+      sale: 10,
     },
     {
       id: 9,
@@ -360,7 +360,7 @@ export const data: IData = {
         'Hand-painted water globe featuring Hogwarts castle from The Wizarding World of Harry Potter',
       price: 48.95,
       rate: 3.9,
-      sale: 10,
+      sale: 50,
     },
     {
       id: 26,
@@ -408,7 +408,7 @@ export const data: IData = {
         'Hogwarts crest woven decorative pillow. From The Wizarding World of Harry Potter. Size 17" x 17", made from polyester and cotton.',
       price: 32.0,
       rate: 4.3,
-      sale: 0,
+      sale: 10,
     },
     {
       id: 30,
