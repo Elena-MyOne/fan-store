@@ -18,7 +18,7 @@ const Header = () => {
         <div className="flex gap-4 items-center md:gap-10">
           <Link
             to={ROUTER_PATH.CART}
-            className="cart flex items-center bg-orange-500 md:px-6 px-3 md:py-3 py-2 rounded-3xl font-bold text-white hover:bg-orange-600 duration-300"
+            className="cart flex items-center bg-orange-500 md:px-6 px-3 md:py-3 py-2 rounded-3xl font-semibold text-white hover:bg-orange-600 duration-300"
           >
             <div className="sum mr-3">
               $ <span>0</span>

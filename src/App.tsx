@@ -16,18 +16,32 @@ import Checkout from './components/pages/Checkout/Checkout';
 function App() {
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [activeCategory, setActiveCategory] = React.useState('all');
 
   React.useEffect(() => {
     fetch(URL.PRODUCTS)
       .then((res) => res.json())
-      .then((json) => setProducts(json))
-      .then(() => setIsLoading(false));
+      .then((json) => {
+        setProducts(json);
+        setIsLoading(false);
+      });
+    window.scrollTo(0, 0);
   }, []);
 
   return (
     <Routes>
       <Route path={ROUTER_PATH.HOME} element={<Layout />}>
-        <Route index element={<Home products={products} loading={isLoading} />}></Route>
+        <Route
+          index
+          element={
+            <Home
+              products={products}
+              loading={isLoading}
+              activeCategory={activeCategory}
+              onClickCategory={(category: string) => setActiveCategory(category ? category : 'all')}
+            />
+          }
+        ></Route>
         <Route path={ROUTER_PATH.PRODUCT} element={<Product />} />
         <Route path={ROUTER_PATH.CART} element={<Cart />} />
         <Route path={ROUTER_PATH.CHECKOUT} element={<Checkout />} />

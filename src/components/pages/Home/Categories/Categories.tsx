@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { ProductsData } from '../../../../models/interface';
 import CategoriesSkeleton from './CategoriesSkeleton';
-import { loadavg } from 'os';
 
 interface ProductsDataProps {
   products: ProductsData[];
   loading: boolean;
+  activeCategory: string;
+  handleCategory: (category: string) => void;
 }
 
 const Categories = (props: ProductsDataProps) => {
-  const [activeCategory, setActiveCategory] = useState('all');
-
   const styleCategoryItem =
     'xl:px-5 px-4 xl:py-2 py-1 bg-gray-200 hover:bg-gray-200 duration-300 rounded-3xl cursor-pointer';
   const styleCategoryItemActive =
@@ -19,9 +18,9 @@ const Categories = (props: ProductsDataProps) => {
   const allCategories = props.products.map((product) => product.category.toLowerCase());
   const categories = ['all', ...new Set(allCategories)].map((category, index) => (
     <li
-      className={category === activeCategory ? styleCategoryItemActive : styleCategoryItem}
+      className={category === props.activeCategory ? styleCategoryItemActive : styleCategoryItem}
       key={index}
-      onClick={() => setActiveCategory(category ? category : 'all')}
+      onClick={() => props.handleCategory(category)}
     >
       {category}
     </li>
