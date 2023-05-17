@@ -9,18 +9,18 @@ interface ProductsDataProps {
   handleCategory: (category: string) => void;
 }
 
-const Categories = (props: ProductsDataProps) => {
+const Categories = ({ products, loading, activeCategory, handleCategory }: ProductsDataProps) => {
   const styleCategoryItem =
     'xl:px-5 px-4 xl:py-2 py-1 bg-gray-200 hover:bg-gray-200 duration-300 rounded-3xl cursor-pointer';
   const styleCategoryItemActive =
     'xl:px-5 px-4 xl:py-2 py-1 text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl cursor-pointer';
 
-  const allCategories = props.products.map((product) => product.category.toLowerCase());
+  const allCategories = products.map((product) => product.category.toLowerCase());
   const categories = ['all', ...new Set(allCategories)].map((category, index) => (
     <li
-      className={category === props.activeCategory ? styleCategoryItemActive : styleCategoryItem}
+      className={category === activeCategory ? styleCategoryItemActive : styleCategoryItem}
       key={index}
-      onClick={() => props.handleCategory(category)}
+      onClick={() => handleCategory(category)}
     >
       {category}
     </li>
@@ -31,7 +31,7 @@ const Categories = (props: ProductsDataProps) => {
   return (
     <div className="categories">
       <ul className="category flex xl:justify-between items-center xl:gap-6 gap-4 flex-wrap">
-        {props.loading ? categoriesSkeleton : categories}
+        {loading ? categoriesSkeleton : categories}
       </ul>
     </div>
   );
