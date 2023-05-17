@@ -11,22 +11,24 @@ import { URL } from '../../../models/enums';
 
 const Home = () => {
   const [products, setProducts] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
     fetch(URL.PRODUCTS)
       .then((res) => res.json())
-      .then((json) => setProducts(json));
+      .then((json) => setProducts(json))
+      .then(() => setIsLoading(false));
   }, []);
 
   return (
     <div className="home container px-2 m-auto">
       <div className="top flex justify-between items-center gap-4 py-8">
-        <Categories products={products} />
+        <Categories products={products} loading={isLoading} />
         <Sort products={products} />
       </div>
       <div className="products">
         <h2 className="title font-semibold text-xl">All products</h2>
-        <Products products={products} />
+        <Products products={products} loading={isLoading} />
       </div>
     </div>
   );

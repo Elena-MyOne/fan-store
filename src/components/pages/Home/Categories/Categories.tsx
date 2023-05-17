@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { ProductsData } from '../../../../models/interface';
+import CategoriesSkeleton from './CategoriesSkeleton';
+import { loadavg } from 'os';
 
 interface ProductsDataProps {
   products: ProductsData[];
+  loading: boolean;
 }
 
 const Categories = (props: ProductsDataProps) => {
@@ -24,9 +27,13 @@ const Categories = (props: ProductsDataProps) => {
     </li>
   ));
 
+  const categoriesSkeleton = [...new Array(7)].map((item, i) => <CategoriesSkeleton key={i} />);
+
   return (
     <div className="categories">
-      <ul className="category flex justify-between items-center gap-6">{categories}</ul>
+      <ul className="category flex justify-between items-center gap-6">
+        {props.loading ? categoriesSkeleton : categories}
+      </ul>
     </div>
   );
 };
