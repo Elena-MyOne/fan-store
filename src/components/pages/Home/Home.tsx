@@ -12,7 +12,7 @@ interface DataProps {
 const Home = ({ products, loading }: DataProps) => {
   return (
     <div className="home container px-2 m-auto">
-      <div className="top flex justify-between items-center gap-4 py-8">
+      <div className="top flex justify-between items-center gap-4 py-8 xl:flex-row flex-col">
         <Categories products={products} loading={loading} />
         <Sort products={products} />
       </div>

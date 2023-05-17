@@ -16,7 +16,7 @@ const Products = ({ products, loading }: ProductProps) => {
   const ProductSkeletons = [...new Array(8)].map((item, i) => <ProductItemSkeleton key={i} />);
 
   return (
-    <div className="products grid grid-cols-4 gap-6 my-5">
+    <div className="products grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:m-auto gap-6 my-5">
       {loading ? ProductSkeletons : productItems}
     </div>
   );

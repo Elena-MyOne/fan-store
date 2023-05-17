@@ -12,9 +12,9 @@ const Categories = (props: ProductsDataProps) => {
   const [activeCategory, setActiveCategory] = useState('all');
 
   const styleCategoryItem =
-    'px-5 py-2 bg-gray-200 hover:bg-gray-200 duration-300 rounded-3xl cursor-pointer';
+    'xl:px-5 px-4 xl:py-2 py-1 bg-gray-200 hover:bg-gray-200 duration-300 rounded-3xl cursor-pointer';
   const styleCategoryItemActive =
-    'px-5 py-2 text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl cursor-pointer';
+    'xl:px-5 px-4 xl:py-2 py-1 text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl cursor-pointer';
 
   const allCategories = props.products.map((product) => product.category.toLowerCase());
   const categories = ['all', ...new Set(allCategories)].map((category, index) => (
@@ -31,7 +31,7 @@ const Categories = (props: ProductsDataProps) => {
 
   return (
     <div className="categories">
-      <ul className="category flex justify-between items-center gap-6">
+      <ul className="category flex xl:justify-between items-center xl:gap-6 gap-4 flex-wrap">
         {props.loading ? categoriesSkeleton : categories}
       </ul>
     </div>
