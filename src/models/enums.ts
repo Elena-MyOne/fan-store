@@ -9,3 +9,7 @@ export enum ROUTER_PATH {
   PROFILE = 'profile',
   NOTFOUND = '*',
 }
+
+export enum URL {
+  PRODUCTS = 'http://localhost:4200/products',
+}
