@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
-import { ROUTER_PATH } from './models/enums';
+import { ROUTER_PATH, URL } from './models/enums';
 import Layout from './components/Layout/Layout';
 import Home from './components/pages/Home/Home';
 import Product from './components/pages/Product/Product';
@@ -14,10 +14,20 @@ import Profile from './components/pages/Profile/Profile';
 import Checkout from './components/pages/Checkout/Checkout';
 
 function App() {
+  const [products, setProducts] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    fetch(URL.PRODUCTS)
+      .then((res) => res.json())
+      .then((json) => setProducts(json))
+      .then(() => setIsLoading(false));
+  }, []);
+
   return (
     <Routes>
       <Route path={ROUTER_PATH.HOME} element={<Layout />}>
-        <Route index element={<Home />}></Route>
+        <Route index element={<Home products={products} loading={isLoading} />}></Route>
         <Route path={ROUTER_PATH.PRODUCT} element={<Product />} />
         <Route path={ROUTER_PATH.CART} element={<Cart />} />
         <Route path={ROUTER_PATH.CHECKOUT} element={<Checkout />} />
