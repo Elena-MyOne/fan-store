@@ -10,9 +10,19 @@ interface DataProps {
   loading: boolean;
   activeCategory: string;
   onClickCategory: (category: string) => void;
+  activeFaculty: string;
+  onClickFaculty: (faculty: string) => void;
 }
 
-const Home = ({ products, loading, activeCategory, onClickCategory, allProducts }: DataProps) => {
+const Home = ({
+  products,
+  loading,
+  activeCategory,
+  onClickCategory,
+  activeFaculty,
+  onClickFaculty,
+  allProducts,
+}: DataProps) => {
   return (
     <div className="home container px-2 m-auto">
       <div className="top flex justify-between items-center gap-4 py-8 xl:flex-row flex-col">
@@ -22,7 +32,11 @@ const Home = ({ products, loading, activeCategory, onClickCategory, allProducts 
           activeCategory={activeCategory}
           handleCategory={(category: string) => onClickCategory(category)}
         />
-        <Sort products={products} />
+        <Sort
+          allProducts={allProducts}
+          handleFaculty={(faculty: string) => onClickFaculty(faculty)}
+          activeFaculty={activeFaculty}
+        />
       </div>
       <div className="products mb-4">
         <h2 className="title font-semibold text-xl md:mb-4 mb-2">All products</h2>

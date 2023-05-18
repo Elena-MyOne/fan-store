@@ -2,24 +2,25 @@ import React, { useState } from 'react';
 import { ProductsData } from '../../../../models/interface';
 
 interface ProductsDataProps {
-  products: ProductsData[];
+  allProducts: ProductsData[];
+  activeFaculty: string;
+  handleFaculty: (faculty: string) => void;
 }
 
 const Sort = (props: ProductsDataProps) => {
   const [isOpenPopup, setIsOpenPopup] = useState(false);
-  const [activeFaculty, setActiveFaculty] = useState('none');
 
   const activePopupItemStyles =
     'font-semibold py-2 px-5 text-orange-400 bg-orange-100 cursor-pointer';
   const popupItemStyles = 'py-2 px-5 cursor-pointer hover:text-orange-400 duration-300';
 
-  const allFaculties = props.products.map((product) => product.faculty);
-  const faculties = [...new Set(allFaculties)].map((faculty, index) => (
+  const allFaculties = props.allProducts.map((product) => product.faculty);
+  const faculties = ['All', ...new Set(allFaculties)].map((faculty, index) => (
     <li
-      className={faculty === activeFaculty ? activePopupItemStyles : popupItemStyles}
+      className={faculty === props.activeFaculty ? activePopupItemStyles : popupItemStyles}
       key={index}
       onClick={() => {
-        setActiveFaculty(faculty ? faculty : 'none');
+        props.handleFaculty(faculty);
         setIsOpenPopup((prev) => !prev);
       }}
     >
@@ -45,7 +46,7 @@ const Sort = (props: ProductsDataProps) => {
               />
             </svg>
           </span>{' '}
-          <span className="label w-[100px]">{activeFaculty}</span>
+          <span className="label w-[100px]">{props.activeFaculty}</span>
         </div>
       </div>
       {isOpenPopup && (

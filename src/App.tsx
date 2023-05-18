@@ -18,6 +18,7 @@ function App() {
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [activeCategory, setActiveCategory] = React.useState('all');
+  const [activeFaculty, setActiveFaculty] = React.useState('All');
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -27,17 +28,16 @@ function App() {
         setAllProducts(json);
         setIsLoading(false);
       });
-    window.scrollTo(0, 0);
   }, []);
 
   React.useEffect(() => {
-    fetch(`${URL.PRODUCTS}?category=${activeCategory}`)
+    fetch(`${URL.PRODUCTS}?category=${activeCategory}&faculty=${activeFaculty}`)
       .then((res) => res.json())
       .then((json) => {
         setProducts(json);
       });
     window.scrollTo(0, 0);
-  }, [activeCategory]);
+  }, [activeCategory, activeFaculty]);
 
   return (
     <Routes>
@@ -51,6 +51,8 @@ function App() {
               loading={isLoading}
               activeCategory={activeCategory}
               onClickCategory={(category: string) => setActiveCategory(category ? category : 'all')}
+              activeFaculty={activeFaculty}
+              onClickFaculty={(faculty: string) => setActiveFaculty(faculty ? faculty : 'none')}
             />
           }
         ></Route>
