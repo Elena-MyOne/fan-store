@@ -14,19 +14,30 @@ import Profile from './components/pages/Profile/Profile';
 import Checkout from './components/pages/Checkout/Checkout';
 
 function App() {
+  const [allProducts, setAllProducts] = React.useState([]);
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [activeCategory, setActiveCategory] = React.useState('all');
 
   React.useEffect(() => {
+    setIsLoading(true);
     fetch(URL.PRODUCTS)
       .then((res) => res.json())
       .then((json) => {
-        setProducts(json);
+        setAllProducts(json);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
   }, []);
+
+  React.useEffect(() => {
+    fetch(`${URL.PRODUCTS}?category=${activeCategory}`)
+      .then((res) => res.json())
+      .then((json) => {
+        setProducts(json);
+      });
+    window.scrollTo(0, 0);
+  }, [activeCategory]);
 
   return (
     <Routes>
@@ -36,6 +47,7 @@ function App() {
           element={
             <Home
               products={products}
+              allProducts={allProducts}
               loading={isLoading}
               activeCategory={activeCategory}
               onClickCategory={(category: string) => setActiveCategory(category ? category : 'all')}
