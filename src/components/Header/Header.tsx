@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import style from './Header.module.scss';
 import { Link } from 'react-router-dom';
 import { ROUTER_PATH } from '../../models/enums';
+import Search from './Search/Search';
 
 const Header = () => {
   const [isSignUp, setSignUp] = useState(false);
@@ -15,6 +16,7 @@ const Header = () => {
         <Link to={ROUTER_PATH.HOME} className="logo w-[100px] md:w-[164px] md:h-[40px]">
           <img className={style.headerLogoImage} src="/assets/images/logo/logo.png" alt="logo" />
         </Link>
+        <Search />
         <div className="flex gap-4 items-center md:gap-10">
           <Link
             to={ROUTER_PATH.CART}

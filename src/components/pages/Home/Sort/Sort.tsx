@@ -35,7 +35,7 @@ const Sort = (props: ProductsDataProps) => {
         onClick={() => setIsOpenPopup((prev) => !prev)}
       >
         <span className="font-semibold">Sort by faculty:</span>{' '}
-        <div className="flex gap-2 items-center border rounded">
+        <div className="flex gap-2 items-center border rounded hover:border-gray-300 duration-300">
           <span
             className={isOpenPopup ? 'icon rotate-180 duration-300' : 'icon rotate-0 duration-300'}
           >
