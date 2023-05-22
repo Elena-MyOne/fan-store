@@ -17,11 +17,25 @@ const Search = ({ searchProduct, setSearchProduct }: SearchProps) => {
         </svg>
       </button>
       <input
-        className="outline-none p-1 pl-10 min-w-[200px] focus:min-w-[300px] rounded-2xl border pl-1 rounded-2xl hover:border-gray-300 duration-300 focus:border-gray-300"
+        className="outline-none p-1 pl-10 min-w-[250px] rounded-2xl border pl-1 rounded-2xl hover:border-gray-300 duration-300 focus:border-gray-300"
         type="text"
         placeholder="Search product ..."
+        value={searchProduct}
         onChange={(e) => setSearchProduct(e.target.value)}
       />
+      {searchProduct && (
+        <button
+          className="clear hover:text-orange-500 duration-300 absolute top-0.5 right-2"
+          onClick={() => setSearchProduct('')}
+        >
+          <svg className="w-[20px] h-[30px]" viewBox="0 96 960 960">
+            <path
+              className="fill-current"
+              d="m250.923 837.076-31.999-31.999L448.001 576 218.924 346.923l31.999-31.999L480 544.001l229.077-229.077 31.999 31.999L511.999 576l229.077 229.077-31.999 31.999L480 607.999 250.923 837.076"
+            />
+          </svg>
+        </button>
+      )}
     </div>
   );
 };
