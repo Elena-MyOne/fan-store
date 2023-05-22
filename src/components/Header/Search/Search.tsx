@@ -1,6 +1,11 @@
 import React from 'react';
 
-const Search = () => {
+interface SearchProps {
+  searchProduct: string;
+  setSearchProduct: (name: string) => void;
+}
+
+const Search = ({ searchProduct, setSearchProduct }: SearchProps) => {
   return (
     <div className="search relative  text-gray-600">
       <button className="hover:text-orange-500 duration-300 absolute top-0 left-2">
@@ -15,6 +20,7 @@ const Search = () => {
         className="outline-none p-1 pl-10 min-w-[200px] focus:min-w-[300px] rounded-2xl border pl-1 rounded-2xl hover:border-gray-300 duration-300 focus:border-gray-300"
         type="text"
         placeholder="Search product ..."
+        onChange={(e) => setSearchProduct(e.target.value)}
       />
     </div>
   );

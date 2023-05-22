@@ -19,6 +19,7 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [activeCategory, setActiveCategory] = React.useState('all');
   const [activeFaculty, setActiveFaculty] = React.useState('All');
+  const [searchProduct, setSearchProduct] = React.useState('');
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -31,17 +32,22 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    fetch(`${URL.PRODUCTS}?category=${activeCategory}&faculty=${activeFaculty}`)
+    fetch(
+      `${URL.PRODUCTS}?category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
+    )
       .then((res) => res.json())
       .then((json) => {
         setProducts(json);
       });
     window.scrollTo(0, 0);
-  }, [activeCategory, activeFaculty]);
+  }, [activeCategory, activeFaculty, searchProduct]);
 
   return (
     <Routes>
-      <Route path={ROUTER_PATH.HOME} element={<Layout />}>
+      <Route
+        path={ROUTER_PATH.HOME}
+        element={<Layout searchProduct={searchProduct} setSearchProduct={setSearchProduct} />}
+      >
         <Route
           index
           element={

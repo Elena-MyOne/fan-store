@@ -4,7 +4,12 @@ import { Link } from 'react-router-dom';
 import { ROUTER_PATH } from '../../models/enums';
 import Search from './Search/Search';
 
-const Header = () => {
+interface HeaderProps {
+  searchProduct: string;
+  setSearchProduct: (name: string) => void;
+}
+
+const Header = ({ searchProduct, setSearchProduct }: HeaderProps) => {
   const [isSignUp, setSignUp] = useState(false);
 
   const signUpPath = isSignUp ? ROUTER_PATH.PROFILE : ROUTER_PATH.SIGNUP;
@@ -16,7 +21,7 @@ const Header = () => {
         <Link to={ROUTER_PATH.HOME} className="logo w-[100px] md:w-[164px] md:h-[40px]">
           <img className={style.headerLogoImage} src="/assets/images/logo/logo.png" alt="logo" />
         </Link>
-        <Search />
+        <Search searchProduct={searchProduct} setSearchProduct={setSearchProduct} />
         <div className="flex gap-4 items-center md:gap-10">
           <Link
             to={ROUTER_PATH.CART}
