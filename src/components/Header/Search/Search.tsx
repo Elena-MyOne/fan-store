@@ -17,7 +17,7 @@ const Search = ({ searchProduct, setSearchProduct }: SearchProps) => {
         </svg>
       </button>
       <input
-        className="outline-none p-1 pl-10 min-w-[250px] rounded-2xl border pl-1 rounded-2xl hover:border-gray-300 duration-300 focus:border-gray-300"
+        className="outline-none py-1 pl-10 pr-8 min-w-[250px] rounded-2xl border rounded-2xl hover:border-gray-300 duration-300 focus:border-gray-300"
         type="text"
         placeholder="Search product ..."
         value={searchProduct}

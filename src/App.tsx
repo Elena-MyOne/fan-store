@@ -20,27 +20,33 @@ function App() {
   const [activeCategory, setActiveCategory] = React.useState('all');
   const [activeFaculty, setActiveFaculty] = React.useState('All');
   const [searchProduct, setSearchProduct] = React.useState('');
+  const [totalProducts, setTotalProducts] = React.useState(0);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [totalPages, setTotalPages] = React.useState(1);
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetch(URL.PRODUCTS)
+    fetch(`${URL.PRODUCTS}?page=1&limit=${totalProducts}`)
       .then((res) => res.json())
       .then((json) => {
-        setAllProducts(json);
+        setAllProducts(json.products);
+        setTotalProducts(json.totalProducts);
         setIsLoading(false);
       });
-  }, []);
+  }, [totalProducts]);
 
   React.useEffect(() => {
     fetch(
-      `${URL.PRODUCTS}?category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
+      `${URL.PRODUCTS}?page=${currentPage}&limit=10&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
     )
       .then((res) => res.json())
       .then((json) => {
-        setProducts(json);
+        setProducts(json.products);
+        setCurrentPage(json.currentPage);
+        setTotalPages(json.totalPages);
       });
     window.scrollTo(0, 0);
-  }, [activeCategory, activeFaculty, searchProduct]);
+  }, [activeCategory, activeFaculty, searchProduct, currentPage]);
 
   return (
     <Routes>
@@ -59,6 +65,9 @@ function App() {
               onClickCategory={(category: string) => setActiveCategory(category ? category : 'all')}
               activeFaculty={activeFaculty}
               onClickFaculty={(faculty: string) => setActiveFaculty(faculty ? faculty : 'none')}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              setCurrentPage={setCurrentPage}
             />
           }
         ></Route>

@@ -3,6 +3,7 @@ import Categories from './Categories/Categories';
 import Products from './Products/Products';
 import Sort from './Sort/Sort';
 import { ProductsData } from '../../../models/interface';
+import Pagination from './Pagination/Pagination';
 
 interface DataProps {
   products: ProductsData[];
@@ -12,6 +13,9 @@ interface DataProps {
   onClickCategory: (category: string) => void;
   activeFaculty: string;
   onClickFaculty: (faculty: string) => void;
+  currentPage: number;
+  totalPages: number;
+  setCurrentPage: (page: number) => void;
 }
 
 const Home = ({
@@ -22,6 +26,9 @@ const Home = ({
   activeFaculty,
   onClickFaculty,
   allProducts,
+  currentPage,
+  totalPages,
+  setCurrentPage,
 }: DataProps) => {
   return (
     <div className="home container px-2 m-auto">
@@ -40,6 +47,11 @@ const Home = ({
       </div>
       <div className="products mb-4">
         <h2 className="title font-semibold text-xl md:mb-4 mb-2">All products</h2>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
+        />
         <Products products={products} loading={loading} />
       </div>
     </div>
