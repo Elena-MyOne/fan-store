@@ -19,7 +19,7 @@ const Search = ({ searchProduct, setSearchProduct }: SearchProps) => {
       <input
         className="outline-none py-1 pl-10 pr-8 min-w-[250px] rounded-2xl border rounded-2xl hover:border-gray-300 duration-300 focus:border-gray-300"
         type="text"
-        placeholder="Search product ..."
+        placeholder="Search ..."
         value={searchProduct}
         onChange={(e) => setSearchProduct(e.target.value)}
       />

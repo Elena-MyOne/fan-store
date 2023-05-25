@@ -1,20 +1,18 @@
 import React from 'react';
 import { ProductsData } from '../../../../models/interface';
 import CategoriesSkeleton from './CategoriesSkeleton';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../../../redux/store';
+import { setActiveCategory } from '../../../../redux/slices/FilterSlice';
 interface ProductsDataProps {
   allProducts: ProductsData[];
   loading: boolean;
-  activeCategory: string;
-  handleCategory: (category: string) => void;
 }
 
-const Categories = ({
-  loading,
-  activeCategory,
-  handleCategory,
-  allProducts,
-}: ProductsDataProps) => {
+const Categories = ({ loading, allProducts }: ProductsDataProps) => {
+  const activeCategory = useSelector((state: RootState) => state.filter.activeCategory);
+  const dispatch = useDispatch();
+
   const styleCategoryItem =
     'xl:px-5 px-4 xl:py-2 py-1 bg-gray-200 hover:bg-gray-200 duration-300 rounded-3xl cursor-pointer';
   const styleCategoryItemActive =
@@ -25,7 +23,7 @@ const Categories = ({
     <li
       className={category === activeCategory ? styleCategoryItemActive : styleCategoryItem}
       key={index}
-      onClick={() => handleCategory(category)}
+      onClick={() => dispatch(setActiveCategory(category))}
     >
       {category}
     </li>
@@ -43,3 +41,6 @@ const Categories = ({
 };
 
 export default Categories;
+function dispatch(): void {
+  throw new Error('Function not implemented.');
+}

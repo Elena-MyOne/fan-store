@@ -14,6 +14,7 @@ const Header = ({ searchProduct, setSearchProduct }: HeaderProps) => {
 
   const signUpPath = isSignUp ? ROUTER_PATH.PROFILE : ROUTER_PATH.SIGNUP;
   const signUpText = isSignUp ? 'Profile' : 'Sign up';
+  const SignIn = isSignUp ? 'Profile' : 'Sign in';
 
   return (
     <header className="header py-4 border">

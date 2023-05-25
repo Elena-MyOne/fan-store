@@ -12,13 +12,19 @@ import Logout from './components/pages/Logout/Logout';
 import SignUp from './components/pages/SignUp/SignUp';
 import Profile from './components/pages/Profile/Profile';
 import Checkout from './components/pages/Checkout/Checkout';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from './redux/store';
 
 function App() {
+  const activeCategory = useSelector((state: RootState) => state.filter.activeCategory);
+  // const dispatch = useDispatch();
+
   const [allProducts, setAllProducts] = React.useState([]);
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [activeCategory, setActiveCategory] = React.useState('all');
+
   const [activeFaculty, setActiveFaculty] = React.useState('All');
+
   const [searchProduct, setSearchProduct] = React.useState('');
   const [totalProducts, setTotalProducts] = React.useState(0);
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -37,7 +43,7 @@ function App() {
 
   React.useEffect(() => {
     fetch(
-      `${URL.PRODUCTS}?page=${currentPage}&limit=10&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
+      `${URL.PRODUCTS}?page=${currentPage}&limit=8&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
     )
       .then((res) => res.json())
       .then((json) => {
@@ -61,8 +67,6 @@ function App() {
               products={products}
               allProducts={allProducts}
               loading={isLoading}
-              activeCategory={activeCategory}
-              onClickCategory={(category: string) => setActiveCategory(category ? category : 'all')}
               activeFaculty={activeFaculty}
               onClickFaculty={(faculty: string) => setActiveFaculty(faculty ? faculty : 'none')}
               currentPage={currentPage}
