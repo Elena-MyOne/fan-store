@@ -5,12 +5,8 @@ import ProductItemSkeleton from './ProductItem/ProductItemSkeleton';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 
-interface ProductProps {
-  loading: boolean;
-}
-
-const Products = ({ loading }: ProductProps) => {
-  const { products } = useSelector((state: RootState) => state.products);
+const Products = () => {
+  const { products, isLoading } = useSelector((state: RootState) => state.products);
   const productItems = products.map((product: ProductsData) => {
     return <ProductItem key={product.id} {...product} />;
   });
@@ -19,7 +15,7 @@ const Products = ({ loading }: ProductProps) => {
 
   return (
     <div className="products grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:m-auto gap-6 my-5">
-      {loading ? ProductSkeletons : productItems}
+      {isLoading ? ProductSkeletons : productItems}
     </div>
   );
 };

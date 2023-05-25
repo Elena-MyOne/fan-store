@@ -3,13 +3,10 @@ import CategoriesSkeleton from './CategoriesSkeleton';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import { setActiveCategory } from '../../../../redux/slices/FilterSlice';
-interface ProductsDataProps {
-  loading: boolean;
-}
 
-const Categories = ({ loading }: ProductsDataProps) => {
-  const activeCategory = useSelector((state: RootState) => state.filter.activeCategory);
-  const allProducts = useSelector((state: RootState) => state.filter.allProducts);
+const Categories = () => {
+  const { activeCategory, allProducts } = useSelector((state: RootState) => state.filter);
+  const { isLoading } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch();
 
   const styleCategoryItem =
@@ -33,7 +30,7 @@ const Categories = ({ loading }: ProductsDataProps) => {
   return (
     <div className="categories">
       <ul className="category flex xl:justify-between items-center xl:gap-6 gap-4 flex-wrap">
-        {loading ? categoriesSkeleton : categories}
+        {isLoading ? categoriesSkeleton : categories}
       </ul>
     </div>
   );

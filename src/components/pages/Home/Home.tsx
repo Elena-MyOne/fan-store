@@ -5,17 +5,16 @@ import Sort from './Sort/Sort';
 import Pagination from './Pagination/Pagination';
 
 interface DataProps {
-  loading: boolean;
   currentPage: number;
   totalPages: number;
   setCurrentPage: (page: number) => void;
 }
 
-const Home = ({ loading, currentPage, totalPages, setCurrentPage }: DataProps) => {
+const Home = ({ currentPage, totalPages, setCurrentPage }: DataProps) => {
   return (
     <div className="home container px-2 m-auto">
       <div className="top flex justify-between items-center gap-4 py-8 xl:flex-row flex-col">
-        <Categories loading={loading} />
+        <Categories />
         <Sort />
       </div>
       <div className="products mb-4">
@@ -25,7 +24,7 @@ const Home = ({ loading, currentPage, totalPages, setCurrentPage }: DataProps) =
           setCurrentPage={setCurrentPage}
         />
         <h2 className="title font-semibold text-xl md:mb-4 mb-2">All products</h2>
-        <Products loading={loading} />
+        <Products />
       </div>
     </div>
   );

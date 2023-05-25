@@ -15,29 +15,25 @@ import Checkout from './components/pages/Checkout/Checkout';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import { setAllProducts } from './redux/slices/FilterSlice';
-import { setProducts } from './redux/slices/ProductsSlice';
+import { setIsLoading, setProducts } from './redux/slices/ProductsSlice';
 
 function App() {
   const { activeCategory, activeFaculty } = useSelector((state: RootState) => state.filter);
-  const { products } = useSelector((state: RootState) => state.products);
   const dispatch = useDispatch();
 
-  // const [products, setProducts] = React.useState([]);
-
-  const [isLoading, setIsLoading] = React.useState(true);
   const [searchProduct, setSearchProduct] = React.useState('');
   const [totalProducts, setTotalProducts] = React.useState(0);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalPages, setTotalPages] = React.useState(1);
 
   React.useEffect(() => {
-    setIsLoading(true);
+    dispatch(setIsLoading(true));
     fetch(`${URL.PRODUCTS}?page=1&limit=${totalProducts}`)
       .then((res) => res.json())
       .then((json) => {
         dispatch(setAllProducts(json.products));
         setTotalProducts(json.totalProducts);
-        setIsLoading(false);
+        dispatch(setIsLoading(false));
       });
   }, [dispatch, totalProducts]);
 
@@ -64,7 +60,6 @@ function App() {
           index
           element={
             <Home
-              loading={isLoading}
               currentPage={currentPage}
               totalPages={totalPages}
               setCurrentPage={setCurrentPage}
