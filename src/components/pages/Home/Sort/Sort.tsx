@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { ProductsData } from '../../../../models/interface';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/store';
+import { setActiveFaculty } from '../../../../redux/slices/FilterSlice';
 
 interface ProductsDataProps {
   allProducts: ProductsData[];
-  activeFaculty: string;
-  handleFaculty: (faculty: string) => void;
 }
 
 const Sort = (props: ProductsDataProps) => {
+  const activeFaculty = useSelector((state: RootState) => state.filter.activeFaculty);
+  const dispatch = useDispatch();
   const [isOpenPopup, setIsOpenPopup] = useState(false);
 
   const activePopupItemStyles =
@@ -17,10 +20,10 @@ const Sort = (props: ProductsDataProps) => {
   const allFaculties = props.allProducts.map((product) => product.faculty);
   const faculties = ['All', ...new Set(allFaculties)].map((faculty, index) => (
     <li
-      className={faculty === props.activeFaculty ? activePopupItemStyles : popupItemStyles}
+      className={faculty === activeFaculty ? activePopupItemStyles : popupItemStyles}
       key={index}
       onClick={() => {
-        props.handleFaculty(faculty);
+        dispatch(setActiveFaculty(faculty));
         setIsOpenPopup((prev) => !prev);
       }}
     >
@@ -46,7 +49,7 @@ const Sort = (props: ProductsDataProps) => {
               />
             </svg>
           </span>{' '}
-          <span className="label w-[100px]">{props.activeFaculty}</span>
+          <span className="label w-[100px]">{activeFaculty}</span>
         </div>
       </div>
       {isOpenPopup && (

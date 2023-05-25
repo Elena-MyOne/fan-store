@@ -17,14 +17,12 @@ import { RootState } from './redux/store';
 
 function App() {
   const activeCategory = useSelector((state: RootState) => state.filter.activeCategory);
+  const activeFaculty = useSelector((state: RootState) => state.filter.activeFaculty);
   // const dispatch = useDispatch();
 
   const [allProducts, setAllProducts] = React.useState([]);
   const [products, setProducts] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-
-  const [activeFaculty, setActiveFaculty] = React.useState('All');
-
   const [searchProduct, setSearchProduct] = React.useState('');
   const [totalProducts, setTotalProducts] = React.useState(0);
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -67,8 +65,6 @@ function App() {
               products={products}
               allProducts={allProducts}
               loading={isLoading}
-              activeFaculty={activeFaculty}
-              onClickFaculty={(faculty: string) => setActiveFaculty(faculty ? faculty : 'none')}
               currentPage={currentPage}
               totalPages={totalPages}
               setCurrentPage={setCurrentPage}

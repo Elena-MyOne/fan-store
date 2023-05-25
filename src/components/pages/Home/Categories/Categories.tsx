@@ -41,6 +41,3 @@ const Categories = ({ loading, allProducts }: ProductsDataProps) => {
 };
 
 export default Categories;
-function dispatch(): void {
-  throw new Error('Function not implemented.');
-}

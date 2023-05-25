@@ -18,8 +18,11 @@ export const filterSlice = createSlice({
     setActiveCategory(state, action: PayloadAction<string>) {
       state.activeCategory = action.payload;
     },
+    setActiveFaculty(state, action: PayloadAction<string>) {
+      state.activeFaculty = action.payload;
+    },
   },
 });
 
-export const { setActiveCategory } = filterSlice.actions;
+export const { setActiveCategory, setActiveFaculty } = filterSlice.actions;
 export default filterSlice.reducer;

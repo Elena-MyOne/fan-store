@@ -9,8 +9,6 @@ interface DataProps {
   products: ProductsData[];
   allProducts: ProductsData[];
   loading: boolean;
-  activeFaculty: string;
-  onClickFaculty: (faculty: string) => void;
   currentPage: number;
   totalPages: number;
   setCurrentPage: (page: number) => void;
@@ -19,8 +17,6 @@ interface DataProps {
 const Home = ({
   products,
   loading,
-  activeFaculty,
-  onClickFaculty,
   allProducts,
   currentPage,
   totalPages,
@@ -30,11 +26,7 @@ const Home = ({
     <div className="home container px-2 m-auto">
       <div className="top flex justify-between items-center gap-4 py-8 xl:flex-row flex-col">
         <Categories allProducts={allProducts} loading={loading} />
-        <Sort
-          allProducts={allProducts}
-          handleFaculty={(faculty: string) => onClickFaculty(faculty)}
-          activeFaculty={activeFaculty}
-        />
+        <Sort allProducts={allProducts} />
       </div>
       <div className="products mb-4">
         <Pagination
