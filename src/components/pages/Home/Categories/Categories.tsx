@@ -1,16 +1,15 @@
 import React from 'react';
-import { ProductsData } from '../../../../models/interface';
 import CategoriesSkeleton from './CategoriesSkeleton';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import { setActiveCategory } from '../../../../redux/slices/FilterSlice';
 interface ProductsDataProps {
-  allProducts: ProductsData[];
   loading: boolean;
 }
 
-const Categories = ({ loading, allProducts }: ProductsDataProps) => {
+const Categories = ({ loading }: ProductsDataProps) => {
   const activeCategory = useSelector((state: RootState) => state.filter.activeCategory);
+  const allProducts = useSelector((state: RootState) => state.filter.allProducts);
   const dispatch = useDispatch();
 
   const styleCategoryItem =

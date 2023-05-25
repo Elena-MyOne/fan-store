@@ -14,14 +14,16 @@ import Profile from './components/pages/Profile/Profile';
 import Checkout from './components/pages/Checkout/Checkout';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/store';
+import { setAllProducts } from './redux/slices/FilterSlice';
+import { setProducts } from './redux/slices/ProductsSlice';
 
 function App() {
-  const activeCategory = useSelector((state: RootState) => state.filter.activeCategory);
-  const activeFaculty = useSelector((state: RootState) => state.filter.activeFaculty);
-  // const dispatch = useDispatch();
+  const { activeCategory, activeFaculty } = useSelector((state: RootState) => state.filter);
+  const { products } = useSelector((state: RootState) => state.products);
+  const dispatch = useDispatch();
 
-  const [allProducts, setAllProducts] = React.useState([]);
-  const [products, setProducts] = React.useState([]);
+  // const [products, setProducts] = React.useState([]);
+
   const [isLoading, setIsLoading] = React.useState(true);
   const [searchProduct, setSearchProduct] = React.useState('');
   const [totalProducts, setTotalProducts] = React.useState(0);
@@ -33,11 +35,11 @@ function App() {
     fetch(`${URL.PRODUCTS}?page=1&limit=${totalProducts}`)
       .then((res) => res.json())
       .then((json) => {
-        setAllProducts(json.products);
+        dispatch(setAllProducts(json.products));
         setTotalProducts(json.totalProducts);
         setIsLoading(false);
       });
-  }, [totalProducts]);
+  }, [dispatch, totalProducts]);
 
   React.useEffect(() => {
     fetch(
@@ -45,12 +47,12 @@ function App() {
     )
       .then((res) => res.json())
       .then((json) => {
-        setProducts(json.products);
+        dispatch(setProducts(json.products));
         setCurrentPage(json.currentPage);
         setTotalPages(json.totalPages);
       });
     window.scrollTo(0, 0);
-  }, [activeCategory, activeFaculty, searchProduct, currentPage]);
+  }, [dispatch, activeCategory, activeFaculty, searchProduct, currentPage]);
 
   return (
     <Routes>
@@ -62,8 +64,6 @@ function App() {
           index
           element={
             <Home
-              products={products}
-              allProducts={allProducts}
               loading={isLoading}
               currentPage={currentPage}
               totalPages={totalPages}

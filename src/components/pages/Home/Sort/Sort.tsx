@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
-import { ProductsData } from '../../../../models/interface';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import { setActiveFaculty } from '../../../../redux/slices/FilterSlice';
 
-interface ProductsDataProps {
-  allProducts: ProductsData[];
-}
-
-const Sort = (props: ProductsDataProps) => {
+const Sort = () => {
   const activeFaculty = useSelector((state: RootState) => state.filter.activeFaculty);
+  const allProducts = useSelector((state: RootState) => state.filter.allProducts);
   const dispatch = useDispatch();
-  const [isOpenPopup, setIsOpenPopup] = useState(false);
+
+  const [isOpenPopup, setIsOpenPopup] = React.useState(false);
 
   const activePopupItemStyles =
     'font-semibold py-2 px-5 text-orange-400 bg-orange-100 cursor-pointer';
   const popupItemStyles = 'py-2 px-5 cursor-pointer hover:text-orange-400 duration-300';
 
-  const allFaculties = props.allProducts.map((product) => product.faculty);
+  const allFaculties = allProducts.map((product) => product.faculty);
   const faculties = ['All', ...new Set(allFaculties)].map((faculty, index) => (
     <li
       className={faculty === activeFaculty ? activePopupItemStyles : popupItemStyles}
