@@ -16,16 +16,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import { setAllProducts } from './redux/slices/FilterSlice';
 import { setIsLoading, setProducts } from './redux/slices/ProductsSlice';
-import { setCurrentPage } from './redux/slices/PaginationSlice';
+import { setCurrentPage, setTotalProducts } from './redux/slices/PaginationSlice';
 
 function App() {
   const { activeCategory, activeFaculty } = useSelector((state: RootState) => state.filter);
-  const { currentPage } = useSelector((state: RootState) => state.pagination);
+  const { currentPage, totalProducts } = useSelector((state: RootState) => state.pagination);
   const dispatch = useDispatch();
 
   const [searchProduct, setSearchProduct] = React.useState('');
 
-  const [totalProducts, setTotalProducts] = React.useState(0);
+  // const [totalProducts, setTotalProducts] = React.useState(0);
 
   const [totalPages, setTotalPages] = React.useState(1);
 
@@ -35,7 +35,7 @@ function App() {
       .then((res) => res.json())
       .then((json) => {
         dispatch(setAllProducts(json.products));
-        setTotalProducts(json.totalProducts);
+        dispatch(setTotalProducts(json.totalProducts));
         dispatch(setIsLoading(false));
       });
   }, [dispatch, totalProducts]);
