@@ -16,14 +16,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import { setAllProducts } from './redux/slices/FilterSlice';
 import { setIsLoading, setProducts } from './redux/slices/ProductsSlice';
+import { setCurrentPage } from './redux/slices/PaginationSlice';
 
 function App() {
   const { activeCategory, activeFaculty } = useSelector((state: RootState) => state.filter);
+  const { currentPage } = useSelector((state: RootState) => state.pagination);
   const dispatch = useDispatch();
 
   const [searchProduct, setSearchProduct] = React.useState('');
+
   const [totalProducts, setTotalProducts] = React.useState(0);
-  const [currentPage, setCurrentPage] = React.useState(1);
+
   const [totalPages, setTotalPages] = React.useState(1);
 
   React.useEffect(() => {
@@ -44,7 +47,7 @@ function App() {
       .then((res) => res.json())
       .then((json) => {
         dispatch(setProducts(json.products));
-        setCurrentPage(json.currentPage);
+        dispatch(setCurrentPage(json.currentPage));
         setTotalPages(json.totalPages);
       });
     window.scrollTo(0, 0);
@@ -56,16 +59,7 @@ function App() {
         path={ROUTER_PATH.HOME}
         element={<Layout searchProduct={searchProduct} setSearchProduct={setSearchProduct} />}
       >
-        <Route
-          index
-          element={
-            <Home
-              currentPage={currentPage}
-              totalPages={totalPages}
-              setCurrentPage={setCurrentPage}
-            />
-          }
-        ></Route>
+        <Route index element={<Home totalPages={totalPages} />}></Route>
         <Route path={ROUTER_PATH.PRODUCT} element={<Product />} />
         <Route path={ROUTER_PATH.CART} element={<Cart />} />
         <Route path={ROUTER_PATH.CHECKOUT} element={<Checkout />} />

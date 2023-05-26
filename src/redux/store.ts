@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import FilterReducer from './slices/FilterSlice';
+import FilterSlice from './slices/FilterSlice';
 import ProductsSlice from './slices/ProductsSlice';
+import PaginationSlice from './slices/PaginationSlice';
 
 export const store = configureStore({
   reducer: {
-    filter: FilterReducer,
+    filter: FilterSlice,
     products: ProductsSlice,
+    pagination: PaginationSlice,
   },
 });
 

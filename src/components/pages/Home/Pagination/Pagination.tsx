@@ -1,19 +1,20 @@
 import React from 'react';
 import styles from './Pagination.module.scss';
 import ReactPaginate from 'react-paginate';
+import { useDispatch } from 'react-redux';
+import { setCurrentPage } from '../../../../redux/slices/PaginationSlice';
 
 interface PaginationProps {
-  currentPage: number;
   totalPages: number;
-  setCurrentPage: (page: number) => void;
 }
 
-const Pagination = ({ totalPages, setCurrentPage }: PaginationProps) => {
+const Pagination = ({ totalPages }: PaginationProps) => {
+  const dispatch = useDispatch();
   const productsPerPage = 10;
 
   function handlePageClick(selectedItem: { selected: number }) {
     const activePage = selectedItem.selected + 1;
-    setCurrentPage(activePage);
+    dispatch(setCurrentPage(activePage));
   }
 
   return (
