@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.scss';
-import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
-import { ROUTER_PATH, URL } from './models/enums';
+import { ROUTER_PATH } from './models/enums';
 import Layout from './components/Layout/Layout';
 import Home from './components/pages/Home/Home';
 import Product from './components/pages/Product/Product';
@@ -13,40 +12,8 @@ import Logout from './components/pages/Logout/Logout';
 import SignUp from './components/pages/SignUp/SignUp';
 import Profile from './components/pages/Profile/Profile';
 import Checkout from './components/pages/Checkout/Checkout';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './redux/store';
-import { setAllProducts } from './redux/slices/FilterSlice';
-import { setIsLoading, setProducts } from './redux/slices/ProductsSlice';
-import { setCurrentPage, setTotalPages, setTotalProducts } from './redux/slices/PaginationSlice';
 
 function App() {
-  const { activeCategory, activeFaculty } = useSelector((state: RootState) => state.filter);
-  const { currentPage, totalProducts } = useSelector((state: RootState) => state.pagination);
-  const { searchProduct } = useSelector((state: RootState) => state.header);
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(setIsLoading(true));
-    axios.get(`${URL.PRODUCTS}?page=1&limit=${totalProducts}`).then((res) => {
-      dispatch(setAllProducts(res.data.products));
-      dispatch(setTotalProducts(res.data.totalProducts));
-      dispatch(setIsLoading(false));
-    });
-  }, [dispatch, totalProducts]);
-
-  React.useEffect(() => {
-    axios
-      .get(
-        `${URL.PRODUCTS}?page=${currentPage}&limit=8&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
-      )
-      .then((res) => {
-        dispatch(setProducts(res.data.products));
-        dispatch(setCurrentPage(res.data.currentPage));
-        dispatch(setTotalPages(res.data.totalPages));
-      });
-    window.scrollTo(0, 0);
-  }, [dispatch, activeCategory, activeFaculty, searchProduct, currentPage]);
-
   return (
     <Routes>
       <Route path={ROUTER_PATH.HOME} element={<Layout />}>
