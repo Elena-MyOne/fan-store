@@ -1,11 +1,12 @@
 import React from 'react';
+import { setSearchProduct } from '../../../redux/slices/HeaderSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
 
-interface SearchProps {
-  searchProduct: string;
-  setSearchProduct: (name: string) => void;
-}
+const Search = () => {
+  const { searchProduct } = useSelector((state: RootState) => state.header);
+  const dispatch = useDispatch();
 
-const Search = ({ searchProduct, setSearchProduct }: SearchProps) => {
   return (
     <div className="search relative  text-gray-600">
       <button className="hover:text-orange-500 duration-300 absolute top-0 left-2">
@@ -21,7 +22,7 @@ const Search = ({ searchProduct, setSearchProduct }: SearchProps) => {
         type="text"
         placeholder="Search ..."
         value={searchProduct}
-        onChange={(e) => setSearchProduct(e.target.value)}
+        onChange={(e) => dispatch(setSearchProduct(e.target.value))}
       />
       {searchProduct && (
         <button

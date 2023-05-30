@@ -22,9 +22,8 @@ import { setCurrentPage, setTotalPages, setTotalProducts } from './redux/slices/
 function App() {
   const { activeCategory, activeFaculty } = useSelector((state: RootState) => state.filter);
   const { currentPage, totalProducts } = useSelector((state: RootState) => state.pagination);
+  const { searchProduct } = useSelector((state: RootState) => state.header);
   const dispatch = useDispatch();
-
-  const [searchProduct, setSearchProduct] = React.useState('');
 
   React.useEffect(() => {
     dispatch(setIsLoading(true));
@@ -50,10 +49,7 @@ function App() {
 
   return (
     <Routes>
-      <Route
-        path={ROUTER_PATH.HOME}
-        element={<Layout searchProduct={searchProduct} setSearchProduct={setSearchProduct} />}
-      >
+      <Route path={ROUTER_PATH.HOME} element={<Layout />}>
         <Route index element={<Home />}></Route>
         <Route path={ROUTER_PATH.PRODUCT} element={<Product />} />
         <Route path={ROUTER_PATH.CART} element={<Cart />} />
