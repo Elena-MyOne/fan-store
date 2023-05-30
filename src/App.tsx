@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
 import { ROUTER_PATH, URL } from './models/enums';
 import Layout from './components/Layout/Layout';
@@ -25,28 +26,24 @@ function App() {
 
   const [searchProduct, setSearchProduct] = React.useState('');
 
-  // const [totalPages, setTotalPages] = React.useState(1);
-
   React.useEffect(() => {
     dispatch(setIsLoading(true));
-    fetch(`${URL.PRODUCTS}?page=1&limit=${totalProducts}`)
-      .then((res) => res.json())
-      .then((json) => {
-        dispatch(setAllProducts(json.products));
-        dispatch(setTotalProducts(json.totalProducts));
-        dispatch(setIsLoading(false));
-      });
+    axios.get(`${URL.PRODUCTS}?page=1&limit=${totalProducts}`).then((res) => {
+      dispatch(setAllProducts(res.data.products));
+      dispatch(setTotalProducts(res.data.totalProducts));
+      dispatch(setIsLoading(false));
+    });
   }, [dispatch, totalProducts]);
 
   React.useEffect(() => {
-    fetch(
-      `${URL.PRODUCTS}?page=${currentPage}&limit=8&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
-    )
-      .then((res) => res.json())
-      .then((json) => {
-        dispatch(setProducts(json.products));
-        dispatch(setCurrentPage(json.currentPage));
-        dispatch(setTotalPages(json.totalPages));
+    axios
+      .get(
+        `${URL.PRODUCTS}?page=${currentPage}&limit=8&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
+      )
+      .then((res) => {
+        dispatch(setProducts(res.data.products));
+        dispatch(setCurrentPage(res.data.currentPage));
+        dispatch(setTotalPages(res.data.totalPages));
       });
     window.scrollTo(0, 0);
   }, [dispatch, activeCategory, activeFaculty, searchProduct, currentPage]);
