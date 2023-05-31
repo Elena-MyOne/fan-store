@@ -1,4 +1,5 @@
 import React from 'react';
+import debounce from 'lodash.debounce';
 import { setSearchProduct } from '../../../redux/slices/HeaderSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
@@ -8,12 +9,27 @@ const Search = () => {
   const dispatch = useDispatch();
 
   const inputElement = React.useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = React.useState('');
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const updateSearchValue = React.useCallback(
+    debounce((string: string) => {
+      dispatch(setSearchProduct(string));
+    }, 500),
+    []
+  );
 
   function onClickClear() {
+    setInputValue('');
     dispatch(setSearchProduct(''));
     if (inputElement.current) {
       inputElement.current.focus();
     }
+  }
+
+  function onChangeInput(e: { target: { value: string } }) {
+    setInputValue(e.target.value);
+    updateSearchValue(e.target.value);
   }
 
   return (
@@ -30,8 +46,8 @@ const Search = () => {
         className="outline-none py-1 pl-10 pr-8 min-w-[250px] rounded-2xl border rounded-2xl hover:border-orange-300 duration-300 focus:border-orange-300"
         type="text"
         placeholder="Search ..."
-        value={searchProduct}
-        onChange={(e) => dispatch(setSearchProduct(e.target.value))}
+        value={inputValue}
+        onChange={onChangeInput}
         ref={inputElement}
       />
       {searchProduct && (
