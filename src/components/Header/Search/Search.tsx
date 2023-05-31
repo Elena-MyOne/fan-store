@@ -7,6 +7,15 @@ const Search = () => {
   const { searchProduct } = useSelector((state: RootState) => state.header);
   const dispatch = useDispatch();
 
+  const inputElement = React.useRef<HTMLInputElement>(null);
+
+  function onClickClear() {
+    dispatch(setSearchProduct(''));
+    if (inputElement.current) {
+      inputElement.current.focus();
+    }
+  }
+
   return (
     <div className="search relative  text-gray-600">
       <button className="hover:text-orange-500 duration-300 absolute top-0 left-2">
@@ -18,16 +27,17 @@ const Search = () => {
         </svg>
       </button>
       <input
-        className="outline-none py-1 pl-10 pr-8 min-w-[250px] rounded-2xl border rounded-2xl hover:border-gray-300 duration-300 focus:border-gray-300"
+        className="outline-none py-1 pl-10 pr-8 min-w-[250px] rounded-2xl border rounded-2xl hover:border-orange-300 duration-300 focus:border-orange-300"
         type="text"
         placeholder="Search ..."
         value={searchProduct}
         onChange={(e) => dispatch(setSearchProduct(e.target.value))}
+        ref={inputElement}
       />
       {searchProduct && (
         <button
           className="clear hover:text-orange-500 duration-300 absolute top-0.5 right-2"
-          onClick={() => setSearchProduct('')}
+          onClick={onClickClear}
         >
           <svg className="w-[20px] h-[30px]" viewBox="0 96 960 960">
             <path
