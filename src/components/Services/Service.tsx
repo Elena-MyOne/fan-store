@@ -22,6 +22,8 @@ const Service = () => {
 
   const navigate = useNavigate();
 
+  const isMounted = React.useRef(false);
+
   React.useEffect(() => {
     dispatch(setIsLoading(true));
     axios
@@ -56,7 +58,6 @@ const Service = () => {
     if (window.location.search) {
       const param = qs.parse(window.location.search.substring(1));
 
-      console.log(param);
       dispatch(
         setFilters({
           activeCategory: param.category as string,
@@ -73,13 +74,22 @@ const Service = () => {
   }, [dispatch]);
 
   React.useEffect(() => {
-    const queryString = qs.stringify({
-      category: activeCategory,
-      faculty: activeFaculty,
-      search: searchProduct,
-      page: currentPage,
-    });
-    navigate(`?${queryString}`);
+    const pathname = window.location.pathname;
+
+    if (isMounted.current && pathname === '/') {
+      const queryString = qs.stringify({
+        category: activeCategory,
+        faculty: activeFaculty,
+        search: searchProduct,
+        page: currentPage,
+      });
+      navigate(`?${queryString}`);
+    }
+    if (pathname !== '/') {
+      isMounted.current = false;
+    }
+
+    isMounted.current = true;
   }, [activeCategory, activeFaculty, searchProduct, currentPage, navigate]);
 
   return <></>;
