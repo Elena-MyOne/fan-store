@@ -46,7 +46,7 @@ const Search = () => {
         className="outline-none py-1 pl-10 pr-8 min-w-[250px] rounded-2xl border rounded-2xl hover:border-orange-300 duration-300 focus:border-orange-300"
         type="text"
         placeholder="Search ..."
-        value={inputValue}
+        value={searchProduct ? searchProduct : inputValue}
         onChange={onChangeInput}
         ref={inputElement}
       />
