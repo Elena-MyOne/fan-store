@@ -10,6 +10,8 @@ const Sort = () => {
 
   const [isOpenPopup, setIsOpenPopup] = React.useState(false);
 
+  const sortRef = React.useRef<HTMLDivElement>(null);
+
   const activePopupItemStyles =
     'font-semibold py-2 px-5 text-orange-400 bg-orange-100 cursor-pointer';
   const popupItemStyles = 'py-2 px-5 cursor-pointer hover:text-orange-400 duration-300';
@@ -28,8 +30,23 @@ const Sort = () => {
     </li>
   ));
 
+  React.useEffect(() => {
+    const handleClickOnBody = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (sortRef.current && !sortRef.current.contains(target)) {
+        setIsOpenPopup(false);
+      }
+    };
+
+    document.body.addEventListener('click', handleClickOnBody);
+
+    return () => {
+      document.body.removeEventListener('click', handleClickOnBody);
+    };
+  }, []);
+
   return (
-    <div className="sort relative">
+    <div ref={sortRef} className="sort relative">
       <div
         className="text flex gap-2 items-center cursor-pointer"
         onClick={() => setIsOpenPopup((prev) => !prev)}
