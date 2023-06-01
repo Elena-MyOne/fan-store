@@ -16,8 +16,11 @@ export const headerSlice = createSlice({
     setSearchProduct(state, action: PayloadAction<string>) {
       state.searchProduct = action.payload;
     },
+    setSearchParam(state, action: PayloadAction<{ searchProduct: string }>) {
+      state.searchProduct = action.payload.searchProduct;
+    },
   },
 });
 
-export const { setSearchProduct } = headerSlice.actions;
+export const { setSearchProduct, setSearchParam } = headerSlice.actions;
 export default headerSlice.reducer;

@@ -27,8 +27,13 @@ export const filterSlice = createSlice({
     setAllProducts(state, action: PayloadAction<ProductsData[]>) {
       state.allProducts = action.payload;
     },
+    setFilters(state, action: PayloadAction<{ activeCategory: string; activeFaculty: string }>) {
+      state.activeCategory = action.payload.activeCategory;
+      state.activeFaculty = action.payload.activeFaculty;
+    },
   },
 });
 
-export const { setActiveCategory, setActiveFaculty, setAllProducts } = filterSlice.actions;
+export const { setActiveCategory, setActiveFaculty, setAllProducts, setFilters } =
+  filterSlice.actions;
 export default filterSlice.reducer;
