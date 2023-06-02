@@ -12,8 +12,6 @@ const Home = () => {
   const title =
     activeCategory === 'all' && activeFaculty === 'All' ? 'All products' : 'Sort products';
 
-  // const title = setTitle();
-
   return (
     <div className="home container px-2 m-auto">
       <div className="top flex justify-between items-center gap-4 py-8 xl:flex-row flex-col">
