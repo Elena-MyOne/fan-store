@@ -1,33 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { CartData, ProductsData } from '../../models/interface';
+import { calcTotalPrice } from '../../utils/calcTotalPrice';
+import { calcTotalSale } from '../../utils/calcTotalSale';
 
 export interface CartState {
+  isEmptyCart: boolean;
   totalPrice: number;
   totalSale: number;
   items: CartData[];
+  itemsCount: number;
 }
 
 const initialState: CartState = {
+  isEmptyCart: true,
   totalPrice: 0,
   totalSale: 0,
   items: [],
+  itemsCount: 0,
 };
 
 const CartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    // addItemToCart(state, action: PayloadAction<ProductsData>) {
-    //   state.items.push(action.payload);
-    //   state.totalPrice =
-    //     Math.round(
-    //       state.items.reduce(
-    //         (acc, currentValue) => acc + (currentValue.price * (100 - currentValue.sale)) / 100,
-    //         initialState.totalPrice
-    //       ) * 100
-    //     ) / 100;
-    // },
+    setEmptyCart(state, action: PayloadAction<boolean>) {
+      state.isEmptyCart = action.payload;
+    },
+
     addItemToCart(state, action: PayloadAction<ProductsData>) {
       const findItem = state.items.find((item) => item.id === action.payload.id);
 
@@ -36,30 +36,56 @@ const CartSlice = createSlice({
       } else {
         state.items.push({ ...action.payload, count: 1 });
       }
-      state.totalPrice =
-        Math.round(
-          state.items.reduce(
-            (acc, currentValue) => acc + (currentValue.price * (100 - currentValue.sale)) / 100,
-            initialState.totalPrice
-          ) * 100
-        ) / 100;
 
-      state.totalSale =
-        Math.round(
-          state.items.reduce(
-            (acc, currentValue) => acc + (currentValue.price * currentValue.sale) / 100,
-            initialState.totalSale
-          ) * 100
-        ) / 100;
+      state.totalPrice = calcTotalPrice(state.items);
+      state.totalSale = calcTotalSale(state.items);
     },
-    removeItemFromCart(state, action: PayloadAction<ProductsData>) {
-      state.items.filter((item) => item.id !== action.payload.id);
+
+    minusItemFromCart(state, action: PayloadAction<number>) {
+      const itemId = action.payload;
+      const findItem = state.items.find((item) => item.id === itemId);
+
+      if (findItem) {
+        if (findItem.count > 1) {
+          findItem.count--;
+        } else {
+          state.items = state.items.filter((obj) => obj.id !== action.payload);
+        }
+
+        state.totalPrice = calcTotalPrice(state.items);
+        state.totalSale = calcTotalSale(state.items);
+      }
     },
+
+    removeItemFromCart(state, action: PayloadAction<number>) {
+      state.items = state.items.filter((obj) => obj.id !== action.payload);
+      state.totalPrice = calcTotalPrice(state.items);
+      state.totalSale = calcTotalSale(state.items);
+    },
+
     clearCart(state) {
       state.items = [];
+      state.totalPrice = 0;
+      state.totalSale = 0;
+      state.isEmptyCart = true;
+      state.itemsCount = 0;
+    },
+
+    setItemsCount(state) {
+      state.itemsCount = state.items.reduce(
+        (acc: number, currentValue) => acc + currentValue.count,
+        0
+      );
     },
   },
 });
 
-export const { addItemToCart, removeItemFromCart, clearCart } = CartSlice.actions;
+export const {
+  addItemToCart,
+  minusItemFromCart,
+  removeItemFromCart,
+  clearCart,
+  setEmptyCart,
+  setItemsCount,
+} = CartSlice.actions;
 export default CartSlice.reducer;

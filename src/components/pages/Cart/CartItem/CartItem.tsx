@@ -1,8 +1,31 @@
 import React from 'react';
 import { CartData } from '../../../../models/interface';
+import { useDispatch } from 'react-redux';
+import {
+  addItemToCart,
+  minusItemFromCart,
+  removeItemFromCart,
+  setItemsCount,
+} from '../../../../redux/slices/CartSlice';
 
 const CartItem = (props: CartData) => {
-  const buttonsStyle = 'w-[30px] h-[30px] hover:text-orange-700 duration-300';
+  const dispatch = useDispatch();
+
+  const buttonsStyle = 'w-[30px] h-[30px] text-gray-400 hover:text-orange-500 duration-300';
+
+  function onClickPlus() {
+    dispatch(addItemToCart(props));
+    dispatch(setItemsCount());
+  }
+
+  function onClickMinus() {
+    dispatch(minusItemFromCart(props.id));
+    dispatch(setItemsCount());
+  }
+
+  function onClickRemove() {
+    dispatch(removeItemFromCart(props.id));
+  }
 
   return (
     <div className="item flex justify-between items-center gap-6 px-2 py-3 relative">
@@ -20,7 +43,7 @@ const CartItem = (props: CartData) => {
       </div>
 
       <div className="amount flex justify-center items-center gap-2 text-orange-500">
-        <button className="add">
+        <button className="add" onClick={onClickPlus}>
           <svg className={buttonsStyle} viewBox="0 96 960 960">
             <path
               className="fill-current"
@@ -29,7 +52,7 @@ const CartItem = (props: CartData) => {
           </svg>
         </button>
         <span className="number text-black ">{props.count}</span>
-        <button className="minus">
+        <button className="minus" onClick={onClickMinus}>
           <svg className={buttonsStyle} viewBox="0 96 960 960">
             <path
               className="fill-current"
@@ -43,7 +66,10 @@ const CartItem = (props: CartData) => {
         $ <span>{(props.price * props.count).toFixed(2)}</span>
       </div>
 
-      <button className="cancel text-gray-400 hover:text-orange-500 duration-300">
+      <button
+        className="cancel text-gray-400 hover:text-orange-500 duration-300"
+        onClick={onClickRemove}
+      >
         <svg className={buttonsStyle} viewBox="0 96 960 960">
           <path
             className="fill-current"

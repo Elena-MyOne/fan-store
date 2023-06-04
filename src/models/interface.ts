@@ -17,15 +17,6 @@ export interface ProductsData {
   sale: number;
 }
 
-export interface CartData {
-  id: number;
-  category: string;
-  faculty: string;
-  name: string;
-  image: string;
-  description: string;
-  price: number;
-  rate: number;
-  sale: number;
+export interface CartData extends ProductsData {
   count: number;
 }

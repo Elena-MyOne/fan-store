@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart } from '../../../../../redux/slices/CartSlice';
+import { addItemToCart, setEmptyCart, setItemsCount } from '../../../../../redux/slices/CartSlice';
 
 interface ProductItemProps {
   id: number;
@@ -44,6 +44,8 @@ const ProductItem = (props: ProductItemProps) => {
       sale: props.sale,
     };
     dispatch(addItemToCart(item));
+    dispatch(setEmptyCart(false));
+    dispatch(setItemsCount());
   }
 
   return (

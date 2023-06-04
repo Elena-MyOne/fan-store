@@ -8,11 +8,11 @@ import { RootState } from '../../redux/store';
 
 const Header = () => {
   const [isSignUp, setSignUp] = useState(false);
-  const { items, totalPrice } = useSelector((state: RootState) => state.cart);
+  const { totalPrice, itemsCount } = useSelector((state: RootState) => state.cart);
 
   const signUpPath = isSignUp ? ROUTER_PATH.PROFILE : ROUTER_PATH.SIGNUP;
   const signUpText = isSignUp ? 'Profile' : 'Sign up';
-  const SignIn = isSignUp ? 'Profile' : 'Sign in';
+  // const SignIn = isSignUp ? 'Profile' : 'Sign in';
 
   return (
     <header className="header py-4 border">
@@ -60,7 +60,7 @@ const Header = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>{items.length}</span>
+              <span>{itemsCount}</span>
             </div>
           </Link>
           <Link to={signUpPath}>
