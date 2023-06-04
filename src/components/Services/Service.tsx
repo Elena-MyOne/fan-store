@@ -85,6 +85,7 @@ const Service = () => {
       });
       navigate(`?${queryString}`);
     }
+
     if (pathname !== '/') {
       isMounted.current = false;
     }

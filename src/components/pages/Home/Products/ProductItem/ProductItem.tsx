@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItemToCart } from '../../../../../redux/slices/CartSlice';
 
 interface ProductItemProps {
   id: number;
@@ -7,9 +9,6 @@ interface ProductItemProps {
   faculty: string;
   name: string;
   image: string;
-  length?: string;
-  core?: string;
-  wood?: string;
   description: string;
   price: number;
   rate: number;
@@ -19,25 +18,39 @@ interface ProductItemProps {
 const ProductItem = (props: ProductItemProps) => {
   const [description, setDescription] = useState(false);
   const [cartAdd, setCartAdd] = useState(false);
+  const dispatch = useDispatch();
 
   const buttonsStyle =
     'flex items-center gap-1 px-2 py-1 hover:text-white bg-gray-200 hover:bg-gray-900 duration-300 rounded-3xl';
   const activeButtonsStyle =
     'flex gap-1 items-center px-2 py-1 text-white bg-orange-500 hover:bg-orange-600 rounded-2xl bg-gray-200 duration-300';
-
   const descriptionButtonStyle = description
     ? 'px-6 py-2 block text-white bg-orange-500 hover:bg-orange-600 duration-300 rounded-3xl'
     : 'px-6 py-2 block text-white bg-gray-700 hover:bg-gray-900 duration-300 rounded-3xl';
-
   const buttonCartStyle = cartAdd ? activeButtonsStyle : buttonsStyle;
-
   const sale = props.sale === 0 ? '' : `-${props.sale}%`;
+
+  function onClickCartButton() {
+    setCartAdd((prev) => !prev);
+    const item: ProductItemProps = {
+      id: props.id,
+      category: props.category,
+      faculty: props.faculty,
+      name: props.name,
+      image: props.image,
+      description: props.description,
+      price: props.price,
+      rate: props.rate,
+      sale: props.sale,
+    };
+    dispatch(addItemToCart(item));
+  }
 
   return (
     <div className="flex flex-col items-center border border-gray-300 pt-3 pb-3 px-4 rounded mb-2 hover:shadow-lg duration-300 relative">
       <div className="top flex items-center justify-between w-full">
         <div className="buttons flex gap-4">
-          <button onClick={() => setCartAdd((prev) => !prev)} className={buttonCartStyle}>
+          <button onClick={onClickCartButton} className={buttonCartStyle}>
             <svg className="w-[20px] h-[20px]" viewBox="0 96 960 960">
               <path
                 className="fill-current"

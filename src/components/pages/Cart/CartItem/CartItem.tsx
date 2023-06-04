@@ -1,20 +1,21 @@
 import React from 'react';
+import { CartData } from '../../../../models/interface';
 
-const CartItem = () => {
-  const buttonsStyle = 'w-[30px] h-[30px] hover:text-orange-600 duration-300';
+const CartItem = (props: CartData) => {
+  const buttonsStyle = 'w-[30px] h-[30px] hover:text-orange-700 duration-300';
 
   return (
-    <div className="item flex justify-between items-center gap-6 p-2">
+    <div className="item flex justify-between items-center gap-6 px-2 py-3 relative">
       <div className="content flex justify-center items-center gap-4">
         <div className="image w-28">
-          <img src="/assets/robes/slytherin-schooluniform-accessories-robes.webp" alt="robes" />
+          <img src={props.image} alt={props.category} />
         </div>
         <div className="description">
-          <h3 className="name font-semibold mb-2">Slytherin Robe</h3>
-          <p className="text text-gray-600 max-w-sm">
-            This authentic Slytherin robe has contrasting green lining, pockets, and features an
-            embroidered patch of the house crest. 100% Polyester
-          </p>
+          <h3 className="name font-semibold mb-2">{props.name}</h3>
+          <div className="text-orange-400 font-semibold absolute top-2 right-2">
+            {props.sale !== 0 ? `- ${props.sale}%` : ''}
+          </div>
+          <p className="text text-gray-600 max-w-sm">{props.description}</p>
         </div>
       </div>
 
@@ -27,7 +28,7 @@ const CartItem = () => {
             />
           </svg>
         </button>
-        <span className="number text-black ">1</span>
+        <span className="number text-black ">{props.count}</span>
         <button className="minus">
           <svg className={buttonsStyle} viewBox="0 96 960 960">
             <path
@@ -39,7 +40,7 @@ const CartItem = () => {
       </div>
 
       <div className="price">
-        $ <span>150.0</span>
+        $ <span>{(props.price * props.count).toFixed(2)}</span>
       </div>
 
       <button className="cancel text-gray-400 hover:text-orange-500 duration-300">

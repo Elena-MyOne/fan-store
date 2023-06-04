@@ -3,9 +3,12 @@ import style from './Header.module.scss';
 import { Link } from 'react-router-dom';
 import { ROUTER_PATH } from '../../models/enums';
 import Search from './Search/Search';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 const Header = () => {
   const [isSignUp, setSignUp] = useState(false);
+  const { items, totalPrice } = useSelector((state: RootState) => state.cart);
 
   const signUpPath = isSignUp ? ROUTER_PATH.PROFILE : ROUTER_PATH.SIGNUP;
   const signUpText = isSignUp ? 'Profile' : 'Sign up';
@@ -24,7 +27,7 @@ const Header = () => {
             className="cart flex items-center bg-orange-500 md:px-6 px-3 md:py-3 py-2 rounded-3xl font-semibold text-white hover:bg-orange-600 duration-300"
           >
             <div className="sum mr-3">
-              $ <span>0</span>
+              $ <span>{totalPrice}</span>
             </div>
             <div className="delimiter bg-white opacity-25 h-[25px] w-[1px] mr-3"></div>
             <div className="icon flex items-center gap-2">
@@ -57,7 +60,7 @@ const Header = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>0</span>
+              <span>{items.length}</span>
             </div>
           </Link>
           <Link to={signUpPath}>
