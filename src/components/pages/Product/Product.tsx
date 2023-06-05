@@ -3,10 +3,19 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { URL } from '../../../models/enums';
 import { ProductsData } from '../../../models/interface';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { addItemToCart, removeItemFromCart, setEmptyCart } from '../../../redux/slices/CartSlice';
 
 const Product = () => {
   const { id } = useParams();
+
   const [isLoading, setIsLoading] = React.useState(false);
+  const [cartAdd, setCartAdd] = React.useState(false);
+
+  const { items } = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
+
   const [product, setProduct] = React.useState<ProductsData>({
     id: 0,
     category: '',
@@ -43,7 +52,26 @@ const Product = () => {
       });
   }, [id]);
 
-  const [cartAdd, setCartAdd] = React.useState(false);
+  function onClickAddToCart() {
+    setCartAdd((prev) => !prev);
+    if (cartAdd) {
+      dispatch(removeItemFromCart(product.id));
+      if (items.length === 0) {
+        dispatch(setEmptyCart(true));
+      }
+    } else {
+      dispatch(addItemToCart(product));
+      dispatch(setEmptyCart(false));
+    }
+  }
+
+  const findItem = items.filter((item) => item.id === product.id);
+
+  React.useEffect(() => {
+    if (findItem.length) {
+      setCartAdd(true);
+    }
+  }, [findItem.length]);
 
   const buttonsStyle =
     'button flex items-center justify-center gap-2 px-6 py-2 block text-white bg-gray-700 hover:bg-gray-900 duration-300 rounded-3xl';
@@ -85,7 +113,7 @@ const Product = () => {
               {product.price === 0 ? '' : `$${product.price}`}
             </div>
             {!isLoading && (
-              <button onClick={() => setCartAdd((prev) => !prev)} className={buttonCartStyle}>
+              <button onClick={onClickAddToCart} className={buttonCartStyle}>
                 <svg className="w-[20px] h-[20px]" viewBox="0 96 960 960">
                   <path
                     className="fill-current"

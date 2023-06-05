@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart, setEmptyCart, setItemsCount } from '../../../../../redux/slices/CartSlice';
+import {
+  addItemToCart,
+  removeItemFromCart,
+  setEmptyCart,
+  setItemsCount,
+} from '../../../../../redux/slices/CartSlice';
+import { RootState } from '../../../../../redux/store';
 
 interface ProductItemProps {
   id: number;
@@ -18,6 +24,8 @@ interface ProductItemProps {
 const ProductItem = (props: ProductItemProps) => {
   const [description, setDescription] = useState(false);
   const [cartAdd, setCartAdd] = useState(false);
+
+  const { items } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
 
   const buttonsStyle =
@@ -43,10 +51,22 @@ const ProductItem = (props: ProductItemProps) => {
       rate: props.rate,
       sale: props.sale,
     };
-    dispatch(addItemToCart(item));
-    dispatch(setEmptyCart(false));
-    dispatch(setItemsCount());
+    if (cartAdd) {
+      dispatch(removeItemFromCart(props.id));
+    } else {
+      dispatch(addItemToCart(item));
+      dispatch(setEmptyCart(false));
+      dispatch(setItemsCount());
+    }
   }
+
+  React.useEffect(() => {
+    items.filter((item) => item.id === props.id).forEach((item) => setCartAdd(true));
+
+    if (items.length === 0) {
+      dispatch(setEmptyCart(true));
+    }
+  }, [dispatch, items, props.id]);
 
   return (
     <div className="flex flex-col items-center border border-gray-300 pt-3 pb-3 px-4 rounded mb-2 hover:shadow-lg duration-300 relative">

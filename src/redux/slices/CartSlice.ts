@@ -68,6 +68,10 @@ const CartSlice = createSlice({
       state.totalPrice = calcTotalPrice(state.items);
       state.totalSale = calcTotalSale(state.items);
       state.itemsCount = calcItemsCount(state.items);
+
+      if (state.items.length === 0) {
+        state.isEmptyCart = true;
+      }
     },
 
     clearCart(state) {
