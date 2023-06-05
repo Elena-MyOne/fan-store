@@ -5,7 +5,6 @@ import {
   addItemToCart,
   minusItemFromCart,
   removeItemFromCart,
-  setItemsCount,
 } from '../../../../redux/slices/CartSlice';
 
 const CartItem = (props: CartData) => {
@@ -15,12 +14,10 @@ const CartItem = (props: CartData) => {
 
   function onClickPlus() {
     dispatch(addItemToCart(props));
-    dispatch(setItemsCount());
   }
 
   function onClickMinus() {
     dispatch(minusItemFromCart(props.id));
-    dispatch(setItemsCount());
   }
 
   function onClickRemove() {
