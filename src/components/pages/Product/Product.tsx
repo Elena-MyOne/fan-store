@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { URL } from '../../../models/enums';
+import { Link, useParams } from 'react-router-dom';
+import { ROUTER_PATH, URL } from '../../../models/enums';
 import { ProductsData } from '../../../models/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
@@ -112,7 +112,7 @@ const Product = () => {
             <div className="price font-semibold text-center text-lg">
               {product.price === 0 ? '' : `$${product.price}`}
             </div>
-            {!isLoading && (
+            <div className="buttons flex justify-center items-center gap-9">
               <button onClick={onClickAddToCart} className={buttonCartStyle}>
                 <svg className="w-[20px] h-[20px]" viewBox="0 96 960 960">
                   <path
@@ -122,7 +122,13 @@ const Product = () => {
                 </svg>
                 {cartAdd ? 'Remove from Cart' : 'Add to Cart'}
               </button>
-            )}
+              <Link
+                to={ROUTER_PATH.HOME}
+                className="back px-6 py-2 block border-solid border-2 text-gray-400 hover:text-orange-500 border-gray-400 hover:border-orange-500 duration-300 rounded-3xl"
+              >
+                Go Back
+              </Link>
+            </div>
           </div>
         </div>
       </div>
