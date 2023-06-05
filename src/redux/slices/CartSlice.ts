@@ -3,6 +3,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { CartData, ProductsData } from '../../models/interface';
 import { calcTotalPrice } from '../../utils/calcTotalPrice';
 import { calcTotalSale } from '../../utils/calcTotalSale';
+import { calcItemsCount } from '../../utils/calcItemsCount';
 
 export interface CartState {
   isEmptyCart: boolean;
@@ -39,6 +40,7 @@ const CartSlice = createSlice({
 
       state.totalPrice = calcTotalPrice(state.items);
       state.totalSale = calcTotalSale(state.items);
+      state.itemsCount = calcItemsCount(state.items);
     },
 
     minusItemFromCart(state, action: PayloadAction<number>) {
@@ -50,10 +52,14 @@ const CartSlice = createSlice({
           findItem.count--;
         } else {
           state.items = state.items.filter((obj) => obj.id !== action.payload);
+          if (state.items.length === 0) {
+            state.isEmptyCart = true;
+          }
         }
 
         state.totalPrice = calcTotalPrice(state.items);
         state.totalSale = calcTotalSale(state.items);
+        state.itemsCount = calcItemsCount(state.items);
       }
     },
 
@@ -61,6 +67,7 @@ const CartSlice = createSlice({
       state.items = state.items.filter((obj) => obj.id !== action.payload);
       state.totalPrice = calcTotalPrice(state.items);
       state.totalSale = calcTotalSale(state.items);
+      state.itemsCount = calcItemsCount(state.items);
     },
 
     clearCart(state) {
@@ -72,10 +79,7 @@ const CartSlice = createSlice({
     },
 
     setItemsCount(state) {
-      state.itemsCount = state.items.reduce(
-        (acc: number, currentValue) => acc + currentValue.count,
-        0
-      );
+      state.itemsCount = calcItemsCount(state.items);
     },
   },
 });
