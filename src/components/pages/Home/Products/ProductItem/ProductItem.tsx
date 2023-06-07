@@ -107,7 +107,7 @@ const ProductItem = (props: ProductItemProps) => {
             <span className="font-semibold">Faculty or school:</span> {props.faculty}
           </div>
         </div>
-        <div className="price font-semibold text-center text-lg">$ {props.price}</div>
+        <div className="price font-semibold text-center text-lg">$ {props.price.toFixed(2)}</div>
         <div className="buttons flex justify-center items-center">
           <button
             className={descriptionButtonStyle}

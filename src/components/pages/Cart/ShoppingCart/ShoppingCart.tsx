@@ -52,13 +52,13 @@ const ShoppingCart = () => {
             <div className="text-right">
               Sale:{' '}
               <span className="">
-                $<span className="total">{totalSale}</span>
+                $<span className="total">{totalSale.toFixed(2)}</span>
               </span>
             </div>
             <div className="text-right font-bold text-orange-500">
               Sum:{' '}
               <span className="">
-                $<span className="total">{totalPrice}</span>
+                $<span className="total">{totalPrice.toFixed(2)}</span>
               </span>
             </div>
           </div>

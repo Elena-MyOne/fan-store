@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import FilterSlice from './slices/FilterSlice';
 import ProductsSlice from './slices/ProductsSlice';
-import PaginationSlice from './slices/PaginationSlice';
 import HeaderSlice from './slices/HeaderSlice';
 import CartSlice from './slices/CartSlice';
 
@@ -9,7 +8,6 @@ export const store = configureStore({
   reducer: {
     filter: FilterSlice,
     products: ProductsSlice,
-    pagination: PaginationSlice,
     header: HeaderSlice,
     cart: CartSlice,
   },

@@ -1,56 +1,28 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { AppDispatch, RootState } from '../../redux/store';
 import React from 'react';
-import { setIsLoading, setProducts } from '../../redux/slices/ProductsSlice';
-import axios from 'axios';
-import { URL } from '../../models/enums';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { setAllProducts, setFilters } from '../../redux/slices/FilterSlice';
-import {
-  setCurrentPage,
-  setTotalPages,
-  setTotalProducts,
-} from '../../redux/slices/PaginationSlice';
+import { setFilters } from '../../redux/slices/FilterSlice';
 import { setSearchParam } from '../../redux/slices/HeaderSlice';
+import { fetchInitialProducts, fetchFilteredProducts } from '../../redux/asyncActions';
 
 const Service = () => {
   const { activeCategory, activeFaculty } = useSelector((state: RootState) => state.filter);
-  const { currentPage, totalProducts } = useSelector((state: RootState) => state.pagination);
+  const { currentPage, totalProducts } = useSelector((state: RootState) => state.products);
   const { searchProduct } = useSelector((state: RootState) => state.header);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();
 
   const isMounted = React.useRef(false);
 
   React.useEffect(() => {
-    dispatch(setIsLoading(true));
-    axios
-      .get(`${URL.PRODUCTS}?page=1&limit=${totalProducts}`)
-      .then((res) => {
-        dispatch(setAllProducts(res.data.products));
-        dispatch(setTotalProducts(res.data.totalProducts));
-        dispatch(setIsLoading(false));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(fetchInitialProducts());
   }, [dispatch, totalProducts]);
 
   React.useEffect(() => {
-    axios
-      .get(
-        `${URL.PRODUCTS}?page=${currentPage}&limit=8&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
-      )
-      .then((res) => {
-        dispatch(setProducts(res.data.products));
-        dispatch(setCurrentPage(res.data.currentPage));
-        dispatch(setTotalPages(res.data.totalPages));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(fetchFilteredProducts());
     window.scrollTo(0, 0);
   }, [dispatch, activeCategory, activeFaculty, searchProduct, currentPage]);
 

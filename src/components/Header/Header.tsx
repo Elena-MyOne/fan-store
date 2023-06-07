@@ -27,7 +27,7 @@ const Header = () => {
             className="cart flex items-center bg-orange-500 md:px-6 px-3 md:py-3 py-2 rounded-3xl font-semibold text-white hover:bg-orange-600 duration-300"
           >
             <div className="sum mr-3">
-              $ <span>{totalPrice}</span>
+              $ <span>{totalPrice.toFixed(2)}</span>
             </div>
             <div className="delimiter bg-white opacity-25 h-[25px] w-[1px] mr-3"></div>
             <div className="icon flex items-center gap-2">

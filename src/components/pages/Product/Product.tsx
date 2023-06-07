@@ -110,7 +110,7 @@ const Product = () => {
           </div>
           <div className="bottom flex items-center justify-center gap-4 flex-col mb-2">
             <div className="price font-semibold text-center text-lg">
-              {product.price === 0 ? '' : `$${product.price}`}
+              {product.price === 0 ? '' : `$${product.price.toFixed(2)}`}
             </div>
             <div className="buttons flex justify-center items-center gap-9">
               <button onClick={onClickAddToCart} className={buttonCartStyle}>
