@@ -1,32 +1,28 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { PayloadAction } from '@reduxjs/toolkit';
-import { ProductsData } from '../../models/interface';
-import axios from 'axios';
-import { URL } from '../../models/enums';
+import { ProductsData } from './../../models/interface';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { STATUS } from '../../models/enums';
+import { fetchFilteredProducts } from '../asyncActions';
 
 export interface ProductsState {
-  isLoading: boolean;
   products: ProductsData[];
   currentPage: number;
   totalProducts: number;
   totalPages: number;
+  status: STATUS;
 }
 
 const initialState: ProductsState = {
-  isLoading: true,
   products: [],
   currentPage: 1,
   totalProducts: 0,
   totalPages: 1,
+  status: STATUS.LOADING,
 };
 
 export const ProductsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    setIsLoading(state, action: PayloadAction<boolean>) {
-      state.isLoading = action.payload;
-    },
     setProducts(state, action: PayloadAction<ProductsData[]>) {
       state.products = action.payload;
     },
@@ -40,8 +36,23 @@ export const ProductsSlice = createSlice({
       state.totalPages = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchFilteredProducts.pending, (state) => {
+        state.status = STATUS.LOADING;
+        state.products = [];
+      })
+      .addCase(fetchFilteredProducts.fulfilled, (state, action) => {
+        state.status = STATUS.SUCCESS;
+        state.products = action.payload;
+      })
+      .addCase(fetchFilteredProducts.rejected, (state) => {
+        state.status = STATUS.ERROR;
+        state.products = [];
+      });
+  },
 });
 
-export const { setProducts, setIsLoading, setCurrentPage, setTotalProducts, setTotalPages } =
+export const { setProducts, setCurrentPage, setTotalProducts, setTotalPages } =
   ProductsSlice.actions;
 export default ProductsSlice.reducer;

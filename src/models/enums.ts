@@ -13,3 +13,9 @@ export enum ROUTER_PATH {
 export enum URL {
   PRODUCTS = 'http://localhost:4200/products',
 }
+
+export enum STATUS {
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error',
+}

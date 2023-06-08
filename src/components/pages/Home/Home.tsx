@@ -5,9 +5,12 @@ import Sort from './Sort/Sort';
 import Pagination from './Pagination/Pagination';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
+import { STATUS } from '../../../models/enums';
+import ProductsError from './ProductsError/ProductsError';
 
 const Home = () => {
   const { activeCategory, activeFaculty } = useSelector((state: RootState) => state.filter);
+  const { status } = useSelector((state: RootState) => state.products);
 
   const title =
     activeCategory === 'all' && activeFaculty === 'All' ? 'All products' : 'Sort products';
@@ -19,9 +22,14 @@ const Home = () => {
         <Sort />
       </div>
       <div className="products mb-4">
-        <Pagination />
-        <h2 className="title font-semibold text-xl md:mb-4 mb-2">{title}</h2>
-        <Products />
+        {status === STATUS.SUCCESS && (
+          <>
+            <Pagination />
+            <h2 className="title font-semibold text-xl md:mb-4 mb-2">{title}</h2>
+          </>
+        )}
+
+        {status === STATUS.ERROR ? <ProductsError /> : <Products />}
       </div>
     </div>
   );
