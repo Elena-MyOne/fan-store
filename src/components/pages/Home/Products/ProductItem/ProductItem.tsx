@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  CartSelector,
+  selectCart,
   addItemToCart,
   removeItemFromCart,
   setEmptyCart,
@@ -25,7 +25,7 @@ const ProductItem = (props: ProductItemProps) => {
   const [description, setDescription] = useState(false);
   const [cartAdd, setCartAdd] = useState(false);
 
-  const { items } = useSelector(CartSelector);
+  const { items } = useSelector(selectCart);
   const dispatch = useDispatch();
 
   const buttonsStyle =

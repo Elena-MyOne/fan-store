@@ -1,13 +1,13 @@
 import React from 'react';
 import CategoriesSkeleton from './CategoriesSkeleton';
 import { useSelector, useDispatch } from 'react-redux';
-import { filterSelector, setActiveCategory } from '../../../../redux/slices/FilterSlice';
+import { selectFilter, setActiveCategory } from '../../../../redux/slices/FilterSlice';
 import { STATUS } from '../../../../models/enums';
-import { productsSelector } from '../../../../redux/slices/ProductsSlice';
+import { selectProducts } from '../../../../redux/slices/ProductsSlice';
 
 const Categories = () => {
-  const { activeCategory, allProducts } = useSelector(filterSelector);
-  const { status } = useSelector(productsSelector);
+  const { activeCategory, allProducts } = useSelector(selectFilter);
+  const { status } = useSelector(selectProducts);
   const dispatch = useDispatch();
 
   const styleCategoryItem =

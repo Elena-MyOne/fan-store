@@ -3,15 +3,15 @@ import { AppDispatch } from '../../redux/store';
 import React from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { filterSelector, setFilters } from '../../redux/slices/FilterSlice';
-import { HeaderSelector, setSearchParam } from '../../redux/slices/HeaderSlice';
+import { selectFilter, setFilters } from '../../redux/slices/FilterSlice';
+import { selectHeader, setSearchParam } from '../../redux/slices/HeaderSlice';
 import { fetchInitialProducts, fetchFilteredProducts } from '../../redux/asyncActions';
-import { productsSelector } from '../../redux/slices/ProductsSlice';
+import { selectProducts } from '../../redux/slices/ProductsSlice';
 
 const Service = () => {
-  const { activeCategory, activeFaculty } = useSelector(filterSelector);
-  const { currentPage, totalProducts } = useSelector(productsSelector);
-  const { searchProduct } = useSelector(HeaderSelector);
+  const { activeCategory, activeFaculty } = useSelector(selectFilter);
+  const { currentPage, totalProducts } = useSelector(selectProducts);
+  const { searchProduct } = useSelector(selectHeader);
   const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();

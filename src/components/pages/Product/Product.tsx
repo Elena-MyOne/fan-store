@@ -5,7 +5,7 @@ import { ROUTER_PATH, URL } from '../../../models/enums';
 import { ProductsData } from '../../../models/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  CartSelector,
+  selectCart,
   addItemToCart,
   removeItemFromCart,
   setEmptyCart,
@@ -17,7 +17,7 @@ const Product = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [cartAdd, setCartAdd] = React.useState(false);
 
-  const { items } = useSelector(CartSelector);
+  const { items } = useSelector(selectCart);
   const dispatch = useDispatch();
 
   const [product, setProduct] = React.useState<ProductsData>({

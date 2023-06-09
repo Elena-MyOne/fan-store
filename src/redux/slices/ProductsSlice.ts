@@ -54,7 +54,7 @@ export const ProductsSlice = createSlice({
   },
 });
 
-export const productsSelector = (state: RootState) => state.products;
+export const selectProducts = (state: RootState) => state.products;
 
 export const { setProducts, setCurrentPage, setTotalProducts, setTotalPages } =
   ProductsSlice.actions;

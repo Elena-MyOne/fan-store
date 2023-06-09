@@ -2,11 +2,10 @@ import React from 'react';
 import styles from './Pagination.module.scss';
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
-import { productsSelector, setCurrentPage } from '../../../../redux/slices/ProductsSlice';
-import { RootState } from '../../../../redux/store';
+import { selectProducts, setCurrentPage } from '../../../../redux/slices/ProductsSlice';
 
 const Pagination = () => {
-  const { totalPages } = useSelector(productsSelector);
+  const { totalPages } = useSelector(selectProducts);
   const dispatch = useDispatch();
   const productsPerPage = 8;
 

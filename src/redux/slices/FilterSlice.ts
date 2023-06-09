@@ -35,7 +35,7 @@ export const filterSlice = createSlice({
   },
 });
 
-export const filterSelector = (state: RootState) => state.filter;
+export const selectFilter = (state: RootState) => state.filter;
 
 export const { setActiveCategory, setActiveFaculty, setAllProducts, setFilters } =
   filterSlice.actions;

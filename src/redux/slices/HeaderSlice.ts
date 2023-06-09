@@ -23,7 +23,7 @@ export const headerSlice = createSlice({
   },
 });
 
-export const HeaderSelector = (state: RootState): HeaderState => state.header;
+export const selectHeader = (state: RootState): HeaderState => state.header;
 
 export const { setSearchProduct, setSearchParam } = headerSlice.actions;
 export default headerSlice.reducer;

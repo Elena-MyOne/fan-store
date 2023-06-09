@@ -4,15 +4,14 @@ import Products from './Products/Products';
 import Sort from './Sort/Sort';
 import Pagination from './Pagination/Pagination';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
 import { STATUS } from '../../../models/enums';
 import ProductsError from './ProductsError/ProductsError';
-import { filterSelector } from '../../../redux/slices/FilterSlice';
-import { productsSelector } from '../../../redux/slices/ProductsSlice';
+import { selectFilter } from '../../../redux/slices/FilterSlice';
+import { selectProducts } from '../../../redux/slices/ProductsSlice';
 
 const Home = () => {
-  const { activeCategory, activeFaculty } = useSelector(filterSelector);
-  const { status } = useSelector(productsSelector);
+  const { activeCategory, activeFaculty } = useSelector(selectFilter);
+  const { status } = useSelector(selectProducts);
 
   const title =
     activeCategory === 'all' && activeFaculty === 'All' ? 'All products' : 'Sort products';

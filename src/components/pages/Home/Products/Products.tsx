@@ -4,10 +4,10 @@ import ProductItem from './ProductItem/ProductItem';
 import ProductItemSkeleton from './ProductItem/ProductItemSkeleton';
 import { useSelector } from 'react-redux';
 import { STATUS } from '../../../../models/enums';
-import { productsSelector } from '../../../../redux/slices/ProductsSlice';
+import { selectProducts } from '../../../../redux/slices/ProductsSlice';
 
 const Products = () => {
-  const { products, status } = useSelector(productsSelector);
+  const { products, status } = useSelector(selectProducts);
   const productItems = products.map((product: ProductsData) => {
     return <ProductItem key={product.id} {...product} />;
   });
