@@ -4,8 +4,12 @@ import { Link, useParams } from 'react-router-dom';
 import { ROUTER_PATH, URL } from '../../../models/enums';
 import { ProductsData } from '../../../models/interface';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
-import { addItemToCart, removeItemFromCart, setEmptyCart } from '../../../redux/slices/CartSlice';
+import {
+  CartSelector,
+  addItemToCart,
+  removeItemFromCart,
+  setEmptyCart,
+} from '../../../redux/slices/CartSlice';
 
 const Product = () => {
   const { id } = useParams();
@@ -13,7 +17,7 @@ const Product = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [cartAdd, setCartAdd] = React.useState(false);
 
-  const { items } = useSelector((state: RootState) => state.cart);
+  const { items } = useSelector(CartSelector);
   const dispatch = useDispatch();
 
   const [product, setProduct] = React.useState<ProductsData>({

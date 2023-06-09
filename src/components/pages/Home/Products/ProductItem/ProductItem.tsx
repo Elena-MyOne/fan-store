@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  CartSelector,
   addItemToCart,
   removeItemFromCart,
   setEmptyCart,
   setItemsCount,
 } from '../../../../../redux/slices/CartSlice';
-import { RootState } from '../../../../../redux/store';
 
 interface ProductItemProps {
   id: number;
@@ -25,7 +25,7 @@ const ProductItem = (props: ProductItemProps) => {
   const [description, setDescription] = useState(false);
   const [cartAdd, setCartAdd] = useState(false);
 
-  const { items } = useSelector((state: RootState) => state.cart);
+  const { items } = useSelector(CartSelector);
   const dispatch = useDispatch();
 
   const buttonsStyle =

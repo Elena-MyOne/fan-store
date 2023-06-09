@@ -2,6 +2,7 @@ import { ProductsData } from './../../models/interface';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { STATUS } from '../../models/enums';
 import { fetchFilteredProducts } from '../asyncActions';
+import { RootState } from '../store';
 
 export interface ProductsState {
   products: ProductsData[];
@@ -52,6 +53,8 @@ export const ProductsSlice = createSlice({
       });
   },
 });
+
+export const productsSelector = (state: RootState) => state.products;
 
 export const { setProducts, setCurrentPage, setTotalProducts, setTotalPages } =
   ProductsSlice.actions;

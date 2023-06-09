@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 export interface HeaderState {
   searchProduct: string;
@@ -21,6 +22,8 @@ export const headerSlice = createSlice({
     },
   },
 });
+
+export const HeaderSelector = (state: RootState): HeaderState => state.header;
 
 export const { setSearchProduct, setSearchParam } = headerSlice.actions;
 export default headerSlice.reducer;

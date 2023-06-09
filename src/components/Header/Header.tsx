@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { ROUTER_PATH } from '../../models/enums';
 import Search from './Search/Search';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { CartSelector } from '../../redux/slices/CartSlice';
 
 const Header = () => {
   const [isSignUp, setSignUp] = useState(false);
-  const { totalPrice, itemsCount } = useSelector((state: RootState) => state.cart);
+  const { totalPrice, itemsCount } = useSelector(CartSelector);
 
   const signUpPath = isSignUp ? ROUTER_PATH.PROFILE : ROUTER_PATH.SIGNUP;
   const signUpText = isSignUp ? 'Profile' : 'Sign up';

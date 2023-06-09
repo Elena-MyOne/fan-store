@@ -1,11 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
-import { setActiveFaculty } from '../../../../redux/slices/FilterSlice';
+import { filterSelector, setActiveFaculty } from '../../../../redux/slices/FilterSlice';
 
 const Sort = () => {
-  const activeFaculty = useSelector((state: RootState) => state.filter.activeFaculty);
-  const allProducts = useSelector((state: RootState) => state.filter.allProducts);
+  const { activeFaculty, allProducts } = useSelector(filterSelector);
   const dispatch = useDispatch();
 
   const [isOpenPopup, setIsOpenPopup] = React.useState(false);

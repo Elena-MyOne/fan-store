@@ -4,6 +4,7 @@ import { CartData, ProductsData } from '../../models/interface';
 import { calcTotalPrice } from '../../utils/calcTotalPrice';
 import { calcTotalSale } from '../../utils/calcTotalSale';
 import { calcItemsCount } from '../../utils/calcItemsCount';
+import { RootState } from '../store';
 
 export interface CartState {
   isEmptyCart: boolean;
@@ -87,6 +88,8 @@ const CartSlice = createSlice({
     },
   },
 });
+
+export const CartSelector = (state: RootState) => state.cart;
 
 export const {
   addItemToCart,

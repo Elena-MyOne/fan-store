@@ -1,16 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../redux/store';
+import { AppDispatch } from '../../redux/store';
 import React from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { setFilters } from '../../redux/slices/FilterSlice';
-import { setSearchParam } from '../../redux/slices/HeaderSlice';
+import { filterSelector, setFilters } from '../../redux/slices/FilterSlice';
+import { HeaderSelector, setSearchParam } from '../../redux/slices/HeaderSlice';
 import { fetchInitialProducts, fetchFilteredProducts } from '../../redux/asyncActions';
+import { productsSelector } from '../../redux/slices/ProductsSlice';
 
 const Service = () => {
-  const { activeCategory, activeFaculty } = useSelector((state: RootState) => state.filter);
-  const { currentPage, totalProducts } = useSelector((state: RootState) => state.products);
-  const { searchProduct } = useSelector((state: RootState) => state.header);
+  const { activeCategory, activeFaculty } = useSelector(filterSelector);
+  const { currentPage, totalProducts } = useSelector(productsSelector);
+  const { searchProduct } = useSelector(HeaderSelector);
   const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();
@@ -42,6 +43,8 @@ const Service = () => {
           searchProduct: param.search as string,
         })
       );
+
+      // dispatch(setCurrentPage(parseInt(param.page as string, 10)));
     }
   }, [dispatch]);
 

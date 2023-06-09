@@ -2,15 +2,12 @@ import React from 'react';
 import CartItem from '../CartItem/CartItem';
 import { Link } from 'react-router-dom';
 import { ROUTER_PATH } from '../../../../models/enums';
-import { RootState } from '../../../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartData } from '../../../../models/interface';
-import { clearCart } from '../../../../redux/slices/CartSlice';
+import { CartSelector, clearCart } from '../../../../redux/slices/CartSlice';
 
 const ShoppingCart = () => {
-  const { items, itemsCount, totalPrice, totalSale } = useSelector(
-    (state: RootState) => state.cart
-  );
+  const { items, itemsCount, totalPrice, totalSale } = useSelector(CartSelector);
   const dispatch = useDispatch();
 
   const cartItems = items.map((item: CartData) => {
