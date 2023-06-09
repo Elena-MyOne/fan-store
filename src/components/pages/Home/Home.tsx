@@ -8,10 +8,11 @@ import { STATUS } from '../../../models/enums';
 import ProductsError from './ProductsError/ProductsError';
 import { selectFilter } from '../../../redux/slices/FilterSlice';
 import { selectProducts } from '../../../redux/slices/ProductsSlice';
+import ProductsEmpty from './ProductsEmpty/ProductsEmpty';
 
 const Home = () => {
   const { activeCategory, activeFaculty } = useSelector(selectFilter);
-  const { status } = useSelector(selectProducts);
+  const { status, products } = useSelector(selectProducts);
 
   const title =
     activeCategory === 'all' && activeFaculty === 'All' ? 'All products' : 'Sort products';
@@ -26,6 +27,7 @@ const Home = () => {
         <Pagination />
         <h2 className="title font-semibold text-xl md:mb-4 mb-2">{title}</h2>
         {status === STATUS.ERROR ? <ProductsError /> : <Products />}
+        {status === STATUS.SUCCESS && products.length === 0 && <ProductsEmpty />}
       </div>
     </div>
   );
