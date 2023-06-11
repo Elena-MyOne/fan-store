@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const ProductSkeleton = () => {
+const ProductSkeleton: React.FC = () => {
   return (
     <div className="bg-white p-3 m-auto">
       <ContentLoader

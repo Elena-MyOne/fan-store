@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ROUTER_PATH, URL } from '../../../models/enums';
 import { ProductsData } from '../../../models/interface';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,8 +12,9 @@ import {
 } from '../../../redux/slices/CartSlice';
 import ProductSkeleton from './ProductSkeleton';
 
-const Product = () => {
+const Product: React.FC = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [cartAdd, setCartAdd] = React.useState(false);
@@ -35,27 +36,32 @@ const Product = () => {
   });
 
   React.useEffect(() => {
-    setIsLoading(true);
-    axios
-      .get(`${URL.PRODUCTS}/${id}`)
-      .then((res) => {
+    async function fetchProductById() {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`${URL.PRODUCTS}/${id}`);
         setProduct({
-          id: res.data.id,
-          category: res.data.category,
-          faculty: res.data.faculty,
-          name: res.data.name,
-          image: res.data.image,
-          description: res.data.description,
-          price: res.data.price,
-          rate: res.data.rate,
-          sale: res.data.sale,
+          id: response.data.id,
+          category: response.data.category,
+          faculty: response.data.faculty,
+          name: response.data.name,
+          image: response.data.image,
+          description: response.data.description,
+          price: response.data.price,
+          rate: response.data.rate,
+          sale: response.data.sale,
         });
-        setIsLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log(error);
-      });
-  }, [id]);
+        //TODO add popup
+        navigate('/');
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchProductById();
+  }, [id, navigate]);
 
   function onClickAddToCart() {
     setCartAdd((prev) => !prev);
@@ -108,11 +114,11 @@ const Product = () => {
             <div className="middle">
               <div className="description pr-2">{product.description}</div>
               <div className="faculty mt-4">
-                <span className="font-semibold">{isLoading ? '' : 'Faculty: '}</span>{' '}
+                <span className="font-semibold">Faculty: </span>
                 {product.faculty}
               </div>
               <div className="category">
-                <span className="font-semibold">{isLoading ? '' : 'Category: '}</span>{' '}
+                <span className="font-semibold">Category: </span>
                 {product.category}
               </div>
             </div>
