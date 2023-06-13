@@ -20,3 +20,19 @@ export interface ProductsData {
 export interface CartData extends ProductsData {
   count: number;
 }
+
+export interface paymentInfoData {
+  cardNumber: string;
+  holderName: string;
+  expirationDate: string;
+  cvc: string;
+  isCardNumberError: boolean;
+  isHolderNameError: boolean;
+  isExpirationDateError: boolean;
+  isCvcError: boolean;
+  cardNumberSuccess: boolean;
+  holderNameSuccess: boolean;
+  expirationDateSuccess: boolean;
+  cvcSuccess: boolean;
+  isSubmit: boolean;
+}

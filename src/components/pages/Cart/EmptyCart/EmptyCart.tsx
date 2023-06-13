@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ROUTER_PATH } from '../../../../models/enums';
 
 const EmptyCart = () => {
@@ -10,12 +10,12 @@ const EmptyCart = () => {
       <div className="w-56">
         <img src="/assets/images/pages/cart/1.png" alt="walking woman with empty cart" />
       </div>
-      <NavLink
+      <Link
         to={ROUTER_PATH.HOME}
         className="px-6 py-2 block text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl"
       >
         Home page
-      </NavLink>
+      </Link>
     </>
   );
 };
