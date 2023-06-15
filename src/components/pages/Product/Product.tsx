@@ -35,6 +35,16 @@ const Product: React.FC = () => {
     length: '',
   });
 
+  const isMounted = React.useRef(false);
+
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    }
+    isMounted.current = true;
+  }, [items]);
+
   React.useEffect(() => {
     async function fetchProductById() {
       setIsLoading(true);

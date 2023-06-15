@@ -105,7 +105,7 @@ const CheckoutSlice = createSlice({
       }
     },
 
-    setSuccessFormSubmit(state) {
+    setSuccessCheckoutFormSubmit(state) {
       state.isSubmit = true;
       state.isCvcError = false;
       state.isCardNumberError = false;
@@ -113,7 +113,7 @@ const CheckoutSlice = createSlice({
       state.isExpirationDateError = false;
     },
 
-    setFormSubmitError(state) {
+    setCheckoutFormSubmitError(state) {
       state.isSubmit = false;
       state.isCvcError = !state.cvcSuccess;
       state.isCardNumberError = !state.cardNumberSuccess;
@@ -133,7 +133,7 @@ export const {
   setExpirationDate,
   setCardCvc,
   validateCardCvc,
-  setSuccessFormSubmit,
-  setFormSubmitError,
+  setSuccessCheckoutFormSubmit,
+  setCheckoutFormSubmitError,
 } = CheckoutSlice.actions;
 export default CheckoutSlice.reducer;

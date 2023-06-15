@@ -8,20 +8,9 @@ import {
   setEmptyCart,
   setItemsCount,
 } from '../../../../../redux/slices/CartSlice';
+import { ProductsData } from '../../../../../models/interface';
 
-interface ProductItemProps {
-  id: number;
-  category: string;
-  faculty: string;
-  name: string;
-  image: string;
-  description: string;
-  price: number;
-  rate: number;
-  sale: number;
-}
-
-const ProductItem = (props: ProductItemProps) => {
+const ProductItem = (props: ProductsData) => {
   const [description, setDescription] = useState(false);
   const [cartAdd, setCartAdd] = useState(false);
 
@@ -40,7 +29,7 @@ const ProductItem = (props: ProductItemProps) => {
 
   function onClickCartButton() {
     setCartAdd((prev) => !prev);
-    const item: ProductItemProps = {
+    const item: ProductsData = {
       id: props.id,
       category: props.category,
       faculty: props.faculty,
@@ -67,6 +56,16 @@ const ProductItem = (props: ProductItemProps) => {
       dispatch(setEmptyCart(true));
     }
   }, [dispatch, items, props.id]);
+
+  const isMounted = React.useRef(false);
+
+  React.useEffect(() => {
+    if (isMounted.current) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    }
+    isMounted.current = true;
+  }, [items]);
 
   return (
     <div className="flex flex-col items-center border border-gray-300 pt-3 pb-3 px-4 rounded mb-2 hover:shadow-lg duration-300 relative">

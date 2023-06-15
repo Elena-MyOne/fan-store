@@ -14,19 +14,24 @@ const Sort = () => {
     'font-semibold py-2 px-5 text-orange-400 bg-orange-100 cursor-pointer';
   const popupItemStyles = 'py-2 px-5 cursor-pointer hover:text-orange-400 duration-300';
 
-  const allFaculties = allProducts.map((product) => product.faculty);
-  const faculties = ['All', ...new Set(allFaculties)].map((faculty, index) => (
-    <li
-      className={faculty === activeFaculty ? activePopupItemStyles : popupItemStyles}
-      key={index}
-      onClick={() => {
-        dispatch(setActiveFaculty(faculty));
-        setIsOpenPopup((prev) => !prev);
-      }}
-    >
-      {faculty}
-    </li>
-  ));
+  const allFaculties = React.useMemo(() => {
+    return allProducts.map((product) => product.faculty);
+  }, [allProducts]);
+
+  const faculties = React.useMemo(() => {
+    return ['All', ...new Set(allFaculties)].map((faculty, index) => (
+      <li
+        className={faculty === activeFaculty ? activePopupItemStyles : popupItemStyles}
+        key={index}
+        onClick={() => {
+          dispatch(setActiveFaculty(faculty));
+          setIsOpenPopup((prev) => !prev);
+        }}
+      >
+        {faculty}
+      </li>
+    ));
+  }, [activeFaculty, allFaculties, dispatch]);
 
   React.useEffect(() => {
     const handleClickOnBody = (e: MouseEvent) => {

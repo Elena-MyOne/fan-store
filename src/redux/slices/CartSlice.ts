@@ -5,6 +5,7 @@ import { calcTotalPrice } from '../../utils/calcTotalPrice';
 import { calcTotalSale } from '../../utils/calcTotalSale';
 import { calcItemsCount } from '../../utils/calcItemsCount';
 import { RootState } from '../store';
+import { getCartFromLocalStorage } from '../../utils/getCartFromLocalStorage';
 
 export interface CartState {
   isEmptyCart: boolean;
@@ -14,12 +15,14 @@ export interface CartState {
   itemsCount: number;
 }
 
+const { isEmptyCart, totalPrice, totalSale, items, itemsCount } = getCartFromLocalStorage();
+
 const initialState: CartState = {
-  isEmptyCart: true,
-  totalPrice: 0,
-  totalSale: 0,
-  items: [],
-  itemsCount: 0,
+  isEmptyCart,
+  totalPrice,
+  totalSale,
+  items,
+  itemsCount,
 };
 
 const CartSlice = createSlice({

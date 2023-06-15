@@ -8,8 +8,8 @@ import {
   setCardHolderName,
   setCardNumber,
   setExpirationDate,
-  setFormSubmitError,
-  setSuccessFormSubmit,
+  setCheckoutFormSubmitError,
+  setSuccessCheckoutFormSubmit,
   validateCardCvc,
   validateCardHolderName,
   validateCardNumber,
@@ -61,10 +61,10 @@ const Checkout: React.FC = () => {
   function handelForm(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (cardNumberSuccess && expirationDateSuccess && holderNameSuccess && cvcSuccess) {
-      dispatch(setSuccessFormSubmit());
+      dispatch(setSuccessCheckoutFormSubmit());
       dispatch(clearCart());
     } else {
-      dispatch(setFormSubmitError());
+      dispatch(setCheckoutFormSubmitError());
     }
   }
 
