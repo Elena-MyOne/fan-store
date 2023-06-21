@@ -32,7 +32,7 @@ const Search = () => {
   }
 
   return (
-    <div className="search relative  text-gray-600">
+    <div className="search relative  text-gray-600 lg:order-2 order-4 self-center mx-2">
       <button className="hover:text-orange-500 duration-300 absolute top-0 left-2">
         <svg className="w-[25px] h-[35px]" viewBox="0 96 960 960">
           <path
