@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <div className="home container px-2 m-auto">
-      <div className="top flex justify-between items-center gap-4 py-8 xl:flex-row flex-col">
+      <div className="top flex justify-between items-center gap-6 py-8 xl:flex-row flex-col">
         <Categories />
         <Sort />
       </div>
