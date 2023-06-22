@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './Header.module.scss';
 import { Link } from 'react-router-dom';
 import { ROUTER_PATH } from '../../models/enums';
 import Search from './Search/Search';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../../redux/slices/CartSlice';
+import { selectUser } from '../../redux/store';
 
 const Header = () => {
-  const [isSignUp, setSignUp] = useState(false);
   const { totalPrice, itemsCount } = useSelector(selectCart);
+  const { isSignUp } = useSelector(selectUser);
 
   const signUpPath = isSignUp ? ROUTER_PATH.PROFILE : ROUTER_PATH.SIGNUP;
   const signUpText = isSignUp ? 'Profile' : 'Sign up';
-  // const SignIn = isSignUp ? 'Profile' : 'Sign in';
 
   return (
     <header className="header py-4 border">

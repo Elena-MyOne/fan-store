@@ -4,6 +4,7 @@ import ProductsSlice from './slices/ProductsSlice';
 import HeaderSlice from './slices/HeaderSlice';
 import CartSlice from './slices/CartSlice';
 import CheckoutSlice from './slices/CheckoutSlice';
+import UserSlice from './slices/UserSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,8 +13,11 @@ export const store = configureStore({
     header: HeaderSlice,
     cart: CartSlice,
     checkout: CheckoutSlice,
+    user: UserSlice,
   },
 });
+
+export const selectUser = (state: RootState) => state.user;
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
