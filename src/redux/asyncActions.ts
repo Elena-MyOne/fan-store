@@ -9,7 +9,12 @@ import {
   setTotalPages,
   setTotalProducts,
 } from './slices/ProductsSlice';
-import { setSignUp } from './slices/UserSlice';
+import {
+  clearSignUpFormInputs,
+  setIsRegisterError,
+  setRegisterErrorMessage,
+  setSignUp,
+} from './slices/UserSlice';
 
 export const fetchInitialProducts = createAsyncThunk(
   'products/fetchInitialProducts',
@@ -59,9 +64,13 @@ export const registerNewUser = createAsyncThunk(
       });
       console.log(response.data);
       dispatch(setSignUp(true));
+      dispatch(setIsRegisterError(false));
+      localStorage.setItem('useInfo', JSON.stringify({ name, email, isSignUp: true }));
     } catch (error) {
-      console.log(error);
       dispatch(setSignUp(false));
+      dispatch(setIsRegisterError(true));
+      dispatch(setRegisterErrorMessage((error as Error).message));
+      dispatch(clearSignUpFormInputs());
     }
   }
 );

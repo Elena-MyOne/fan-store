@@ -14,6 +14,8 @@ export interface UserState {
   confirmPassword: string;
   confirmPasswordSuccess: boolean;
   isConfirmPasswordError: boolean;
+  isRegisterError: boolean;
+  registerErrorMessage: string;
 }
 
 const initialState: UserState = {
@@ -30,6 +32,8 @@ const initialState: UserState = {
   confirmPassword: '',
   confirmPasswordSuccess: false,
   isConfirmPasswordError: false,
+  isRegisterError: false,
+  registerErrorMessage: '',
 };
 
 const USER_REGEX = /^[a-zA-Z0-9-_]{2,30}$/;
@@ -100,6 +104,22 @@ const UserSlice = createSlice({
         : (state.isConfirmPasswordError = true);
       state.isSignUp = false;
     },
+    setIsRegisterError(state, action: PayloadAction<boolean>) {
+      state.isRegisterError = action.payload;
+    },
+    setRegisterErrorMessage(state, action: PayloadAction<string>) {
+      state.registerErrorMessage = action.payload;
+    },
+    clearSignUpFormInputs(state) {
+      state.name = '';
+      state.nameSuccess = false;
+      state.email = '';
+      state.emailSuccess = false;
+      state.password = '';
+      state.passwordSuccess = false;
+      state.confirmPassword = '';
+      state.confirmPasswordSuccess = false;
+    },
   },
 });
 
@@ -114,5 +134,8 @@ export const {
   validatePassword,
   validateConfirmPassword,
   validateForm,
+  setIsRegisterError,
+  setRegisterErrorMessage,
+  clearSignUpFormInputs,
 } = UserSlice.actions;
 export default UserSlice.reducer;

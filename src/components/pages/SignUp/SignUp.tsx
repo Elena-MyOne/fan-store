@@ -8,7 +8,6 @@ import {
   setEmail,
   setName,
   setPassword,
-  setSignUp,
   validateConfirmPassword,
   validateForm,
   validatePassword,
@@ -16,6 +15,7 @@ import {
   validateUserName,
 } from '../../../redux/slices/UserSlice';
 import { registerNewUser } from '../../../redux/asyncActions';
+import SignUpErrorPopup from './SignUpErrorPopup/SignUpErrorPopup';
 
 const SignUp: React.FC = () => {
   const {
@@ -32,6 +32,7 @@ const SignUp: React.FC = () => {
     confirmPassword,
     confirmPasswordSuccess,
     isConfirmPasswordError,
+    isRegisterError,
   } = useSelector(selectUser);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -84,134 +85,148 @@ const SignUp: React.FC = () => {
   }
 
   return (
-    <section className="h-[87vh] flex justify-center items-center bg-gray-100">
-      <div className="body bg-white p-4 border rounded w-[450px]">
-        {isSignUp ? (
-          <section className="flex flex-col justify-center items-center gap-6">
-            <img className="w-44" src="./assets/images/3.webp" alt="" />
-            <p className="font-semibold text-lg">Success!</p>
-            <Link
-              to={ROUTER_PATH.HOME}
-              className="w-44 px-6 py-2 block text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl"
-            >
-              Go to home page
-            </Link>
-          </section>
-        ) : (
-          <>
-            <h2 className="title text-center font-semibold text-lg mb-8">Register</h2>
-            <form className="flex items-center justify-center flex-col gap-6" onSubmit={handelForm}>
-              <div className="w-full">
-                <label htmlFor="name">Name</label>
-                <input
-                  type="text"
-                  className={`name ${isNameError ? errorInputStyles : inputStyles}`}
-                  value={name}
-                  onChange={handleUserName}
-                  ref={userRef}
-                  id="name"
-                  autoComplete="off"
-                  aria-describedby="name"
-                />
-                <div className={isNameError ? errorStyle : errorStyleHidden} aria-live="assertive">
-                  The User Name must be from 2 to 30 symbols and can include only letters, numbers
-                  and _
-                </div>
-                <div
-                  className={nameSuccess ? successInputValueStyle : errorStyleHidden}
-                  aria-live="assertive"
-                >
-                  &#10003; Correct
-                </div>
-              </div>
-              <div className="w-full">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="text"
-                  className={`email ${isEmailError ? errorInputStyles : inputStyles}`}
-                  value={email}
-                  onChange={handleUserEmail}
-                  id="email"
-                  autoComplete="off"
-                  aria-describedby="email"
-                />
-                <div className={isEmailError ? errorStyle : errorStyleHidden} aria-live="assertive">
-                  Please enter the email (www@www.com)
-                </div>
-                <div
-                  className={emailSuccess ? successInputValueStyle : errorStyleHidden}
-                  aria-live="assertive"
-                >
-                  &#10003; Correct
-                </div>
-              </div>
-              <div className="w-full">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  className={`password ${isPasswordError ? errorInputStyles : inputStyles}`}
-                  onChange={handleUserPassword}
-                  value={password}
-                  id="password"
-                  aria-describedby="password"
-                />
-                <div
-                  className={isPasswordError ? errorStyle : errorStyleHidden}
-                  aria-live="assertive"
-                >
-                  The password must include one lowercase, uppercase, number, and special character.
-                  The length should be between 8 and 30 symbols.
-                </div>
-                <div
-                  className={passwordSuccess ? successInputValueStyle : errorStyleHidden}
-                  aria-live="assertive"
-                >
-                  &#10003; Correct
-                </div>
-              </div>
-              <div className="w-full">
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <input
-                  type="password"
-                  className={`password ${isConfirmPasswordError ? errorInputStyles : inputStyles}`}
-                  value={confirmPassword}
-                  onChange={handleUserConfirmPassword}
-                  id="confirmPassword"
-                  aria-describedby="confirmPassword"
-                />
-                <div
-                  className={isConfirmPasswordError ? errorStyle : errorStyleHidden}
-                  aria-live="assertive"
-                >
-                  The Password Confirmation should match the Password
-                </div>
-                <div
-                  className={confirmPasswordSuccess ? successInputValueStyle : errorStyleHidden}
-                  aria-live="assertive"
-                >
-                  &#10003; Correct
-                </div>
-              </div>
-              <button
-                type="submit"
-                className="px-10 py-2 block text-white bg-orange-500 hover:bg-orange-600 duration-300 rounded-3xl cursor-pointer"
-              >
-                Sign Up
-              </button>
-            </form>
-            <div className="registered flex gap-1 justify-center items-center flex-col mt-6">
-              <p>Already registered?</p>
+    <>
+      {isRegisterError && <SignUpErrorPopup />}
+      <section className="h-[87vh] flex justify-center items-center bg-gray-100">
+        <div className="body bg-white p-4 border rounded max-w-[450px]">
+          {isSignUp ? (
+            <section className="flex flex-col justify-center items-center gap-6 min-w-[310px]">
+              <img className="w-44" src="./assets/images/3.webp" alt="" />
+              <p className="font-semibold text-lg">Success!</p>
               <Link
-                to={ROUTER_PATH.HOME + ROUTER_PATH.LOGIN}
-                className="pointer text-orange-500 hover:text-orange-600 duration-300"
+                to={ROUTER_PATH.HOME}
+                className="w-44 px-6 py-2 block text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl"
               >
-                Sign In
+                Go to home page
               </Link>
-            </div>
-          </>
-        )}
-      </div>
-    </section>
+            </section>
+          ) : (
+            <>
+              <h2 className="title text-center font-semibold text-lg mb-8">Register</h2>
+              <form
+                className="flex items-center justify-center flex-col gap-6"
+                onSubmit={handelForm}
+              >
+                <div className="w-full">
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    className={`name ${isNameError ? errorInputStyles : inputStyles}`}
+                    value={name}
+                    onChange={handleUserName}
+                    ref={userRef}
+                    id="name"
+                    autoComplete="off"
+                    aria-describedby="name"
+                  />
+                  <div
+                    className={isNameError ? errorStyle : errorStyleHidden}
+                    aria-live="assertive"
+                  >
+                    The User Name must be from 2 to 30 symbols and can include only letters, numbers
+                    and _
+                  </div>
+                  <div
+                    className={nameSuccess ? successInputValueStyle : errorStyleHidden}
+                    aria-live="assertive"
+                  >
+                    &#10003; Correct
+                  </div>
+                </div>
+                <div className="w-full">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="text"
+                    className={`email ${isEmailError ? errorInputStyles : inputStyles}`}
+                    value={email}
+                    onChange={handleUserEmail}
+                    id="email"
+                    autoComplete="off"
+                    aria-describedby="email"
+                  />
+                  <div
+                    className={isEmailError ? errorStyle : errorStyleHidden}
+                    aria-live="assertive"
+                  >
+                    Please enter the email (www@www.com)
+                  </div>
+                  <div
+                    className={emailSuccess ? successInputValueStyle : errorStyleHidden}
+                    aria-live="assertive"
+                  >
+                    &#10003; Correct
+                  </div>
+                </div>
+                <div className="w-full">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    className={`password ${isPasswordError ? errorInputStyles : inputStyles}`}
+                    onChange={handleUserPassword}
+                    value={password}
+                    id="password"
+                    aria-describedby="password"
+                  />
+                  <div
+                    className={isPasswordError ? errorStyle : errorStyleHidden}
+                    aria-live="assertive"
+                  >
+                    The password must include one lowercase, uppercase, number, and special
+                    character. The length should be between 8 and 30 symbols.
+                  </div>
+                  <div
+                    className={passwordSuccess ? successInputValueStyle : errorStyleHidden}
+                    aria-live="assertive"
+                  >
+                    &#10003; Correct
+                  </div>
+                </div>
+                <div className="w-full">
+                  <label htmlFor="confirmPassword">Confirm Password</label>
+                  <input
+                    type="password"
+                    className={`password ${
+                      isConfirmPasswordError ? errorInputStyles : inputStyles
+                    }`}
+                    value={confirmPassword}
+                    onChange={handleUserConfirmPassword}
+                    id="confirmPassword"
+                    aria-describedby="confirmPassword"
+                  />
+                  <div
+                    className={isConfirmPasswordError ? errorStyle : errorStyleHidden}
+                    aria-live="assertive"
+                  >
+                    The Password Confirmation should match the Password
+                  </div>
+                  <div
+                    className={confirmPasswordSuccess ? successInputValueStyle : errorStyleHidden}
+                    aria-live="assertive"
+                  >
+                    &#10003; Correct
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="px-10 py-2 block text-white bg-orange-500 hover:bg-orange-600 duration-300 rounded-3xl cursor-pointer"
+                >
+                  Sign Up
+                </button>
+              </form>
+              <div className="registered flex gap-1 justify-center items-center flex-col mt-6">
+                <p>Already registered?</p>
+                <Link
+                  to={ROUTER_PATH.HOME + ROUTER_PATH.LOGIN}
+                  className="pointer text-orange-500 hover:text-orange-600 duration-300"
+                >
+                  Sign In
+                </Link>
+              </div>
+            </>
+          )}
+        </div>
+      </section>
+    </>
   );
 };
 
