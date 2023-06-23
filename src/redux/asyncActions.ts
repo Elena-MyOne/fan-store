@@ -9,6 +9,7 @@ import {
   setTotalPages,
   setTotalProducts,
 } from './slices/ProductsSlice';
+import { setSignUp } from './slices/UserSlice';
 
 export const fetchInitialProducts = createAsyncThunk(
   'products/fetchInitialProducts',
@@ -44,3 +45,25 @@ export const fetchFilteredProducts = createAsyncThunk(
     return response.data.products;
   }
 );
+
+export const registerNewUser = createAsyncThunk(
+  'users/registerNewUser',
+  async (_, { dispatch, getState }) => {
+    try {
+      const state: RootState = getState() as RootState;
+      const { name, email, password } = state.user;
+
+      const response = await axios.post(URL.USERS, JSON.stringify({ name, email, password }), {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      });
+      console.log(response.data);
+      dispatch(setSignUp(true));
+    } catch (error) {
+      console.log(error);
+      dispatch(setSignUp(false));
+    }
+  }
+);
+
+// export const fetchUserById

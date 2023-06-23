@@ -92,20 +92,13 @@ const UserSlice = createSlice({
       }
     },
     validateForm(state) {
-      if (
-        state.nameSuccess &&
-        state.emailSuccess &&
-        state.passwordSuccess &&
-        state.confirmPasswordSuccess
-      ) {
-        // axios request
-      }
       state.nameSuccess ? (state.isNameError = false) : (state.isNameError = true);
       state.emailSuccess ? (state.isEmailError = false) : (state.isEmailError = true);
       state.passwordSuccess ? (state.isPasswordError = false) : (state.isPasswordError = true);
       state.confirmPasswordSuccess
         ? (state.isConfirmPasswordError = false)
         : (state.isConfirmPasswordError = true);
+      state.isSignUp = false;
     },
   },
 });

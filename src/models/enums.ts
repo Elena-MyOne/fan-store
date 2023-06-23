@@ -12,6 +12,7 @@ export enum ROUTER_PATH {
 
 export enum URL {
   PRODUCTS = 'http://localhost:4200/products',
+  USERS = 'http://localhost:4200/users',
 }
 
 export enum STATUS {

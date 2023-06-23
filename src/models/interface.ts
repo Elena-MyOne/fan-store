@@ -20,3 +20,10 @@ export interface ProductsData {
 export interface CartData extends ProductsData {
   count: number;
 }
+
+export interface UserData {
+  id?: number;
+  name: string;
+  email: string;
+  password: string;
+}
