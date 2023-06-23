@@ -1,11 +1,12 @@
 import React, { ChangeEvent, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ROUTER_PATH } from '../../../models/enums';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, selectUser } from '../../../redux/store';
 import {
   setConfirmPassword,
   setEmail,
+  setIsRegisterError,
   setName,
   setPassword,
   validateConfirmPassword,
@@ -35,6 +36,8 @@ const SignUp: React.FC = () => {
     isRegisterError,
   } = useSelector(selectUser);
   const dispatch = useDispatch<AppDispatch>();
+
+  const navigate = useNavigate();
 
   const userRef = React.useRef<HTMLInputElement>(null);
 
@@ -76,13 +79,20 @@ const SignUp: React.FC = () => {
     dispatch(validateConfirmPassword());
   }
 
-  function handelForm(e: FormEvent<HTMLFormElement>) {
+  const handelForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(validateForm());
     if (nameSuccess && emailSuccess && passwordSuccess && confirmPasswordSuccess) {
-      dispatch(registerNewUser());
+      try {
+        await dispatch(registerNewUser());
+      } finally {
+        setTimeout(() => {
+          navigate(ROUTER_PATH.HOME);
+          dispatch(setIsRegisterError(false));
+        }, 5000);
+      }
     }
-  }
+  };
 
   return (
     <>

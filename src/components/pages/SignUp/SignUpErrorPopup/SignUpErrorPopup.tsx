@@ -2,6 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, selectUser } from '../../../../redux/store';
 import { setIsRegisterError, setRegisterErrorMessage } from '../../../../redux/slices/UserSlice';
+import { ROUTER_PATH } from '../../../../models/enums';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpErrorPopup = () => {
   const { registerErrorMessage } = useSelector(selectUser);
