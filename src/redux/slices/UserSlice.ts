@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { getUserFromLocalStorage } from '../../utils/getUserFromLoocalStorage';
 
 export interface UserState {
   isSignUp: boolean;
@@ -18,12 +19,16 @@ export interface UserState {
   registerErrorMessage: string;
 }
 
+const { isSignUp, name, email } = getUserFromLocalStorage();
+
+console.log(isSignUp, name, email);
+
 const initialState: UserState = {
-  isSignUp: false,
-  name: '',
+  isSignUp,
+  name,
   nameSuccess: false,
   isNameError: false,
-  email: '',
+  email,
   emailSuccess: false,
   isEmailError: false,
   password: '',
