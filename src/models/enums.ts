@@ -4,9 +4,12 @@ export enum ROUTER_PATH {
   CART = 'cart',
   CHECKOUT = 'cart/checkout',
   LOGIN = 'login',
-  LOGOUT = 'logout',
   SIGNUP = 'signup',
   PROFILE = 'profile',
+  LOGOUT = 'logout',
+  BILLING = 'billing',
+  CHANGE_PASSWORD = 'change-password',
+  ACCOUNT = 'account',
   NOTFOUND = '*',
 }
 

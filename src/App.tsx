@@ -7,10 +7,14 @@ import Home from './components/pages/Home/Home';
 import Product from './components/pages/Product/Product';
 import NotFound from './components/pages/NotFound/NotFound';
 import Login from './components/pages/Login/Login';
-import Logout from './components/pages/Logout/Logout';
+
 import SignUp from './components/pages/SignUp/SignUp';
 import Checkout from './components/pages/Checkout/Checkout';
 import Loader from './components/Loader/Loader';
+import Logout from './components/pages/Profile/Logout/Logout';
+import Billing from './components/pages/Profile/Billing/Billing';
+import ChangePassword from './components/pages/Profile/changePassword/ChangePassword';
+import Account from './components/pages/Profile/Account/Account';
 
 const Cart = React.lazy(
   () => import(/* webpackChunkName: "Cart" */ './components/pages/Cart/Cart')
@@ -35,7 +39,6 @@ function App() {
         />
         <Route path={ROUTER_PATH.CHECKOUT} element={<Checkout />} />
         <Route path={ROUTER_PATH.LOGIN} element={<Login />} />
-        <Route path={ROUTER_PATH.LOGOUT} element={<Logout />} />
         <Route path={ROUTER_PATH.SIGNUP} element={<SignUp />} />
         <Route
           path={ROUTER_PATH.PROFILE}
@@ -44,7 +47,12 @@ function App() {
               <Profile />
             </React.Suspense>
           }
-        />
+        >
+          <Route path={ROUTER_PATH.ACCOUNT} element={<Account />} />
+          <Route path={ROUTER_PATH.CHANGE_PASSWORD} element={<ChangePassword />} />
+          <Route path={ROUTER_PATH.BILLING} element={<Billing />} />
+          <Route path={ROUTER_PATH.LOGOUT} element={<Logout />} />
+        </Route>
         <Route path={ROUTER_PATH.NOTFOUND} element={<NotFound />} />
       </Route>
     </Routes>

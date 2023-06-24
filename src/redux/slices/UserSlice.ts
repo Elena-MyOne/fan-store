@@ -21,8 +21,6 @@ export interface UserState {
 
 const { isSignUp, name, email } = getUserFromLocalStorage();
 
-console.log(isSignUp, name, email);
-
 const initialState: UserState = {
   isSignUp,
   name,

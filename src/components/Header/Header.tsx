@@ -9,10 +9,13 @@ import { selectUser } from '../../redux/store';
 
 const Header = () => {
   const { totalPrice, itemsCount } = useSelector(selectCart);
-  const { isSignUp } = useSelector(selectUser);
+  const { isSignUp, name } = useSelector(selectUser);
 
-  const signUpPath = isSignUp ? ROUTER_PATH.PROFILE : ROUTER_PATH.SIGNUP;
-  const signUpText = isSignUp ? 'Profile' : 'Sign up';
+  const signUpPath = isSignUp
+    ? `${ROUTER_PATH.PROFILE}/${ROUTER_PATH.ACCOUNT}`
+    : ROUTER_PATH.SIGNUP;
+
+  const signUpText = isSignUp ? name : 'Sign up';
 
   return (
     <header className="header py-4 border">
