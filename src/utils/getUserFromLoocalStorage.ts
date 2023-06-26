@@ -7,10 +7,12 @@ export function getUserFromLocalStorage() {
   const isSignUp = user.isSignUp || false;
   const name = user.name;
   const email = user.email;
+  const id = user.id || 0;
 
   return {
     isSignUp,
     name,
     email,
+    id,
   };
 }

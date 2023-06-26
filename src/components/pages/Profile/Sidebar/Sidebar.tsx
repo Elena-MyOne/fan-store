@@ -1,14 +1,16 @@
 import React from 'react';
 import { ROUTER_PATH } from '../../../../models/enums';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import './Sidebar.scss';
 
 const Sidebar = () => {
-  const itemStyle = 'item hover:text-orange-400 duration-300 cursor-pointer';
+  const itemStyle = 'item hover:text-orange-500 duration-300 cursor-pointer';
+  const navLinkStyle = 'flex gap-2 items-center';
 
   return (
-    <ul className="sidebar my-4 bg-gray-100 p-4 flex flex-col gap-6">
+    <ul className="sidebar bg-gray-100 p-4 flex flex-col gap-6">
       <li className={itemStyle}>
-        <Link to={ROUTER_PATH.ACCOUNT} className="flex gap-2 items-center">
+        <NavLink to={ROUTER_PATH.ACCOUNT} className={`sidebar-link ${navLinkStyle}`}>
           <svg className="w-[20px] h-[20px]" viewBox="0 96 960 960">
             <path
               className="fill-current"
@@ -16,10 +18,10 @@ const Sidebar = () => {
             />
           </svg>
           <span>Account information</span>
-        </Link>
+        </NavLink>
       </li>
       <li className={itemStyle}>
-        <Link to={ROUTER_PATH.CHANGE_PASSWORD} className="flex gap-2 items-center">
+        <NavLink to={ROUTER_PATH.CHANGE_PASSWORD} className={`sidebar-link ${navLinkStyle}`}>
           <svg className="w-[20px] h-[20px]" viewBox="0 -960 960 960">
             <path
               className="fill-current"
@@ -27,10 +29,10 @@ const Sidebar = () => {
             />
           </svg>
           <span>Change password</span>
-        </Link>
+        </NavLink>
       </li>
       <li className={itemStyle}>
-        <Link to={ROUTER_PATH.BILLING} className="flex gap-2 items-center">
+        <NavLink to={ROUTER_PATH.BILLING} className={`sidebar-link ${navLinkStyle}`}>
           <svg className="w-[20px] h-[20px]" viewBox="0 -960 960 960">
             <path
               className="fill-current"
@@ -38,10 +40,10 @@ const Sidebar = () => {
             />
           </svg>
           <span>Billing</span>
-        </Link>
+        </NavLink>
       </li>
       <li className={itemStyle}>
-        <Link to={ROUTER_PATH.LOGOUT} className="flex gap-2 items-center">
+        <NavLink to={ROUTER_PATH.LOGOUT} className={`sidebar-link ${navLinkStyle}`}>
           <svg className="w-[20px] h-[20px]" viewBox="0 -960 960 960">
             <path
               className="fill-current"
@@ -49,7 +51,7 @@ const Sidebar = () => {
             />
           </svg>
           <span>Log out</span>
-        </Link>
+        </NavLink>
       </li>
     </ul>
   );

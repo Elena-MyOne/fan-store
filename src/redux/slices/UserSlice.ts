@@ -17,9 +17,10 @@ export interface UserState {
   isConfirmPasswordError: boolean;
   isRegisterError: boolean;
   registerErrorMessage: string;
+  id: number;
 }
 
-const { isSignUp, name, email } = getUserFromLocalStorage();
+const { isSignUp, name, email, id } = getUserFromLocalStorage();
 
 const initialState: UserState = {
   isSignUp,
@@ -37,6 +38,7 @@ const initialState: UserState = {
   isConfirmPasswordError: false,
   isRegisterError: false,
   registerErrorMessage: '',
+  id,
 };
 
 const USER_REGEX = /^[a-zA-Z0-9-_]{2,30}$/;
@@ -123,6 +125,9 @@ const UserSlice = createSlice({
       state.confirmPassword = '';
       state.confirmPasswordSuccess = false;
     },
+    setUserId(state, action: PayloadAction<number>) {
+      state.id = action.payload;
+    },
   },
 });
 
@@ -140,5 +145,6 @@ export const {
   setIsRegisterError,
   setRegisterErrorMessage,
   clearSignUpFormInputs,
+  setUserId,
 } = UserSlice.actions;
 export default UserSlice.reducer;

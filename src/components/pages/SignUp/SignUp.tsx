@@ -89,7 +89,7 @@ const SignUp: React.FC = () => {
         setTimeout(() => {
           navigate(ROUTER_PATH.HOME);
           dispatch(setIsRegisterError(false));
-        }, 5000);
+        }, 2500);
       }
     }
   };

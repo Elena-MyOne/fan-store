@@ -63,9 +63,11 @@ export const registerNewUser = createAsyncThunk(
         withCredentials: true,
       });
       console.log(response.data);
+
+      const id = response.data.id || 0;
       dispatch(setSignUp(true));
       dispatch(setIsRegisterError(false));
-      localStorage.setItem('useInfo', JSON.stringify({ name, email, isSignUp: true }));
+      localStorage.setItem('useInfo', JSON.stringify({ name, email, isSignUp: true, id }));
     } catch (error) {
       dispatch(setSignUp(false));
       dispatch(setIsRegisterError(true));
