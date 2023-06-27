@@ -41,7 +41,7 @@ const initialState: UserState = {
   id,
 };
 
-const USER_REGEX = /^[a-zA-Z0-9-_]{2,30}$/;
+const USER_REGEX = /^[a-zA-Z0-9\s-_]{2,30}$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}$/;
 
