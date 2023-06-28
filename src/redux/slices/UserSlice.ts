@@ -55,6 +55,7 @@ const UserSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    reset: () => initialState,
     setSignUp(state, action: PayloadAction<boolean>) {
       state.isSignUp = action.payload;
     },
@@ -177,5 +178,6 @@ export const {
   setUserLogInError,
   setUserLogInSuccess,
   clearLogInFormInputs,
+  reset,
 } = UserSlice.actions;
 export default UserSlice.reducer;

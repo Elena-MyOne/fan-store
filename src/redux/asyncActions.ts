@@ -91,7 +91,7 @@ export const validateLogInUser = createAsyncThunk(
       if (userLogInInfo && password) {
         const response = await axios.get(`${URL.USERS}/${userLogInInfo}/${password}`);
         const data = response.data;
-        console.log(data);
+
         dispatch(setUserLogInError(false));
         dispatch(setName(data.name));
         dispatch(setEmail(data.email));

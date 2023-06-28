@@ -28,7 +28,7 @@ const FormErrorPopup = () => {
     if (registerErrorMessage) {
       return registerErrorMessage;
     } else if (isUserLogInError) {
-      return 'Invalid Name or Password. Please check the entered user name or email, and password and try again.';
+      return 'Invalid Name or Password. Please check the entered UserName or Email, and Password and try again.';
     } else {
       return 'Error Occurred';
     }
@@ -47,7 +47,6 @@ const FormErrorPopup = () => {
 
       <h2 className="title text-center font-semibold max-w-[420px] m-auto">
         {(registerErrorMessage || isUserLogInError) && showErrorMessage()}
-        {/* {registerErrorMessage ? registerErrorMessage : 'Error Occurred'} */}
       </h2>
       {registerErrorMessage && <p>Please try again later</p>}
     </div>

@@ -24,6 +24,8 @@ const Profile = React.lazy(
 );
 
 function App() {
+  const loaderText = 'Loading...';
+
   return (
     <Routes>
       <Route path={ROUTER_PATH.HOME} element={<Layout />}>
@@ -32,7 +34,7 @@ function App() {
         <Route
           path={ROUTER_PATH.CART}
           element={
-            <React.Suspense fallback={<Loader />}>
+            <React.Suspense fallback={<Loader text={loaderText} />}>
               <Cart />
             </React.Suspense>
           }
@@ -43,7 +45,7 @@ function App() {
         <Route
           path={ROUTER_PATH.PROFILE}
           element={
-            <React.Suspense fallback={<Loader />}>
+            <React.Suspense fallback={<Loader text={loaderText} />}>
               <Profile />
             </React.Suspense>
           }

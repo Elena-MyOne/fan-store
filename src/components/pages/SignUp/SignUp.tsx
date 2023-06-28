@@ -98,7 +98,7 @@ const SignUp: React.FC = () => {
     <>
       {isRegisterError && <FormErrorPopup />}
       <section className="h-[87vh] flex justify-center items-center bg-gray-100">
-        <div className="body bg-white p-4 border rounded max-w-[450px]">
+        <div className="body bg-white p-4 border rounded">
           {isSignUp ? (
             <section className="flex flex-col justify-center items-center gap-6 min-w-[310px]">
               <img className="w-44" src="./assets/images/3.webp" alt="" />
@@ -114,7 +114,7 @@ const SignUp: React.FC = () => {
             <>
               <h2 className="title text-center font-semibold text-lg mb-8">Register</h2>
               <form
-                className="flex items-center justify-center flex-col gap-6"
+                className="flex items-center justify-center flex-col gap-6 md:w-[450px] w-[310px]"
                 onSubmit={handelForm}
               >
                 <div className="w-full">
