@@ -18,6 +18,9 @@ export interface UserState {
   isRegisterError: boolean;
   registerErrorMessage: string;
   id: number;
+  userLogInInfo: string;
+  isUserLogInError: boolean;
+  isUserLogInSuccess: boolean;
 }
 
 const { isSignUp, name, email, id } = getUserFromLocalStorage();
@@ -39,6 +42,9 @@ const initialState: UserState = {
   isRegisterError: false,
   registerErrorMessage: '',
   id,
+  userLogInInfo: '',
+  isUserLogInError: false,
+  isUserLogInSuccess: false,
 };
 
 const USER_REGEX = /^[a-zA-Z0-9\s-_]{2,30}$/;
@@ -55,11 +61,17 @@ const UserSlice = createSlice({
     setName(state, action: PayloadAction<string>) {
       state.name = action.payload;
     },
+    setNameSuccess(state, action: PayloadAction<boolean>) {
+      state.nameSuccess = action.payload;
+    },
     setEmail(state, action: PayloadAction<string>) {
       state.email = action.payload;
     },
     setPassword(state, action: PayloadAction<string>) {
       state.password = action.payload;
+    },
+    setIsPasswordError(state, action: PayloadAction<boolean>) {
+      state.isPasswordError = action.payload;
     },
     setConfirmPassword(state, action: PayloadAction<string>) {
       state.confirmPassword = action.payload;
@@ -128,14 +140,29 @@ const UserSlice = createSlice({
     setUserId(state, action: PayloadAction<number>) {
       state.id = action.payload;
     },
+    setUserLogInInfo(state, action: PayloadAction<string>) {
+      state.userLogInInfo = action.payload;
+    },
+    setUserLogInError(state, action: PayloadAction<boolean>) {
+      state.isUserLogInError = action.payload;
+    },
+    setUserLogInSuccess(state, action: PayloadAction<boolean>) {
+      state.isUserLogInSuccess = action.payload;
+    },
+    clearLogInFormInputs(state) {
+      state.userLogInInfo = '';
+      state.password = '';
+    },
   },
 });
 
 export const {
   setSignUp,
   setName,
+  setNameSuccess,
   setEmail,
   setPassword,
+  setIsPasswordError,
   setConfirmPassword,
   validateUserName,
   validateUserEmail,
@@ -146,5 +173,9 @@ export const {
   setRegisterErrorMessage,
   clearSignUpFormInputs,
   setUserId,
+  setUserLogInInfo,
+  setUserLogInError,
+  setUserLogInSuccess,
+  clearLogInFormInputs,
 } = UserSlice.actions;
 export default UserSlice.reducer;

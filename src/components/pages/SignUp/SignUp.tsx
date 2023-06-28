@@ -16,7 +16,7 @@ import {
   validateUserName,
 } from '../../../redux/slices/UserSlice';
 import { registerNewUser } from '../../../redux/asyncActions';
-import SignUpErrorPopup from './SignUpErrorPopup/SignUpErrorPopup';
+import FormErrorPopup from '../../FormErrorPopup/FormErrorPopup';
 
 const SignUp: React.FC = () => {
   const {
@@ -89,14 +89,14 @@ const SignUp: React.FC = () => {
         setTimeout(() => {
           navigate(ROUTER_PATH.HOME);
           dispatch(setIsRegisterError(false));
-        }, 2500);
+        }, 3000);
       }
     }
   };
 
   return (
     <>
-      {isRegisterError && <SignUpErrorPopup />}
+      {isRegisterError && <FormErrorPopup />}
       <section className="h-[87vh] flex justify-center items-center bg-gray-100">
         <div className="body bg-white p-4 border rounded max-w-[450px]">
           {isSignUp ? (

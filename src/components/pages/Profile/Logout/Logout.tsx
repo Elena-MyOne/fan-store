@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Logout = () => {
+const Logout: React.FC = () => {
   return (
-    <div>
-      <div>Logout</div>
+    <div className="logout ">
+      <div className="body ">Logout</div>
     </div>
   );
 };

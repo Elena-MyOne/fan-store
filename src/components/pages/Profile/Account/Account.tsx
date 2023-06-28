@@ -39,10 +39,12 @@ const Account: React.FC = () => {
 
   const handelNameSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    //TODO /users -> PATCH
   };
 
   const handelEmailSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    //TODO /users -> PATCH
   };
 
   return (
