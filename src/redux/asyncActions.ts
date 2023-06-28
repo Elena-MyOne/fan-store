@@ -125,6 +125,7 @@ export const deleteUser = createAsyncThunk(
       if (id !== 0) {
         const response = await axios.delete(`${URL.USERS}/${id}`);
         localStorage.removeItem('useInfo');
+        localStorage.removeItem('cart');
         dispatch(reset());
         console.log(response.data);
       }
