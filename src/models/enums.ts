@@ -10,6 +10,7 @@ export enum ROUTER_PATH {
   BILLING = 'billing',
   CHANGE_PASSWORD = 'change-password',
   ACCOUNT = 'account',
+  DELETE_ACCOUNT = 'delete-account',
   NOTFOUND = '*',
 }
 

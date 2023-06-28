@@ -15,6 +15,7 @@ import Logout from './components/pages/Profile/Logout/Logout';
 import Billing from './components/pages/Profile/Billing/Billing';
 import ChangePassword from './components/pages/Profile/changePassword/ChangePassword';
 import Account from './components/pages/Profile/Account/Account';
+import DeleteAccount from './components/pages/Profile/DeleteAccount/DeleteAccount';
 
 const Cart = React.lazy(
   () => import(/* webpackChunkName: "Cart" */ './components/pages/Cart/Cart')
@@ -54,6 +55,7 @@ function App() {
           <Route path={ROUTER_PATH.CHANGE_PASSWORD} element={<ChangePassword />} />
           <Route path={ROUTER_PATH.BILLING} element={<Billing />} />
           <Route path={ROUTER_PATH.LOGOUT} element={<Logout />} />
+          <Route path={ROUTER_PATH.DELETE_ACCOUNT} element={<DeleteAccount />} />
         </Route>
         <Route path={ROUTER_PATH.NOTFOUND} element={<NotFound />} />
       </Route>

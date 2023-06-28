@@ -11,6 +11,7 @@ import {
 } from './slices/ProductsSlice';
 import {
   clearSignUpFormInputs,
+  reset,
   setEmail,
   setIsRegisterError,
   setName,
@@ -91,7 +92,7 @@ export const validateLogInUser = createAsyncThunk(
       if (userLogInInfo && password) {
         const response = await axios.get(`${URL.USERS}/${userLogInInfo}/${password}`);
         const data = response.data;
-
+        console.log(response.data);
         dispatch(setUserLogInError(false));
         dispatch(setName(data.name));
         dispatch(setEmail(data.email));
@@ -109,6 +110,26 @@ export const validateLogInUser = createAsyncThunk(
       if (userLogInInfo === '' || password === '') {
         dispatch(setUserLogInError(true));
       }
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  'users/deleteUser',
+
+  async (_, { dispatch, getState }) => {
+    const state: RootState = getState() as RootState;
+    const { id } = state.user;
+
+    try {
+      if (id !== 0) {
+        const response = await axios.delete(`${URL.USERS}/${id}`);
+        localStorage.removeItem('useInfo');
+        dispatch(reset());
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 );
