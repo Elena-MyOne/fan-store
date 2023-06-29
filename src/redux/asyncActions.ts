@@ -68,15 +68,23 @@ export const registerNewUser = createAsyncThunk(
         withCredentials: true,
       });
       console.log(response.data);
+      const data = response.data;
 
-      const id = response.data.id || 0;
+      const id = data.id || 0;
       dispatch(setSignUp(true));
       dispatch(setIsRegisterError(false));
-      localStorage.setItem('useInfo', JSON.stringify({ name, email, isSignUp: true, id }));
+      localStorage.setItem(
+        'useInfo',
+        JSON.stringify({ name: data.name, email: data.email, isSignUp: true, id: data.id })
+      );
     } catch (error) {
       dispatch(setSignUp(false));
       dispatch(setIsRegisterError(true));
-      dispatch(setRegisterErrorMessage((error as Error).message));
+      if (axios.isAxiosError(error) && error.response && error.response.status === 409) {
+        dispatch(setRegisterErrorMessage('User already exists'));
+      } else {
+        dispatch(setRegisterErrorMessage((error as Error).message));
+      }
       dispatch(clearSignUpFormInputs());
     }
   }
@@ -122,13 +130,11 @@ export const deleteUser = createAsyncThunk(
     const { id } = state.user;
 
     try {
-      if (id !== 0) {
-        const response = await axios.delete(`${URL.USERS}/${id}`);
-        localStorage.removeItem('useInfo');
-        localStorage.removeItem('cart');
-        dispatch(reset());
-        console.log(response.data);
-      }
+      const response = await axios.delete(`${URL.USERS}/${id}`);
+      localStorage.removeItem('useInfo');
+      localStorage.removeItem('cart');
+      dispatch(reset());
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }

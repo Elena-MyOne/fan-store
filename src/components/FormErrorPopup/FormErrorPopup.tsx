@@ -48,7 +48,7 @@ const FormErrorPopup = () => {
       <h2 className="title text-center font-semibold max-w-[420px] m-auto">
         {(registerErrorMessage || isUserLogInError) && showErrorMessage()}
       </h2>
-      {registerErrorMessage && <p>Please try again later</p>}
+      {registerErrorMessage && <p>Please verify all the inputs and try again</p>}
     </div>
   );
 };
