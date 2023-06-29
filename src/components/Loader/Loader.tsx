@@ -7,7 +7,7 @@ interface LoaderProps {
 
 const Loader = ({ text }: LoaderProps) => {
   return (
-    <div className="flex justify-center items-center h-full flex-col gap-5">
+    <div className="flex justify-center items-center h-full flex-col gap-5 h-80">
       <div className={style.dots}>
         <div className={style.dot}></div>
         <div className={style.dot}></div>
