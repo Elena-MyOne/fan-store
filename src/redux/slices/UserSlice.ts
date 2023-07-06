@@ -21,6 +21,9 @@ export interface UserState {
   userLogInInfo: string;
   isUserLogInError: boolean;
   isUserLogInSuccess: boolean;
+  currentPassword: string;
+  currentPasswordSuccess: boolean;
+  isCurrentPasswordError: boolean;
 }
 
 const { isSignUp, name, email, id } = getUserFromLocalStorage();
@@ -45,6 +48,9 @@ const initialState: UserState = {
   userLogInInfo: '',
   isUserLogInError: false,
   isUserLogInSuccess: false,
+  currentPassword: '',
+  currentPasswordSuccess: false,
+  isCurrentPasswordError: false,
 };
 
 const USER_REGEX = /^[a-zA-Z0-9\s-_]{2,30}$/;
@@ -154,6 +160,15 @@ const UserSlice = createSlice({
       state.userLogInInfo = '';
       state.password = '';
     },
+    setCurrentPassword(state, action: PayloadAction<string>) {
+      state.currentPassword = action.payload;
+    },
+    setCurrentPasswordSuccess(state, action: PayloadAction<boolean>) {
+      state.currentPasswordSuccess = action.payload;
+    },
+    setCurrentPasswordError(state, action: PayloadAction<boolean>) {
+      state.isCurrentPasswordError = action.payload;
+    },
   },
 });
 
@@ -179,5 +194,8 @@ export const {
   setUserLogInSuccess,
   clearLogInFormInputs,
   reset,
+  setCurrentPassword,
+  setCurrentPasswordSuccess,
+  setCurrentPasswordError,
 } = UserSlice.actions;
 export default UserSlice.reducer;

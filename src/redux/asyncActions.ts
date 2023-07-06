@@ -12,6 +12,8 @@ import {
 import {
   clearSignUpFormInputs,
   reset,
+  setCurrentPasswordError,
+  setCurrentPasswordSuccess,
   setEmail,
   setIsRegisterError,
   setName,
@@ -75,7 +77,7 @@ export const registerNewUser = createAsyncThunk(
       dispatch(setIsRegisterError(false));
       localStorage.setItem(
         'useInfo',
-        JSON.stringify({ name: data.name, email: data.email, isSignUp: true, id: data.id })
+        JSON.stringify({ name: data.name, email: data.email, isSignUp: true, id: id })
       );
     } catch (error) {
       dispatch(setSignUp(false));
@@ -98,7 +100,7 @@ export const validateLogInUser = createAsyncThunk(
 
     try {
       if (userLogInInfo && password) {
-        const response = await axios.get(`${URL.USERS}/${userLogInInfo}/${password}`);
+        const response = await axios.get(`${URL.USERS_LOGIN}/${userLogInInfo}/${password}`);
         const data = response.data;
         console.log(response.data);
         dispatch(setUserLogInError(false));
@@ -118,6 +120,36 @@ export const validateLogInUser = createAsyncThunk(
       if (userLogInInfo === '' || password === '') {
         dispatch(setUserLogInError(true));
       }
+    }
+  }
+);
+
+export const validateCurrentPassword = createAsyncThunk(
+  'users/validateCurrentPassword',
+
+  async (_, { dispatch, getState }) => {
+    const state: RootState = getState() as RootState;
+    const { currentPassword, email, password } = state.user;
+
+    if (password) {
+      return;
+    }
+
+    try {
+      const response = await axios.get(`${URL.USERS}/${email}/${currentPassword}`);
+      const data = response.data;
+      if (data === 'Password does not match') {
+        dispatch(setCurrentPasswordError(true));
+        dispatch(setCurrentPasswordSuccess(false));
+      } else if (data === 'Password matches') {
+        dispatch(setCurrentPasswordError(false));
+        dispatch(setCurrentPasswordSuccess(true));
+      } else {
+        dispatch(setCurrentPasswordError(false));
+        dispatch(setCurrentPasswordSuccess(false));
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 );
