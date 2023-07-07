@@ -121,7 +121,7 @@ const UserSlice = createSlice({
         state.confirmPasswordSuccess = false;
       }
     },
-    validateForm(state) {
+    validateSignUpForm(state) {
       state.nameSuccess ? (state.isNameError = false) : (state.isNameError = true);
       state.emailSuccess ? (state.isEmailError = false) : (state.isEmailError = true);
       state.passwordSuccess ? (state.isPasswordError = false) : (state.isPasswordError = true);
@@ -176,6 +176,17 @@ const UserSlice = createSlice({
     },
     clearChangePasswordInputs(state) {
       state.currentPassword = '';
+      state.currentPasswordSuccess = false;
+      state.password = '';
+      state.passwordSuccess = false;
+      state.confirmPassword = '';
+      state.confirmPasswordSuccess = false;
+    },
+    validateChangePasswordForm(state) {
+      state.passwordSuccess ? (state.isPasswordError = false) : (state.isPasswordError = true);
+      state.confirmPasswordSuccess
+        ? (state.isConfirmPasswordError = false)
+        : (state.isConfirmPasswordError = true);
     },
   },
 });
@@ -192,7 +203,7 @@ export const {
   validateUserEmail,
   validatePassword,
   validateConfirmPassword,
-  validateForm,
+  validateSignUpForm,
   setIsRegisterError,
   setRegisterErrorMessage,
   clearSignUpFormInputs,
@@ -207,5 +218,6 @@ export const {
   setCurrentPasswordError,
   setChangePasswordErrorMessage,
   clearChangePasswordInputs,
+  validateChangePasswordForm,
 } = UserSlice.actions;
 export default UserSlice.reducer;

@@ -130,11 +130,7 @@ export const validateCurrentPassword = createAsyncThunk(
 
   async (_, { dispatch, getState }) => {
     const state: RootState = getState() as RootState;
-    const { currentPassword, email, password } = state.user;
-
-    if (password) {
-      return;
-    }
+    const { currentPassword, email } = state.user;
 
     try {
       const response = await axios.get(`${URL.USERS}/${email}/${currentPassword}`);
@@ -149,6 +145,26 @@ export const validateCurrentPassword = createAsyncThunk(
         dispatch(setCurrentPasswordError(false));
         dispatch(setCurrentPasswordSuccess(false));
       }
+    } catch (error) {
+      console.log(error);
+      dispatch(setChangePasswordErrorMessage((error as Error).message));
+    }
+  }
+);
+
+export const changePassword = createAsyncThunk(
+  'users/changePassword',
+  async (_, { dispatch, getState }) => {
+    const state: RootState = getState() as RootState;
+    const { email, password } = state.user;
+
+    try {
+      const response = await axios.patch(`${URL.USERS}/${email}`, JSON.stringify({ password }), {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      });
+      const data = response.data;
+      console.log(data);
     } catch (error) {
       console.log(error);
       dispatch(setChangePasswordErrorMessage((error as Error).message));

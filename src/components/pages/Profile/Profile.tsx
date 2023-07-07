@@ -2,8 +2,8 @@ import React from 'react';
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 import Sidebar from './Sidebar/Sidebar';
 import { Outlet } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, selectUser } from '../../../redux/store';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../../redux/store';
 import FormErrorPopup from '../../FormErrorPopup/FormErrorPopup';
 
 const Profile: React.FC = () => {

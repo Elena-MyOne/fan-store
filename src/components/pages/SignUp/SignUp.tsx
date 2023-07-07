@@ -4,13 +4,14 @@ import { ROUTER_PATH } from '../../../models/enums';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, selectUser } from '../../../redux/store';
 import {
+  clearSignUpFormInputs,
   setConfirmPassword,
   setEmail,
   setIsRegisterError,
   setName,
   setPassword,
   validateConfirmPassword,
-  validateForm,
+  validateSignUpForm,
   validatePassword,
   validateUserEmail,
   validateUserName,
@@ -18,6 +19,7 @@ import {
 import { registerNewUser } from '../../../redux/asyncActions';
 import FormErrorPopup from '../../FormErrorPopup/FormErrorPopup';
 import Loader from '../../Loader/Loader';
+import SuccessPopup from '../../SuccessPopup/SuccessPopup';
 
 const SignUp: React.FC = () => {
   const {
@@ -82,13 +84,14 @@ const SignUp: React.FC = () => {
 
   const handelForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(validateForm());
+    dispatch(validateSignUpForm());
     if (nameSuccess && emailSuccess && passwordSuccess && confirmPasswordSuccess) {
       try {
         setIsRequestSend(true);
         await dispatch(registerNewUser());
       } finally {
         setIsRequestSend(false);
+        dispatch(clearSignUpFormInputs());
         setTimeout(() => {
           dispatch(setIsRegisterError(false));
         }, 10000);
@@ -103,24 +106,7 @@ const SignUp: React.FC = () => {
       <section className="h-[86vh] flex justify-center items-center bg-gray-100">
         <div className="body bg-white p-4 border rounded">
           {isSignUp ? (
-            <section className="flex flex-col justify-center items-center gap-6 min-w-[310px]">
-              <img className="w-44" src="./assets/images/3.webp" alt="" />
-              <p className="font-semibold text-lg">Success!</p>
-              <div className="buttons flex gap-4 text-center">
-                <Link
-                  to={ROUTER_PATH.HOME}
-                  className="w-44 px-6 py-2 block text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl"
-                >
-                  Home page
-                </Link>
-                <Link
-                  to={`/${ROUTER_PATH.PROFILE}/${ROUTER_PATH.ACCOUNT}`}
-                  className="w-44 px-6 py-2 block hover:text-white bg-gray-200 hover:bg-gray-900 duration-300 rounded-3xl"
-                >
-                  Profile page
-                </Link>
-              </div>
-            </section>
+            <SuccessPopup />
           ) : (
             <>
               {isRequestSend ? (
