@@ -12,6 +12,7 @@ import {
 import {
   clearSignUpFormInputs,
   reset,
+  setChangePasswordErrorMessage,
   setCurrentPasswordError,
   setCurrentPasswordSuccess,
   setEmail,
@@ -150,6 +151,7 @@ export const validateCurrentPassword = createAsyncThunk(
       }
     } catch (error) {
       console.log(error);
+      dispatch(setChangePasswordErrorMessage((error as Error).message));
     }
   }
 );

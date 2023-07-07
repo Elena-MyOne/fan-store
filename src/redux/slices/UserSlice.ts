@@ -24,6 +24,7 @@ export interface UserState {
   currentPassword: string;
   currentPasswordSuccess: boolean;
   isCurrentPasswordError: boolean;
+  changePasswordErrorMessage: string;
 }
 
 const { isSignUp, name, email, id } = getUserFromLocalStorage();
@@ -51,6 +52,7 @@ const initialState: UserState = {
   currentPassword: '',
   currentPasswordSuccess: false,
   isCurrentPasswordError: false,
+  changePasswordErrorMessage: '',
 };
 
 const USER_REGEX = /^[a-zA-Z0-9\s-_]{2,30}$/;
@@ -169,6 +171,12 @@ const UserSlice = createSlice({
     setCurrentPasswordError(state, action: PayloadAction<boolean>) {
       state.isCurrentPasswordError = action.payload;
     },
+    setChangePasswordErrorMessage(state, action: PayloadAction<string>) {
+      state.changePasswordErrorMessage = action.payload;
+    },
+    clearChangePasswordInputs(state) {
+      state.currentPassword = '';
+    },
   },
 });
 
@@ -197,5 +205,7 @@ export const {
   setCurrentPassword,
   setCurrentPasswordSuccess,
   setCurrentPasswordError,
+  setChangePasswordErrorMessage,
+  clearChangePasswordInputs,
 } = UserSlice.actions;
 export default UserSlice.reducer;
