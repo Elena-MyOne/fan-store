@@ -1,9 +1,8 @@
 import React, { FormEvent } from 'react';
-import { useSelector } from 'react-redux';
-import { selectUser } from '../../../../redux/store';
+import { getUserFromLocalStorage } from '../../../../utils/getUserFromLoocalStorage';
 
 const Account: React.FC = () => {
-  const { name, email } = useSelector(selectUser);
+  const { name, email } = getUserFromLocalStorage();
 
   const [editName, setEditName] = React.useState(false);
   const [editEmail, setEditEmail] = React.useState(false);
