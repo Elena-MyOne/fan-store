@@ -12,7 +12,7 @@ import {
 import {
   clearSignUpFormInputs,
   reset,
-  setChangePasswordErrorMessage,
+  setChangeUserDataErrorMessage,
   setCurrentPasswordError,
   setCurrentPasswordSuccess,
   setEmail,
@@ -23,6 +23,14 @@ import {
   setUserId,
   setUserLogInError,
 } from './slices/UserSlice';
+import { getUserFromLocalStorage } from '../utils/getUserFromLoocalStorage';
+
+const requestConfig = {
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true,
+};
+
+const { name: storedName, email: storedEmail } = getUserFromLocalStorage();
 
 export const fetchInitialProducts = createAsyncThunk(
   'products/fetchInitialProducts',
@@ -66,10 +74,11 @@ export const registerNewUser = createAsyncThunk(
       const state: RootState = getState() as RootState;
       const { name, email, password } = state.user;
 
-      const response = await axios.post(URL.USERS, JSON.stringify({ name, email, password }), {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        URL.USERS,
+        JSON.stringify({ name, email, password }),
+        requestConfig
+      );
       console.log(response.data);
       const data = response.data;
 
@@ -147,7 +156,7 @@ export const validateCurrentPassword = createAsyncThunk(
       }
     } catch (error) {
       console.log(error);
-      dispatch(setChangePasswordErrorMessage((error as Error).message));
+      dispatch(setChangeUserDataErrorMessage((error as Error).message));
     }
   }
 );
@@ -156,18 +165,85 @@ export const changePassword = createAsyncThunk(
   'users/changePassword',
   async (_, { dispatch, getState }) => {
     const state: RootState = getState() as RootState;
-    const { email, password } = state.user;
+    const { password } = state.user;
 
     try {
-      const response = await axios.patch(`${URL.USERS}/${email}`, JSON.stringify({ password }), {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
-      });
+      await axios.patch(`${URL.USERS}/${storedEmail}`, JSON.stringify({ password }), requestConfig);
+    } catch (error) {
+      console.log(error);
+      dispatch(setChangeUserDataErrorMessage((error as Error).message));
+    }
+  }
+);
+
+export const changeUserName = createAsyncThunk(
+  'users/changeUserName',
+  async (_, { dispatch, getState }) => {
+    const state: RootState = getState() as RootState;
+    const { name } = state.user;
+
+    if (name === storedName) {
+      dispatch(
+        setChangeUserDataErrorMessage(
+          'Invalid Entry, new User Name should be different from the old one'
+        )
+      );
+      return;
+    }
+
+    try {
+      const response = await axios.patch(
+        `${URL.USERS}/${storedEmail}`,
+        JSON.stringify({ name }),
+        requestConfig
+      );
       const data = response.data;
+      if (response.status === 200) {
+        localStorage.setItem(
+          'useInfo',
+          JSON.stringify({ name: data.name, email: data.email, isSignUp: true, id: data.id })
+        );
+      }
       console.log(data);
     } catch (error) {
       console.log(error);
-      dispatch(setChangePasswordErrorMessage((error as Error).message));
+      dispatch(setChangeUserDataErrorMessage((error as Error).message));
+    }
+  }
+);
+
+export const changeUserEmail = createAsyncThunk(
+  'users/changeUserEmail',
+  async (_, { dispatch, getState }) => {
+    const state: RootState = getState() as RootState;
+    const { email } = state.user;
+
+    if (email === storedEmail) {
+      dispatch(
+        setChangeUserDataErrorMessage(
+          'Invalid Entry, new User Email should be different from the old one'
+        )
+      );
+      return;
+    }
+
+    try {
+      const response = await axios.patch(
+        `${URL.USERS}/${storedEmail}`,
+        JSON.stringify({ email }),
+        requestConfig
+      );
+      const data = response.data;
+      if (response.status === 200) {
+        localStorage.setItem(
+          'useInfo',
+          JSON.stringify({ name: data.name, email: data.email, isSignUp: true, id: data.id })
+        );
+      }
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      dispatch(setChangeUserDataErrorMessage((error as Error).message));
     }
   }
 );

@@ -5,19 +5,17 @@ import { ROUTER_PATH } from '../../models/enums';
 import Search from './Search/Search';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../../redux/slices/CartSlice';
-import { getUserFromLocalStorage } from '../../utils/getUserFromLoocalStorage';
 import { selectUser } from '../../redux/store';
 
-const Header = () => {
+const Header: React.FC = () => {
   const { totalPrice, itemsCount } = useSelector(selectCart);
   const { isSignUp } = useSelector(selectUser);
-  const { name } = getUserFromLocalStorage();
 
   const signUpPath = isSignUp
     ? `${ROUTER_PATH.PROFILE}/${ROUTER_PATH.ACCOUNT}`
     : ROUTER_PATH.SIGNUP;
 
-  const signUpText = isSignUp ? name : 'Sign up';
+  const signUpText = isSignUp ? 'Account' : 'Sign up';
 
   return (
     <header className="header py-4 border">

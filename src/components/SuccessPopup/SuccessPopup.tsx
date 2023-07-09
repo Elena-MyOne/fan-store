@@ -18,7 +18,7 @@ const SuccessPopup: React.FC = () => {
           to={`/${ROUTER_PATH.PROFILE}/${ROUTER_PATH.ACCOUNT}`}
           className="w-44 px-6 py-2 block hover:text-white bg-gray-200 hover:bg-gray-900 duration-300 rounded-3xl"
         >
-          Profile page
+          Account
         </Link>
       </div>
     </div>

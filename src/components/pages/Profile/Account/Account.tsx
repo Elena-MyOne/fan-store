@@ -1,11 +1,29 @@
-import React, { FormEvent } from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import { getUserFromLocalStorage } from '../../../../utils/getUserFromLoocalStorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, selectUser } from '../../../../redux/store';
+import {
+  clearUserEmailDate,
+  clearUserNameDate,
+  setChangeUserDataErrorMessage,
+  setEmail,
+  setIsEmailError,
+  setIsNameError,
+  setName,
+  validateUserEmail,
+  validateUserName,
+} from '../../../../redux/slices/UserSlice';
+import { changeUserEmail, changeUserName } from '../../../../redux/asyncActions';
 
 const Account: React.FC = () => {
-  const { name, email } = getUserFromLocalStorage();
+  const { name: storageName, email: storageEmail } = getUserFromLocalStorage();
 
   const [editName, setEditName] = React.useState(false);
   const [editEmail, setEditEmail] = React.useState(false);
+
+  const { name, isNameError, nameSuccess, email, isEmailError, emailSuccess } =
+    useSelector(selectUser);
+  const dispatch = useDispatch<AppDispatch>();
 
   const nameRef = React.useRef<HTMLInputElement>(null);
   const emailRef = React.useRef<HTMLInputElement>(null);
@@ -19,14 +37,6 @@ const Account: React.FC = () => {
     }
   }, [editName, editEmail]);
 
-  const listItemStyles = 'border rounded p-4 flex justify-between items-center';
-  const itemSpanStyles = 'text-orange-400 font-semibold min-w-[90px] inline-block';
-  const svgIconStyles = 'hover:text-orange-500 duration-300 cursor-pointer';
-  const buttonsStyle =
-    'flex items-center gap-1 px-4 py-1 hover:text-white bg-gray-200 hover:bg-orange-500 duration-300 rounded';
-  const inputStyles =
-    'border rounded px-2 py-1 w-full outline-none focus:border-orange-300 duration-300 hover:border-orange-400';
-
   const closeAccountForm = () => {
     setEditName(false);
     setEditEmail(false);
@@ -36,15 +46,60 @@ const Account: React.FC = () => {
     event.stopPropagation();
   };
 
-  const handelNameSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handelNameSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //TODO /users -> PATCH
+    if (nameSuccess) {
+      dispatch(setIsNameError(false));
+      await dispatch(changeUserName());
+      closeAccountForm();
+    } else {
+      dispatch(setIsNameError(true));
+    }
   };
 
-  const handelEmailSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handelEmailSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //TODO /users -> PATCH
+    if (emailSuccess) {
+      dispatch(setIsEmailError(false));
+      await dispatch(changeUserEmail());
+      closeAccountForm();
+    } else {
+      dispatch(setIsEmailError(true));
+    }
   };
+
+  function handleNameEditButton() {
+    setEditName((prev) => !prev);
+    dispatch(clearUserNameDate());
+    dispatch(setChangeUserDataErrorMessage(''));
+  }
+
+  function handleEmailEditButton() {
+    setEditEmail((prev) => !prev);
+    dispatch(clearUserEmailDate());
+    dispatch(setChangeUserDataErrorMessage(''));
+  }
+
+  function handleEditName(e: ChangeEvent<HTMLInputElement>) {
+    dispatch(setName(e.target.value));
+    dispatch(validateUserName());
+  }
+
+  function handleEditEmail(e: ChangeEvent<HTMLInputElement>) {
+    dispatch(setEmail(e.target.value));
+    dispatch(validateUserEmail());
+  }
+
+  const listItemStyles = 'border rounded p-4 flex justify-between items-center';
+  const itemSpanStyles = 'text-orange-400 font-semibold min-w-[90px] inline-block';
+  const svgIconStyles = 'hover:text-orange-500 duration-300 cursor-pointer';
+  const buttonsStyle =
+    'flex items-center gap-1 px-4 py-1 hover:text-white bg-gray-200 hover:bg-orange-500 duration-300 rounded';
+  const inputStyles =
+    'border w-full rounded px-2 py-1 outline-none focus:border-orange-300 duration-300 hover:border-orange-400 grow';
+  const errorStyle = 'error text-red-600 mt-1';
+  const errorStyleHidden = 'hidden';
+  const successInputValueStyle = 'success text-green-600 mt-1';
 
   return (
     <div className="account">
@@ -53,8 +108,8 @@ const Account: React.FC = () => {
         <ul className="account-info grow flex flex-col gap-4 flex-wrap">
           <li className={listItemStyles}>
             <span className={itemSpanStyles}>Name: </span>
-            <span>{name}</span>
-            <button className={svgIconStyles} onClick={() => setEditName((prev) => !prev)}>
+            <span>{storageName}</span>
+            <button className={svgIconStyles} onClick={handleNameEditButton}>
               <svg className="w-[20px] h-[20px]" viewBox="0 -960 960 960">
                 <path
                   className="fill-current"
@@ -65,8 +120,8 @@ const Account: React.FC = () => {
           </li>
           <li className={listItemStyles}>
             <span className={itemSpanStyles}>Email: </span>
-            <div>{email}</div>
-            <button className={svgIconStyles} onClick={() => setEditEmail((prev) => !prev)}>
+            <div>{storageEmail}</div>
+            <button className={svgIconStyles} onClick={handleEmailEditButton}>
               <svg className="w-[20px] h-[20px]" viewBox="0 -960 960 960">
                 <path
                   className="fill-current"
@@ -98,33 +153,62 @@ const Account: React.FC = () => {
               </div>
               {editName && (
                 <form
-                  className="edit-name flex justify-center items-center gap-1"
+                  className="edit-name flex justify-center items-start gap-1 w-[310px]"
                   onClick={handelNameSubmit}
                 >
-                  <label className="inline-block">
+                  <div className="w-full">
                     <input
                       type="text"
                       className={inputStyles}
                       ref={nameRef}
                       placeholder="Edit Name"
+                      value={name}
+                      onChange={handleEditName}
                     />
-                  </label>
+                    <div
+                      className={isNameError ? errorStyle : errorStyleHidden}
+                      aria-live="assertive"
+                    >
+                      The User Name must be from 2 to 30 symbols and can include only letters,
+                      numbers and _
+                    </div>
+                    <div
+                      className={nameSuccess ? successInputValueStyle : errorStyleHidden}
+                      aria-live="assertive"
+                    >
+                      &#10003; Correct
+                    </div>
+                  </div>
                   <button className={buttonsStyle}>Save</button>
                 </form>
               )}
               {editEmail && (
                 <form
-                  className="edit-name flex justify-center items-center gap-1"
+                  className="edit-name flex justify-center items-start gap-1 w-[310px]"
                   onClick={handelEmailSubmit}
                 >
-                  <label>
+                  <div className="w-full">
                     <input
                       type="text"
                       className={inputStyles}
                       ref={emailRef}
                       placeholder="Edit Email"
+                      value={email}
+                      onChange={handleEditEmail}
                     />
-                  </label>
+                    <div
+                      className={isEmailError ? errorStyle : errorStyleHidden}
+                      aria-live="assertive"
+                    >
+                      Please enter the email (www@www.com)
+                    </div>
+                    <div
+                      className={emailSuccess ? successInputValueStyle : errorStyleHidden}
+                      aria-live="assertive"
+                    >
+                      &#10003; Correct
+                    </div>
+                  </div>
                   <button className={buttonsStyle}>Save</button>
                 </form>
               )}

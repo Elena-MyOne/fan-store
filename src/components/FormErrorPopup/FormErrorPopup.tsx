@@ -4,7 +4,7 @@ import { AppDispatch, selectUser } from '../../redux/store';
 import {
   clearChangePasswordInputs,
   clearLogInFormInputs,
-  setChangePasswordErrorMessage,
+  setChangeUserDataErrorMessage,
   setIsRegisterError,
   setRegisterErrorMessage,
   setUserLogInError,
@@ -28,7 +28,7 @@ const FormErrorPopup = () => {
     }
 
     dispatch(setRegisterErrorMessage(''));
-    dispatch(setChangePasswordErrorMessage(''));
+    dispatch(setChangeUserDataErrorMessage(''));
   }
 
   function showErrorMessage(): string {

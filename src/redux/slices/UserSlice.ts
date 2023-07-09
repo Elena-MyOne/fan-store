@@ -73,8 +73,14 @@ const UserSlice = createSlice({
     setNameSuccess(state, action: PayloadAction<boolean>) {
       state.nameSuccess = action.payload;
     },
+    setIsNameError(state, action: PayloadAction<boolean>) {
+      state.isNameError = action.payload;
+    },
     setEmail(state, action: PayloadAction<string>) {
       state.email = action.payload;
+    },
+    setIsEmailError(state, action: PayloadAction<boolean>) {
+      state.isEmailError = action.payload;
     },
     setPassword(state, action: PayloadAction<string>) {
       state.password = action.payload;
@@ -94,6 +100,11 @@ const UserSlice = createSlice({
         state.nameSuccess = false;
       }
     },
+    clearUserNameDate(state) {
+      state.name = '';
+      state.nameSuccess = false;
+      state.isNameError = false;
+    },
     validateUserEmail(state) {
       const result = EMAIL_REGEX.test(state.email);
       if (result) {
@@ -102,6 +113,11 @@ const UserSlice = createSlice({
       } else {
         state.emailSuccess = false;
       }
+    },
+    clearUserEmailDate(state) {
+      state.email = '';
+      state.emailSuccess = false;
+      state.isEmailError = false;
     },
     validatePassword(state) {
       const result = PASSWORD_REGEX.test(state.password);
@@ -171,7 +187,7 @@ const UserSlice = createSlice({
     setCurrentPasswordError(state, action: PayloadAction<boolean>) {
       state.isCurrentPasswordError = action.payload;
     },
-    setChangePasswordErrorMessage(state, action: PayloadAction<string>) {
+    setChangeUserDataErrorMessage(state, action: PayloadAction<string>) {
       state.changePasswordErrorMessage = action.payload;
     },
     clearChangePasswordInputs(state) {
@@ -195,12 +211,16 @@ export const {
   setSignUp,
   setName,
   setNameSuccess,
+  setIsNameError,
   setEmail,
+  setIsEmailError,
   setPassword,
   setIsPasswordError,
   setConfirmPassword,
   validateUserName,
+  clearUserNameDate,
   validateUserEmail,
+  clearUserEmailDate,
   validatePassword,
   validateConfirmPassword,
   validateSignUpForm,
@@ -216,7 +236,7 @@ export const {
   setCurrentPassword,
   setCurrentPasswordSuccess,
   setCurrentPasswordError,
-  setChangePasswordErrorMessage,
+  setChangeUserDataErrorMessage,
   clearChangePasswordInputs,
   validateChangePasswordForm,
 } = UserSlice.actions;
