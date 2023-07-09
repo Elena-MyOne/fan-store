@@ -33,6 +33,9 @@ const Checkout: React.FC = () => {
   } = useSelector(selectCheckout);
   const dispatch = useDispatch();
 
+  const [isNumberVisible, setIsNumberVisible] = React.useState(false);
+  const [isCvcVisible, setIsCvcVisible] = React.useState(false);
+
   const maxCardNumberLength = 16;
 
   function handleCardNumber(e: ChangeEvent<HTMLInputElement>) {
@@ -68,6 +71,14 @@ const Checkout: React.FC = () => {
     }
   }
 
+  function handelCardNumberVisibility() {
+    setIsNumberVisible((prev) => !prev);
+  }
+
+  function handelCvcVisibility() {
+    setIsCvcVisible((prev) => !prev);
+  }
+
   const inputStyles =
     'border rounded px-2 py-1 w-full outline-none focus:border-orange-300 duration-300 hover:border-orange-400';
   const errorInputStyles =
@@ -75,6 +86,8 @@ const Checkout: React.FC = () => {
   const errorStyle = 'error text-red-600';
   const successInputValueStyle = 'success text-green-600';
   const hiddenElementStyle = 'hidden';
+  const iconActiveStyle = 'w-[20px] h-[20px] text-orange-500';
+  const iconHiddenStyle = 'w-[20px] h-[20px] text-gray-500';
 
   return (
     <div className="flex justify-center items-center bg-gray-100 h-full">
@@ -89,15 +102,29 @@ const Checkout: React.FC = () => {
           <form className="form" onSubmit={handelForm}>
             <div className="body grid grid-cols-[2fr_1fr] grid-rows-2 gap-4 mb-7">
               <div className="number mb-2">
-                <label>
+                <label className="relative">
                   <p className="pb-1 text-gray-500">Card number</p>
                   <input
-                    type="text"
+                    type={isNumberVisible ? 'text' : 'password'}
                     className={`number ${isCardNumberError ? errorInputStyles : inputStyles}`}
                     value={cardNumber}
                     onChange={handleCardNumber}
                     maxLength={maxCardNumberLength}
                   />
+                  <div
+                    className="icon absolute top-[65%] right-2"
+                    onClick={handelCardNumberVisibility}
+                  >
+                    <svg
+                      className={isNumberVisible ? iconActiveStyle : iconHiddenStyle}
+                      viewBox="0 -960 960 960"
+                    >
+                      <path
+                        className="fill-current"
+                        d="M480.208-344.232q64.638 0 110.099-45.669 45.461-45.67 45.461-110.307 0-64.638-45.669-110.099-45.67-45.461-110.307-45.461-64.638 0-110.099 45.669-45.461 45.67-45.461 110.307 0 64.638 45.669 110.099 45.67 45.461 110.307 45.461Zm-.511-44.922q-46.312 0-78.428-32.418-32.115-32.419-32.115-78.731t32.418-78.428q32.419-32.115 78.731-32.115t78.428 32.418q32.115 32.419 32.115 78.731t-32.418 78.428q-32.419 32.115-78.731 32.115Zm.358 169.153q-137.593 0-249.823-77.038Q118.001-374.078 61.54-500q56.461-125.922 168.637-202.961 112.175-77.038 249.768-77.038 137.593 0 249.823 77.038Q841.999-625.922 898.46-500q-56.461 125.922-168.637 202.961-112.175 77.038-249.768 77.038ZM480-500Zm-.169 234.615q119.246 0 218.823-63.769Q798.23-392.923 850.461-500 798.23-607.077 698.822-670.846q-99.408-63.769-218.653-63.769-119.246 0-218.823 63.769Q161.77-607.077 108.924-500q52.846 107.077 152.254 170.846 99.408 63.769 218.653 63.769Z"
+                      />
+                    </svg>
+                  </div>
                 </label>
                 <p className={isCardNumberError ? errorStyle : hiddenElementStyle}>
                   Please enter valid card number
@@ -143,15 +170,26 @@ const Checkout: React.FC = () => {
                 </p>
               </div>
               <div className="cvc">
-                <label>
+                <label className="relative">
                   <p className="pb-1 text-gray-500">CVC</p>
                   <input
-                    type="text"
+                    type={isCvcVisible ? 'text' : 'password'}
                     className={`cvc ${isCvcError ? errorInputStyles : inputStyles}`}
                     value={cvc}
                     onChange={handleCvc}
                     maxLength={3}
                   />
+                  <div className="icon absolute top-[65%] right-2" onClick={handelCvcVisibility}>
+                    <svg
+                      className={isCvcVisible ? iconActiveStyle : iconHiddenStyle}
+                      viewBox="0 -960 960 960"
+                    >
+                      <path
+                        className="fill-current"
+                        d="M480.208-344.232q64.638 0 110.099-45.669 45.461-45.67 45.461-110.307 0-64.638-45.669-110.099-45.67-45.461-110.307-45.461-64.638 0-110.099 45.669-45.461 45.67-45.461 110.307 0 64.638 45.669 110.099 45.67 45.461 110.307 45.461Zm-.511-44.922q-46.312 0-78.428-32.418-32.115-32.419-32.115-78.731t32.418-78.428q32.419-32.115 78.731-32.115t78.428 32.418q32.115 32.419 32.115 78.731t-32.418 78.428q-32.419 32.115-78.731 32.115Zm.358 169.153q-137.593 0-249.823-77.038Q118.001-374.078 61.54-500q56.461-125.922 168.637-202.961 112.175-77.038 249.768-77.038 137.593 0 249.823 77.038Q841.999-625.922 898.46-500q-56.461 125.922-168.637 202.961-112.175 77.038-249.768 77.038ZM480-500Zm-.169 234.615q119.246 0 218.823-63.769Q798.23-392.923 850.461-500 798.23-607.077 698.822-670.846q-99.408-63.769-218.653-63.769-119.246 0-218.823 63.769Q161.77-607.077 108.924-500q52.846 107.077 152.254 170.846 99.408 63.769 218.653 63.769Z"
+                      />
+                    </svg>
+                  </div>
                 </label>
                 <p className={isCvcError ? errorStyle : hiddenElementStyle}>
                   Please enter three numbers

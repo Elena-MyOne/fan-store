@@ -9,7 +9,7 @@ const SuccessCheckoutPopup: React.FC = () => {
       <img
         className="mb-5 inline-block"
         src="../../assets/images/pages/checkout/1.png"
-        alt="Howarts logo"
+        alt="post owl"
       />
       <p className="text-md mb-5 font-semibold">
         The Purchase will be delivered within 7 days. Thank you for shopping with us!
