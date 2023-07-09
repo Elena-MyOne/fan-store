@@ -120,6 +120,9 @@ const CheckoutSlice = createSlice({
       state.isHolderNameError = !state.holderNameSuccess;
       state.isExpirationDateError = !state.expirationDateSuccess;
     },
+    setIsSubmit(state, action: PayloadAction<boolean>) {
+      state.isSubmit = action.payload;
+    },
   },
 });
 
@@ -135,5 +138,6 @@ export const {
   validateCardCvc,
   setSuccessCheckoutFormSubmit,
   setCheckoutFormSubmitError,
+  setIsSubmit,
 } = CheckoutSlice.actions;
 export default CheckoutSlice.reducer;
