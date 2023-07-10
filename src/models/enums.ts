@@ -16,8 +16,11 @@ export enum ROUTER_PATH {
 
 export enum URL {
   PRODUCTS = 'https://fan-store-backend-elena-myone.onrender.com/products',
+  // PRODUCTS = 'http://localhost:4200/products',
   USERS = 'https://fan-store-backend-elena-myone.onrender.com/users',
+  // USERS = 'http://localhost:4200/users',
   USERS_LOGIN = 'https://fan-store-backend-elena-myone.onrender.com/users/login',
+  // USERS_LOGIN = 'http://localhost:4200/users/login',
 }
 
 export enum STATUS {

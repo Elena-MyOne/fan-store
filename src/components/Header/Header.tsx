@@ -6,6 +6,7 @@ import Search from './Search/Search';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../../redux/slices/CartSlice';
 import { selectUser } from '../../redux/store';
+import logo from '../../assets/images/logo/logo.png';
 
 const Header: React.FC = () => {
   const { totalPrice, itemsCount } = useSelector(selectCart);
@@ -24,7 +25,7 @@ const Header: React.FC = () => {
           to={ROUTER_PATH.HOME}
           className="logo w-[100px] md:w-[164px] md:h-[40px] lg:order-1 order-1"
         >
-          <img className={style.headerLogoImage} src="/assets/images/logo/logo.png" alt="logo" />
+          <img className={style.headerLogoImage} src={logo} alt="logo" />
         </Link>
         <Search />
         <div className="flex gap-4 items-center md:gap-10 lg:order-3 order-2">
