@@ -1,20 +1,21 @@
 {
   "files": {
     "main.css": "/fan-store/static/css/main.510acc93.css",
-    "main.js": "/fan-store/static/js/main.8fabb54e.js",
+    "main.js": "/fan-store/static/js/main.8eefd098.js",
     "Cart.js": "/fan-store/static/js/Cart.38e9a38a.chunk.js",
     "Profile.css": "/fan-store/static/css/Profile.4ad84ba5.chunk.css",
     "Profile.js": "/fan-store/static/js/Profile.908a2948.chunk.js",
     "static/media/1.png": "/fan-store/static/media/1.5d135f9e8394c78608a5.png",
+    "static/media/3.webp": "/fan-store/static/media/3.e6d1517ade057a6c4e98.webp",
     "index.html": "/fan-store/index.html",
     "main.510acc93.css.map": "/fan-store/static/css/main.510acc93.css.map",
-    "main.8fabb54e.js.map": "/fan-store/static/js/main.8fabb54e.js.map",
+    "main.8eefd098.js.map": "/fan-store/static/js/main.8eefd098.js.map",
     "Cart.38e9a38a.chunk.js.map": "/fan-store/static/js/Cart.38e9a38a.chunk.js.map",
     "Profile.4ad84ba5.chunk.css.map": "/fan-store/static/css/Profile.4ad84ba5.chunk.css.map",
     "Profile.908a2948.chunk.js.map": "/fan-store/static/js/Profile.908a2948.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.510acc93.css",
-    "static/js/main.8fabb54e.js"
+    "static/js/main.8eefd098.js"
   ]
 }
