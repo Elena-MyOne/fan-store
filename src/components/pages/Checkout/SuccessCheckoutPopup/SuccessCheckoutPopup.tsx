@@ -1,16 +1,13 @@
 import React from 'react';
 import { ROUTER_PATH } from '../../../../models/enums';
 import { Link } from 'react-router-dom';
+import img from '../../../../assets/images/pages/checkout/1.png';
 
 const SuccessCheckoutPopup: React.FC = () => {
   return (
     <div className="title bg-white p-4 rounded border text-center w-80">
       <h2 className="title text-center font-semibold text-lg mb-5">Success</h2>
-      <img
-        className="mb-5 inline-block"
-        src="../../assets/images/pages/checkout/1.png"
-        alt="post owl"
-      />
+      <img className="mb-5 inline-block" src={img} alt="post owl" />
       <p className="text-md mb-5 font-semibold">
         The Purchase will be delivered within 7 days. Thank you for shopping with us!
       </p>

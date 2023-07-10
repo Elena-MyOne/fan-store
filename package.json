@@ -1,7 +1,7 @@
 {
-  "homepage": "https://elena-myone.github.io/fan-store",
-  "name": "my-social",
+  "name": "fan-store",
   "version": "0.1.0",
+  "homepage": "https://elena-myone.github.io/fan-store",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
