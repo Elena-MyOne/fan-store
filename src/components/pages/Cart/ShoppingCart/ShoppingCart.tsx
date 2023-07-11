@@ -5,10 +5,11 @@ import { ROUTER_PATH } from '../../../../models/enums';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartData } from '../../../../models/interface';
 import { selectCart, clearCart } from '../../../../redux/slices/CartSlice';
+import { AppDispatch } from '../../../../redux/store';
 
-const ShoppingCart = () => {
+const ShoppingCart: React.FC = () => {
   const { items, itemsCount, totalPrice, totalSale } = useSelector(selectCart);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const isMounted = React.useRef(false);
 

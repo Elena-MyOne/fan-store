@@ -105,10 +105,10 @@ const Product: React.FC = () => {
       {isLoading ? (
         <ProductSkeleton />
       ) : (
-        <div className="card bg-white flex justify-between gap-5 border border-gray-300 rounded p-2 max-w-5xl">
-          <div className="column">
+        <div className="card bg-white flex flex-col md:flex-row justify-between gap-5 border border-gray-300 rounded p-2 max-w-5xl">
+          <div className="column m-auto">
             <div className="image w-64">
-              <img src={product.image} alt={product.name} />
+              <img className="" src={product.image} alt={product.name} />
             </div>
             <div className="rate text-center font-semibold pt-2">
               {product.rate === 0 ? '' : `Rate: ${product.rate}`}
@@ -136,7 +136,7 @@ const Product: React.FC = () => {
               <div className="price font-semibold text-center text-lg">
                 {product.price === 0 ? '' : `$${product.price.toFixed(2)}`}
               </div>
-              <div className="buttons flex justify-center items-center gap-9">
+              <div className="buttons flex flex-col sm:flex-row justify-center items-center gap-9">
                 <button onClick={onClickAddToCart} className={buttonCartStyle}>
                   <svg className="w-[20px] h-[20px]" viewBox="0 96 960 960">
                     <path

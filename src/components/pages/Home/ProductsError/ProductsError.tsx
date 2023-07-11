@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductsError = () => {
+const ProductsError: React.FC = () => {
   return (
     <>
       <h2 className="text title font-semibold text-xl md:pt-10 pt-6 text-center text-red-500">

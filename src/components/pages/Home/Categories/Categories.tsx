@@ -20,6 +20,9 @@ const Categories: React.FC = () => {
   }, [allProducts]);
 
   const categories = React.useMemo(() => {
+    if (allProducts.length === 0) {
+      return;
+    }
     return ['all', ...new Set(allCategories)].map((category, index) => (
       <li
         className={category === activeCategory ? styleCategoryItemActive : styleCategoryItem}
@@ -29,7 +32,7 @@ const Categories: React.FC = () => {
         {category}
       </li>
     ));
-  }, [activeCategory, allCategories, dispatch]);
+  }, [allProducts.length, activeCategory, allCategories, dispatch]);
 
   const categoriesSkeleton = [...new Array(7)].map((item, i) => <CategoriesSkeleton key={i} />);
 

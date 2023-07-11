@@ -4,7 +4,7 @@ import ShoppingCart from './ShoppingCart/ShoppingCart';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../../../redux/slices/CartSlice';
 
-const Cart = () => {
+const Cart: React.FC = () => {
   const { isEmptyCart } = useSelector(selectCart);
 
   return (

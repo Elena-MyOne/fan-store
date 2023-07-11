@@ -10,7 +10,7 @@ import { selectFilter } from '../../../redux/slices/FilterSlice';
 import { selectProducts } from '../../../redux/slices/ProductsSlice';
 import ProductsEmpty from './ProductsEmpty/ProductsEmpty';
 
-const Home = () => {
+const Home: React.FC = () => {
   const { activeCategory, activeFaculty } = useSelector(selectFilter);
   const { status, products } = useSelector(selectProducts);
 

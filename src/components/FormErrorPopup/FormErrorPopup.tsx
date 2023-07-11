@@ -10,7 +10,7 @@ import {
   setUserLogInError,
 } from '../../redux/slices/UserSlice';
 
-const FormErrorPopup = () => {
+const FormErrorPopup: React.FC = () => {
   const { isRegisterError, registerErrorMessage, isUserLogInError, changePasswordErrorMessage } =
     useSelector(selectUser);
   const dispatch = useDispatch<AppDispatch>();

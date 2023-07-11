@@ -20,15 +20,15 @@ const Header: React.FC = () => {
 
   return (
     <header className="header py-4 border">
-      <div className="body flex justify-between container m-auto items-center flex-wrap sm:gap-10 gap-4">
+      <div className="body flex justify-between container m-auto items-center flex-wrap md:gap-20 gap-9">
         <Link
           to={ROUTER_PATH.HOME}
-          className="logo w-[100px] md:w-[164px] md:h-[40px] lg:order-1 order-1"
+          className="logo w-[100px] md:w-[164px] md:h-[40px] md:order-1 order-1"
         >
           <img className={style.headerLogoImage} src={logo} alt="logo" />
         </Link>
         <Search />
-        <div className="flex gap-4 items-center md:gap-10 lg:order-3 order-2">
+        <div className="flex gap-4 items-center md:gap-10 md:order-3 order-2">
           <Link
             to={ROUTER_PATH.CART}
             className="cart flex items-center bg-orange-500 md:px-6 px-3 md:py-3 py-2 rounded-3xl font-semibold text-white hover:bg-orange-600 duration-300"

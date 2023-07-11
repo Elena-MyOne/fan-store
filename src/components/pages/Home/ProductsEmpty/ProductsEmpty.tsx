@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductsEmpty = () => {
+const ProductsEmpty: React.FC = () => {
   return (
     <div className="font-semibold text-center my-5">
       <p>Ups... 😕</p>
