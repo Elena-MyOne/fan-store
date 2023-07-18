@@ -12,8 +12,6 @@ const Pagination: React.FC = () => {
 
   function handlePageClick(selectedItem: { selected: number }) {
     const activePage = selectedItem.selected + 1;
-    console.log(activePage);
-
     dispatch(setCurrentPage(activePage));
   }
 
