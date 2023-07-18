@@ -6,29 +6,29 @@ import { selectProducts, setCurrentPage } from '../../../../redux/slices/Product
 import { AppDispatch } from '../../../../redux/store';
 
 const Pagination: React.FC = () => {
-  const { products, totalPages } = useSelector(selectProducts);
+  const { totalPages } = useSelector(selectProducts);
   const dispatch = useDispatch<AppDispatch>();
   const productsPerPage = 8;
 
   function handlePageClick(selectedItem: { selected: number }) {
     const activePage = selectedItem.selected + 1;
+    console.log(activePage);
+
     dispatch(setCurrentPage(activePage));
   }
 
   return (
     <>
-      {products.length !== 0 && (
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel=">"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={productsPerPage}
-          pageCount={totalPages}
-          previousLabel="<"
-          renderOnZeroPageCount={null}
-          className={`flex gap-2 p-1 my-4 items-center justify-center ${styles.root}`}
-        />
-      )}
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel=">"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={productsPerPage}
+        pageCount={totalPages}
+        previousLabel="<"
+        renderOnZeroPageCount={null}
+        className={`flex gap-2 p-1 my-4 items-center justify-center ${styles.root}`}
+      />
     </>
   );
 };
