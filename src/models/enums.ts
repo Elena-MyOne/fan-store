@@ -1,6 +1,5 @@
 export enum ROUTER_PATH {
-  // HOME = '/',
-  HOME = '/fan-store',
+  HOME = '/',
   PRODUCT = '/:id',
   CART = 'cart',
   CHECKOUT = 'cart/checkout',
