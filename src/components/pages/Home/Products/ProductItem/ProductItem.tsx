@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -11,8 +11,8 @@ import {
 import { ProductsData } from '../../../../../models/interface';
 
 const ProductItem = (props: ProductsData) => {
-  const [description, setDescription] = useState(false);
-  const [cartAdd, setCartAdd] = useState(false);
+  const [description, setDescription] = React.useReducer((prev) => !prev, false);
+  const [cartAdd, setCartAdd] = React.useState(false);
 
   const { items } = useSelector(selectCart);
   const dispatch = useDispatch();
@@ -108,10 +108,7 @@ const ProductItem = (props: ProductsData) => {
         </div>
         <div className="price font-semibold text-center text-lg">$ {props.price.toFixed(2)}</div>
         <div className="buttons flex justify-center items-center">
-          <button
-            className={descriptionButtonStyle}
-            onClick={() => setDescription((prev) => !prev)}
-          >
+          <button className={descriptionButtonStyle} onClick={setDescription}>
             {description ? 'Hide Description' : 'Show Description'}
           </button>
         </div>

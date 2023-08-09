@@ -33,8 +33,8 @@ const Checkout: React.FC = () => {
   } = useSelector(selectCheckout);
   const dispatch = useDispatch();
 
-  const [isNumberVisible, setIsNumberVisible] = React.useState(false);
-  const [isCvcVisible, setIsCvcVisible] = React.useState(false);
+  const [isNumberVisible, setIsNumberVisible] = React.useReducer((prev) => !prev, false);
+  const [isCvcVisible, setIsCvcVisible] = React.useReducer((prev) => !prev, false);
 
   const maxCardNumberLength = 16;
 
@@ -71,14 +71,6 @@ const Checkout: React.FC = () => {
     }
   }
 
-  function handelCardNumberVisibility() {
-    setIsNumberVisible((prev) => !prev);
-  }
-
-  function handelCvcVisibility() {
-    setIsCvcVisible((prev) => !prev);
-  }
-
   const inputStyles =
     'border rounded px-2 py-1 w-full outline-none focus:border-orange-300 duration-300 hover:border-orange-400';
   const errorInputStyles =
@@ -111,10 +103,7 @@ const Checkout: React.FC = () => {
                     onChange={handleCardNumber}
                     maxLength={maxCardNumberLength}
                   />
-                  <div
-                    className="icon absolute top-[65%] right-2"
-                    onClick={handelCardNumberVisibility}
-                  >
+                  <div className="icon absolute top-[65%] right-2" onClick={setIsNumberVisible}>
                     <svg
                       className={isNumberVisible ? iconActiveStyle : iconHiddenStyle}
                       viewBox="0 -960 960 960"
@@ -179,7 +168,7 @@ const Checkout: React.FC = () => {
                     onChange={handleCvc}
                     maxLength={3}
                   />
-                  <div className="icon absolute top-[65%] right-2" onClick={handelCvcVisibility}>
+                  <div className="icon absolute top-[65%] right-2" onClick={setIsCvcVisible}>
                     <svg
                       className={isCvcVisible ? iconActiveStyle : iconHiddenStyle}
                       viewBox="0 -960 960 960"
