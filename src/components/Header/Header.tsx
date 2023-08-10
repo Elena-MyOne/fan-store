@@ -19,16 +19,26 @@ const Header: React.FC = () => {
   const signUpText = isSignUp ? 'Account' : 'Sign up';
 
   return (
-    <header className="header py-4 border">
-      <div className="body flex justify-between container m-auto items-center flex-wrap md:gap-20 gap-9">
+    <header className="header pt-4 border">
+      <div className="body flex justify-between container m-auto items-center flex-wrap md:gap-20 gap-9 pb-4">
         <Link
           to={ROUTER_PATH.HOME}
           className="logo w-[100px] md:w-[164px] md:h-[40px] md:order-1 order-1"
         >
           <img className={style.headerLogoImage} src={logo} alt="logo" />
         </Link>
-        <Search />
-        <div className="flex gap-4 items-center md:gap-10 md:order-3 order-2">
+        <div className="profile flex gap-4 items-center md:gap-10 md:order-3 order-2">
+          <Link to={signUpPath}>
+            <div className="icon text-gray-800 flex flex-col items-center">
+              <svg className="w-[30px] h-[30px]" viewBox="0 -960 960 960">
+                <path
+                  className="fill-current"
+                  d="M480-481q-66 0-108-42t-42-108q0-66 42-108t108-42q66 0 108 42t42 108q0 66-42 108t-108 42ZM160-160v-94q0-38 19-65t49-41q67-30 128.5-45T480-420q62 0 123 15.5t127.921 44.694q31.301 14.126 50.19 40.966Q800-292 800-254v94H160Zm60-60h520v-34q0-16-9.5-30.5T707-306q-64-31-117-42.5T480-360q-57 0-111 11.5T252-306q-14 7-23 21.5t-9 30.5v34Zm260-321q39 0 64.5-25.5T570-631q0-39-25.5-64.5T480-721q-39 0-64.5 25.5T390-631q0 39 25.5 64.5T480-541Zm0-90Zm0 411Z"
+                />
+              </svg>
+              <span className="text min-[400px]:block hidden font-semibold">{signUpText}</span>
+            </div>
+          </Link>
           <Link
             to={ROUTER_PATH.CART}
             className="cart flex items-center bg-orange-500 md:px-6 px-3 md:py-3 py-2 rounded-3xl font-semibold text-white hover:bg-orange-600 duration-300"
@@ -70,19 +80,9 @@ const Header: React.FC = () => {
               <span>{itemsCount}</span>
             </div>
           </Link>
-          <Link to={signUpPath}>
-            <div className="icon text-gray-800 flex flex-col items-center">
-              <svg className="w-[30px] h-[30px]" viewBox="0 -960 960 960">
-                <path
-                  className="fill-current"
-                  d="M232.001-253.077q59.923-41.307 119.23-64.038Q410.539-339.846 480-339.846q69.461 0 129.077 22.731 59.615 22.731 119.538 64.038 43.615-50.538 64.807-106.725Q814.615-415.989 814.615-480q0-141.538-96.538-238.077Q621.538-814.615 480-814.615t-238.077 96.538Q145.385-621.538 145.385-480q0 64.011 21.5 120.198t65.116 106.725Zm247.782-204.231q-53.937 0-90.744-37.025-36.808-37.024-36.808-90.961 0-53.936 37.025-90.744 37.024-36.807 90.961-36.807t90.744 37.024q36.808 37.024 36.808 90.961t-37.025 90.744q-37.024 36.808-90.961 36.808Zm.685 357.307q-79.006 0-148.242-29.77-69.235-29.769-120.961-81.576-51.725-51.808-81.494-120.727-29.77-68.92-29.77-148t29.77-147.925q29.769-68.846 81.576-120.654 51.808-51.807 120.727-81.576 68.92-29.77 148-29.77t147.925 29.77q68.846 29.769 120.654 81.576 51.807 51.808 81.576 120.686 29.77 68.878 29.77 147.499 0 79.006-29.77 148.242-29.769 69.235-81.576 120.961-51.808 51.725-120.686 81.494-68.878 29.77-147.499 29.77ZM480-145.385q55.769 0 110-17.731t102.154-57.346q-47.923-35.231-101.5-54.616Q537.077-294.462 480-294.462T369.154-275.27q-53.77 19.192-100.923 54.808Q315.769-180.847 370-163.116q54.231 17.731 110 17.731Zm.054-357.307q35.869 0 59.1-23.284 23.231-23.285 23.231-59.154 0-35.87-23.285-59.101-23.284-23.231-59.154-23.231-35.869 0-59.1 23.285-23.231 23.284-23.231 59.154 0 35.869 23.285 59.1 23.284 23.231 59.154 23.231ZM480-585.077Zm0 365.153Z"
-                />
-              </svg>
-              <span className="text min-[400px]:block hidden">{signUpText}</span>
-            </div>
-          </Link>
         </div>
       </div>
+      <Search />
     </header>
   );
 };
