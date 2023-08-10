@@ -9,6 +9,7 @@ import ProductsError from './ProductsError/ProductsError';
 import { selectFilter } from '../../../redux/slices/FilterSlice';
 import { selectProducts } from '../../../redux/slices/ProductsSlice';
 import ProductsEmpty from './ProductsEmpty/ProductsEmpty';
+import Search from './Search/Search';
 
 const Home: React.FC = () => {
   const { activeCategory, activeFaculty } = useSelector(selectFilter);
@@ -18,18 +19,21 @@ const Home: React.FC = () => {
     activeCategory === 'all' && activeFaculty === 'All' ? 'All products' : 'Sort products';
 
   return (
-    <div className="home container px-2 m-auto">
-      <div className="top flex justify-between items-center gap-6 py-8 xl:flex-row flex-col">
-        <Categories />
-        <Sort />
+    <>
+      <Search />
+      <div className="home container px-2 m-auto">
+        <div className="top flex justify-between items-center gap-6 py-8 xl:flex-row flex-col">
+          <Categories />
+          <Sort />
+        </div>
+        <div className="products mb-4">
+          <Pagination />
+          <h2 className="title font-semibold text-xl md:mb-4 mb-2">{title}</h2>
+          {status === STATUS.ERROR ? <ProductsError /> : <Products />}
+          {status === STATUS.SUCCESS && products.length === 0 && <ProductsEmpty />}
+        </div>
       </div>
-      <div className="products mb-4">
-        <Pagination />
-        <h2 className="title font-semibold text-xl md:mb-4 mb-2">{title}</h2>
-        {status === STATUS.ERROR ? <ProductsError /> : <Products />}
-        {status === STATUS.SUCCESS && products.length === 0 && <ProductsEmpty />}
-      </div>
-    </div>
+    </>
   );
 };
 

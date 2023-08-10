@@ -1,5 +1,6 @@
 export enum ROUTER_PATH {
-  HOME = '/',
+  MAIN = '/',
+  HOME = 'home',
   PRODUCT = '/:id',
   CART = 'cart',
   CHECKOUT = 'cart/checkout',
@@ -27,4 +28,13 @@ export enum STATUS {
   LOADING = 'loading',
   SUCCESS = 'success',
   ERROR = 'error',
+}
+
+export enum CATEGORIES {
+  WANDS = 'wands',
+  DECORATIONS = 'decorations',
+  PILLOWS = 'pillows',
+  SWEATERS = 'sweaters',
+  SOUVENIRS = 'souvenirs',
+  ROBES = 'robes',
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import style from './Header.module.scss';
 import { Link } from 'react-router-dom';
 import { ROUTER_PATH } from '../../models/enums';
-import Search from './Search/Search';
 import { useSelector } from 'react-redux';
 import { selectCart } from '../../redux/slices/CartSlice';
 import { selectUser } from '../../redux/store';
@@ -22,7 +21,7 @@ const Header: React.FC = () => {
     <header className="header pt-4 border">
       <div className="body flex justify-between container m-auto items-center flex-wrap md:gap-20 gap-9 pb-4">
         <Link
-          to={ROUTER_PATH.HOME}
+          to={ROUTER_PATH.MAIN}
           className="logo w-[100px] md:w-[164px] md:h-[40px] md:order-1 order-1"
         >
           <img className={style.headerLogoImage} src={logo} alt="logo" />
@@ -82,7 +81,6 @@ const Header: React.FC = () => {
           </Link>
         </div>
       </div>
-      <Search />
     </header>
   );
 };

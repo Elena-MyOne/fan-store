@@ -16,6 +16,7 @@ import Billing from './components/pages/Profile/Billing/Billing';
 import ChangePassword from './components/pages/Profile/changePassword/ChangePassword';
 import Account from './components/pages/Profile/Account/Account';
 import DeleteAccount from './components/pages/Profile/DeleteAccount/DeleteAccount';
+import Main from './components/pages/Main/Main';
 
 const Cart = React.lazy(
   () => import(/* webpackChunkName: "Cart" */ './components/pages/Cart/Cart')
@@ -29,8 +30,9 @@ function App() {
 
   return (
     <Routes>
-      <Route path={ROUTER_PATH.HOME} element={<Layout />}>
-        <Route index element={<Home />}></Route>
+      <Route path={ROUTER_PATH.MAIN} element={<Layout />}>
+        <Route index element={<Main />}></Route>
+        <Route path={ROUTER_PATH.HOME} element={<Home />} />
         <Route path={ROUTER_PATH.PRODUCT} element={<Product />} />
         <Route
           path={ROUTER_PATH.CART}

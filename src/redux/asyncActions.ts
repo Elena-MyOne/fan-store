@@ -53,7 +53,7 @@ export const fetchFilteredProducts = createAsyncThunk(
   async (_, { dispatch, getState }) => {
     const state: RootState = getState() as RootState;
     const { activeCategory, activeFaculty } = state.filter;
-    const searchProduct = state.header.searchProduct;
+    const searchProduct = state.search.searchProduct;
     const currentPage = state.products.currentPage;
 
     const response = await axios.get(

@@ -4,14 +4,14 @@ import React from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { selectFilter, setFilters } from '../../redux/slices/FilterSlice';
-import { selectHeader, setSearchParam } from '../../redux/slices/HeaderSlice';
+import { selectSearch, setSearchParam } from '../../redux/slices/SearchSlice';
 import { fetchInitialProducts, fetchFilteredProducts } from '../../redux/asyncActions';
 import { selectProducts } from '../../redux/slices/ProductsSlice';
 
 const Service = () => {
   const { activeCategory, activeFaculty } = useSelector(selectFilter);
   const { currentPage, totalProducts } = useSelector(selectProducts);
-  const { searchProduct } = useSelector(selectHeader);
+  const { searchProduct } = useSelector(selectSearch);
   const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();
