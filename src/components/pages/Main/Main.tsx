@@ -1,13 +1,13 @@
 import React from 'react';
-import Slider from './Slider/Slider';
+import Carousel from './Slider/Carousel';
 import MainCategories from './MainCategories/MainCategories';
 
 const Main: React.FC = () => {
   return (
     <section className="bg-gray-100 h-full">
       <MainCategories />
-      <Slider />
       <div className="body container m-auto">
+        <Carousel />
         <div className="why">Why choose us</div>
         <div className="popular">Most popular</div>
         <div className="sale">Sales -20%</div>

@@ -11,7 +11,7 @@ const MainCategories: React.FC = () => {
 
   return (
     <>
-      <ul className="categories container m-auto font-semibold text-lg flex items-center justify-between flex-wrap gap-4 py-4">
+      <ul className="categories container m-auto font-semibold text-lg flex items-center justify-between flex-wrap gap-5 px-2 py-6">
         <li className={itemStyle} onClick={() => dispatch(setActiveCategory(CATEGORIES.WANDS))}>
           <Link to={ROUTER_PATH.HOME}>Wands</Link>
         </li>
