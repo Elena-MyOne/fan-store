@@ -38,3 +38,10 @@ export enum CATEGORIES {
   SOUVENIRS = 'souvenirs',
   ROBES = 'robes',
 }
+
+export enum FACULTY {
+  GRYFFINDOR = 'gryffindor',
+  HUFFLEPUFF = 'hufflepuff',
+  RAVENCLAW = 'ravenclaw',
+  SLYTHERIN = 'slytherin',
+}

@@ -3,7 +3,6 @@ import React from 'react';
 import Slider from 'react-slick';
 import './slick.scss';
 import './slick-theme.scss';
-
 import './Carousel.scss';
 
 import { Link } from 'react-router-dom';
