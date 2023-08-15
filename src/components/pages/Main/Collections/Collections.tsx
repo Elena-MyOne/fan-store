@@ -15,7 +15,7 @@ const Collections: React.FC = () => {
   const linkStyles = `bg-[rgba(0,0,0,0.2)] x-10 pt-28 pb-5 rounded-xl h-full block`;
 
   return (
-    <section className="py-10">
+    <section className="py-10 container m-auto">
       <h2 className="title font-semibold text-xl md:mb-4 mb-2">Collections</h2>
       <ul className="items grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 items-center justify-between text-center">
         <li

@@ -21,11 +21,11 @@ const Carousel: React.FC = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 7000,
   };
 
   return (
-    <div className="slider px-4 pb-8">
+    <div className="slider px-4 pb-8 container m-auto">
       <div className="body text-white rounded-lg">
         <Slider {...settings}>
           {slides.map((slide) => (
@@ -36,11 +36,11 @@ const Carousel: React.FC = () => {
               <div className="content max-w-lg">
                 <h2 className="font-fjalla md:text-3xl text-xl">{slide.title}</h2>
                 <p className="md:text-xl mt-4 md:mt-8 h-24 sm:block hidden">{slide.text}</p>
-                <p className="md:text-xl mt-4 md:mt-8 text-orange-500">-20% sale</p>
+                <p className="md:text-xl mt-4 md:mt-8 text-orange-500">-50% sale</p>
                 <Link
-                  className="inline-block bg-gray-200 hover:bg-orange-500 px-4 py-2 text-black hover:text-white rounded-3xl mt-8 mb-10 sm:mb-0 duration-300"
+                  className="text-xl inline-block bg-gray-200 hover:bg-orange-500 px-4 py-2 text-black hover:text-white rounded-3xl mt-8 mb-10 sm:mb-0 duration-300"
                   to={ROUTER_PATH.HOME}
-                  onClick={() => dispatch(setActiveCategory(CATEGORIES.ROBES))}
+                  onClick={() => dispatch(setActiveCategory(slide.link))}
                 >
                   Shop Now
                 </Link>

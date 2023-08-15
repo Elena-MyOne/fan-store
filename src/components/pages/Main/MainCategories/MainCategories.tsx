@@ -10,8 +10,11 @@ const MainCategories: React.FC = () => {
   const itemStyle = 'py-1 px-2 hover:text-orange-400 cursor-pointer duration-300';
 
   return (
-    <>
-      <ul className="categories container m-auto font-semibold text-lg flex items-center justify-between flex-wrap gap-5 px-2 py-6">
+    <div className="container m-auto">
+      <ul className="categories container m-auto font-semibold text-lg flex items-center justify-between flex-wrap gap-x-8 gap-y-4 px-2 py-6">
+        <li className={itemStyle} onClick={() => dispatch(setActiveCategory(CATEGORIES.ALL))}>
+          <Link to={ROUTER_PATH.HOME}>All Products</Link>
+        </li>
         <li className={itemStyle} onClick={() => dispatch(setActiveCategory(CATEGORIES.WANDS))}>
           <Link to={ROUTER_PATH.HOME}>Wands</Link>
         </li>
@@ -34,10 +37,10 @@ const MainCategories: React.FC = () => {
           <Link to={ROUTER_PATH.HOME}>Robes</Link>
         </li>
         <li className="sale py-1 px-4 bg-gray-800 text-white rounded duration-300 cursor-pointer hover:bg-orange-500">
-          Sale -20%
+          Sale -50%
         </li>
       </ul>
-    </>
+    </div>
   );
 };
 

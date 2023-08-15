@@ -37,6 +37,7 @@ export enum CATEGORIES {
   SWEATERS = 'sweaters',
   SOUVENIRS = 'souvenirs',
   ROBES = 'robes',
+  ALL = 'all',
 }
 
 export enum FACULTY {
@@ -44,4 +45,5 @@ export enum FACULTY {
   HUFFLEPUFF = 'hufflepuff',
   RAVENCLAW = 'ravenclaw',
   SLYTHERIN = 'slytherin',
+  ALL = 'all',
 }
