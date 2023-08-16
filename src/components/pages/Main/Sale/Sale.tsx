@@ -4,10 +4,16 @@ import { selectProducts } from '../../../../redux/slices/ProductsSlice';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { STATUS } from '../../../../models/enums';
-import SaleProducts from './SaleProducts';
+import ProductCard from './ProductCard';
+import { ProductsData } from '../../../../models/interface';
 
 const Sale: React.FC = () => {
-  const { status } = useSelector(selectProducts);
+  const { saleProducts, status } = useSelector(selectProducts);
+  const sale = saleProducts.slice(0, 4);
+
+  const products = sale.map((product: ProductsData) => {
+    return <ProductCard key={product.id} {...product} />;
+  });
 
   return (
     <section className="md:py-20 py-10 container m-auto">
@@ -31,7 +37,9 @@ const Sale: React.FC = () => {
           <Skeleton height={300} />
         </div>
       ) : (
-        <SaleProducts />
+        <div className="body grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 text-center items-center justify-between gap-6">
+          {products}
+        </div>
       )}
     </section>
   );
