@@ -2,16 +2,23 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { ProductsData } from '../../models/interface';
 import { RootState } from '../store';
+import { ORDER, SORT } from '../../models/enums';
 
 export interface FilterState {
   activeCategory: string;
   activeFaculty: string;
+  sort: string;
+  order: string;
+  sale: string;
   allProducts: ProductsData[];
 }
 
 const initialState: FilterState = {
   activeCategory: 'all',
   activeFaculty: 'All',
+  sort: '',
+  order: '',
+  sale: '',
   allProducts: [],
 };
 
@@ -32,11 +39,33 @@ export const filterSlice = createSlice({
       state.activeCategory = action.payload.activeCategory;
       state.activeFaculty = action.payload.activeFaculty;
     },
+    setSort(state, action: PayloadAction<string>) {
+      state.sort = action.payload;
+    },
+    setOrder(state, action: PayloadAction<string>) {
+      state.order = action.payload;
+    },
+    setSale(state, action: PayloadAction<string>) {
+      state.sale = action.payload;
+    },
+    setSaleForMainPage(state) {
+      state.sort = SORT.SALE;
+      state.sale = 'true';
+      state.order = ORDER.DESC;
+    },
   },
 });
 
 export const selectFilter = (state: RootState) => state.filter;
 
-export const { setActiveCategory, setActiveFaculty, setAllProducts, setFilters } =
-  filterSlice.actions;
+export const {
+  setActiveCategory,
+  setActiveFaculty,
+  setAllProducts,
+  setFilters,
+  setSort,
+  setOrder,
+  setSale,
+  setSaleForMainPage,
+} = filterSlice.actions;
 export default filterSlice.reducer;

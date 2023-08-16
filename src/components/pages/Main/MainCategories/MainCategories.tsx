@@ -1,7 +1,7 @@
 import React from 'react';
-import { CATEGORIES, ROUTER_PATH } from '../../../../models/enums';
+import { CATEGORIES, FACULTY, ROUTER_PATH } from '../../../../models/enums';
 import { Link } from 'react-router-dom';
-import { setActiveCategory } from '../../../../redux/slices/FilterSlice';
+import { setActiveCategory, setActiveFaculty } from '../../../../redux/slices/FilterSlice';
 import { useDispatch } from 'react-redux';
 
 const MainCategories: React.FC = () => {
@@ -9,35 +9,40 @@ const MainCategories: React.FC = () => {
 
   const itemStyle = 'py-1 px-2 hover:text-orange-400 cursor-pointer duration-300';
 
+  const onClickMainCategories = (category: string): void => {
+    dispatch(setActiveFaculty(FACULTY.ALL));
+    dispatch(setActiveCategory(category));
+  };
+
   return (
     <div className="container m-auto">
       <ul className="categories container m-auto font-semibold text-lg flex items-center justify-between flex-wrap gap-x-8 gap-y-4 px-2 py-6">
-        <li className={itemStyle} onClick={() => dispatch(setActiveCategory(CATEGORIES.ALL))}>
+        <li className={itemStyle} onClick={() => onClickMainCategories(CATEGORIES.ALL)}>
           <Link to={ROUTER_PATH.HOME}>All Products</Link>
         </li>
-        <li className={itemStyle} onClick={() => dispatch(setActiveCategory(CATEGORIES.WANDS))}>
+        <li className={itemStyle} onClick={() => onClickMainCategories(CATEGORIES.WANDS)}>
           <Link to={ROUTER_PATH.HOME}>Wands</Link>
         </li>
-        <li
-          className={itemStyle}
-          onClick={() => dispatch(setActiveCategory(CATEGORIES.DECORATIONS))}
-        >
+        <li className={itemStyle} onClick={() => onClickMainCategories(CATEGORIES.DECORATIONS)}>
           <Link to={ROUTER_PATH.HOME}>Decorations</Link>
         </li>
-        <li className={itemStyle} onClick={() => dispatch(setActiveCategory(CATEGORIES.PILLOWS))}>
+        <li className={itemStyle} onClick={() => onClickMainCategories(CATEGORIES.PILLOWS)}>
           <Link to={ROUTER_PATH.HOME}>Pillows</Link>
         </li>
-        <li className={itemStyle} onClick={() => dispatch(setActiveCategory(CATEGORIES.SWEATERS))}>
+        <li className={itemStyle} onClick={() => onClickMainCategories(CATEGORIES.SWEATERS)}>
           <Link to={ROUTER_PATH.HOME}>Sweaters</Link>
         </li>
-        <li className={itemStyle} onClick={() => dispatch(setActiveCategory(CATEGORIES.SOUVENIRS))}>
+        <li className={itemStyle} onClick={() => onClickMainCategories(CATEGORIES.SOUVENIRS)}>
           <Link to={ROUTER_PATH.HOME}>Souvenirs</Link>
         </li>
-        <li className={itemStyle} onClick={() => dispatch(setActiveCategory(CATEGORIES.ROBES))}>
+        <li className={itemStyle} onClick={() => onClickMainCategories(CATEGORIES.ROBES)}>
           <Link to={ROUTER_PATH.HOME}>Robes</Link>
         </li>
-        <li className="sale py-1 px-4 bg-gray-800 text-white rounded duration-300 cursor-pointer hover:bg-orange-500">
-          Sale -50%
+        <li
+          className="sale py-1 px-4 bg-gray-800 text-white rounded duration-300 cursor-pointer hover:bg-orange-500"
+          onClick={() => console.log('ok')}
+        >
+          <Link to={ROUTER_PATH.HOME}>Sale -30%</Link>
         </li>
       </ul>
     </div>

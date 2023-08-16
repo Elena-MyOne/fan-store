@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { STATUS } from '../../../../models/enums';
 import { selectProducts } from '../../../../redux/slices/ProductsSlice';
 
-const Products = () => {
+const Products: React.FC = () => {
   const { products, status } = useSelector(selectProducts);
   const productItems = products.map((product: ProductsData) => {
     return <ProductItem key={product.id} {...product} />;

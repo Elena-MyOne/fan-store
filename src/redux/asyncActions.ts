@@ -6,6 +6,7 @@ import { setAllProducts } from './slices/FilterSlice';
 import {
   setCurrentPage,
   setProducts,
+  setSaleProducts,
   setTotalPages,
   setTotalProducts,
 } from './slices/ProductsSlice';
@@ -47,6 +48,36 @@ export const fetchInitialProducts = createAsyncThunk(
     }
   }
 );
+
+export const getSaleProducts = createAsyncThunk(
+  'products/getSaleProducts',
+  async (_, { dispatch, getState }) => {
+    try {
+      const state: RootState = getState() as RootState;
+      const { sale, sort, order } = state.filter;
+
+      const response = await axios.get(
+        `${URL.PRODUCTS}?page=1&limit=50&sale=${sale}&sort=${sort}&order=${order}`
+      );
+
+      dispatch(setSaleProducts(response.data.products));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+//!sale:
+//https://fan-store-backend-elena-myone.onrender.com/products?page=1&limit=50&sale=true&sort=sale&order=desc
+
+//TODO price:
+//https://fan-store-backend-elena-myone.onrender.com/products?page=1&limit=50&sort=price&order=desc
+
+//TODO rate:
+//https://fan-store-backend-elena-myone.onrender.com/products?page=1&limit=50&sort=rate&order=asc
+
+//All together
+//https://fan-store-backend-elena-myone.onrender.com/products?page=1&limit=50&sort=rate&order=asc&category=souvenirs&faculty=Hufflepuff
 
 export const fetchFilteredProducts = createAsyncThunk(
   'products/fetchFilteredProducts',

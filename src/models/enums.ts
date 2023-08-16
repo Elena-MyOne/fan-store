@@ -45,5 +45,16 @@ export enum FACULTY {
   HUFFLEPUFF = 'hufflepuff',
   RAVENCLAW = 'ravenclaw',
   SLYTHERIN = 'slytherin',
-  ALL = 'all',
+  ALL = 'All',
+}
+
+export enum SORT {
+  SALE = 'sale',
+  RATE = 'rate',
+  PRICE = 'price',
+}
+
+export enum ORDER {
+  DESC = 'desc',
+  ASC = 'asc',
 }

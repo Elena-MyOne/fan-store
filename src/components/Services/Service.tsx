@@ -3,9 +3,13 @@ import { AppDispatch } from '../../redux/store';
 import React from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { selectFilter, setFilters } from '../../redux/slices/FilterSlice';
+import { selectFilter, setFilters, setSaleForMainPage } from '../../redux/slices/FilterSlice';
 import { selectSearch, setSearchParam } from '../../redux/slices/SearchSlice';
-import { fetchInitialProducts, fetchFilteredProducts } from '../../redux/asyncActions';
+import {
+  fetchInitialProducts,
+  fetchFilteredProducts,
+  getSaleProducts,
+} from '../../redux/asyncActions';
 import { selectProducts } from '../../redux/slices/ProductsSlice';
 
 const Service = () => {
@@ -19,7 +23,12 @@ const Service = () => {
   const isMounted = React.useRef(false);
 
   React.useEffect(() => {
+    dispatch(setSaleForMainPage());
+  }, []);
+
+  React.useEffect(() => {
     dispatch(fetchInitialProducts());
+    dispatch(getSaleProducts());
   }, [dispatch, totalProducts]);
 
   React.useEffect(() => {

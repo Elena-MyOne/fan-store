@@ -3,6 +3,7 @@ import Carousel from './Carousel/Carousel';
 import MainCategories from './MainCategories/MainCategories';
 import Collections from './Collections/Collections';
 import BestSellers from './BestSellers/BestSellers';
+import Sale from './Sale/Sale';
 
 const Main: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const Main: React.FC = () => {
       <div className="body">
         <Carousel />
         <Collections />
-        <div className="sale">Sales -20%</div>
+        <Sale />
         <BestSellers />
       </div>
     </section>

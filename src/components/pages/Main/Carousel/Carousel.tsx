@@ -36,7 +36,7 @@ const Carousel: React.FC = () => {
               <div className="content max-w-lg">
                 <h2 className="font-fjalla md:text-3xl text-xl">{slide.title}</h2>
                 <p className="md:text-xl mt-4 md:mt-8 h-24 sm:block hidden">{slide.text}</p>
-                <p className="md:text-xl mt-4 md:mt-8 text-orange-500">-50% sale</p>
+                <p className="md:text-xl mt-4 md:mt-8 text-orange-500">-30% sale</p>
                 <Link
                   className="text-xl inline-block bg-gray-200 hover:bg-orange-500 px-4 py-2 text-black hover:text-white rounded-3xl mt-8 mb-10 sm:mb-0 duration-300"
                   to={ROUTER_PATH.HOME}
