@@ -53,6 +53,11 @@ export const filterSlice = createSlice({
       state.sale = 'true';
       state.order = ORDER.DESC;
     },
+    setRatingForMainPage(state) {
+      state.sort = SORT.RATE;
+      state.sale = '';
+      state.order = ORDER.DESC;
+    },
   },
 });
 
@@ -67,5 +72,6 @@ export const {
   setOrder,
   setSale,
   setSaleForMainPage,
+  setRatingForMainPage,
 } = filterSlice.actions;
 export default filterSlice.reducer;

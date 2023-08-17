@@ -1,26 +1,25 @@
 import React from 'react';
+import SeeAll from '../SeeAll/SeeAll';
 import { useSelector } from 'react-redux';
 import { selectProducts } from '../../../../redux/slices/ProductsSlice';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
 import { STATUS } from '../../../../models/enums';
-import ProductCard from '../ProductCard/ProductCard';
+import Skeleton from 'react-loading-skeleton';
 import { ProductsData } from '../../../../models/interface';
-import SeeAll from '../SeeAll/SeeAll';
+import ProductCard from '../ProductCard/ProductCard';
 
-const Sale: React.FC = () => {
-  const { saleProducts, status } = useSelector(selectProducts);
-  const sale = saleProducts.slice(0, 4);
+const BestRating: React.FC = () => {
+  const { bestRatingProducts, status } = useSelector(selectProducts);
+  const rate = bestRatingProducts.slice(0, 4);
 
-  const products = sale.map((product: ProductsData) => {
+  const products = rate.map((product: ProductsData) => {
     return <ProductCard key={product.id} {...product} />;
   });
 
   return (
     <section className="md:py-20 py-10 container m-auto">
       <div className="top flex gap-6 items-center justify-between md:mb-6 mb-2">
-        <h2 className="title font-semibold text-xl">Sale</h2>
-        <SeeAll all="sale" />
+        <h2 className="title font-semibold text-xl">Best Rating</h2>
+        <SeeAll />
       </div>
       {status === STATUS.LOADING ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-between gap-6">
@@ -38,4 +37,4 @@ const Sale: React.FC = () => {
   );
 };
 
-export default Sale;
+export default BestRating;

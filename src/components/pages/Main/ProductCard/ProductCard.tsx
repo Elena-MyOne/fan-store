@@ -9,6 +9,7 @@ import {
   setEmptyCart,
   setItemsCount,
 } from '../../../../redux/slices/CartSlice';
+import StarsRating from './StarsRating/StarsRating';
 
 const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
   const [addWishlist, setAddWishlist] = React.useReducer((prev) => !prev, false);
@@ -108,11 +109,14 @@ const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
         <div className="sale text-lg text-orange-400">{sale}</div>
       </div>
 
-      <div className="image h-[210px] m-auto">
+      <div className="image h-[190px] m-auto">
         <img className="h-full" src={props.image} alt={props.category} />
       </div>
       <div className="content">
-        <div className="title text-lg mb-3">{props.name}</div>
+        <div className="title text-lg">{props.name}</div>
+        <div className="title mb-3">
+          <StarsRating rate={props.rate} />
+        </div>
         <div className="price font-semibold mb-3">${props.price.toFixed(2)}</div>
         <Link
           to={`/${props.id}`}

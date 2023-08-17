@@ -11,6 +11,7 @@ export interface ProductsState {
   totalPages: number;
   status: STATUS;
   saleProducts: ProductsData[];
+  bestRatingProducts: ProductsData[];
 }
 
 const initialState: ProductsState = {
@@ -20,6 +21,7 @@ const initialState: ProductsState = {
   totalPages: 1,
   status: STATUS.LOADING,
   saleProducts: [],
+  bestRatingProducts: [],
 };
 
 export const ProductsSlice = createSlice({
@@ -41,6 +43,9 @@ export const ProductsSlice = createSlice({
     setSaleProducts(state, action: PayloadAction<ProductsData[]>) {
       state.saleProducts = action.payload;
     },
+    setBestRatingProducts(state, action: PayloadAction<ProductsData[]>) {
+      state.bestRatingProducts = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -61,6 +66,12 @@ export const ProductsSlice = createSlice({
 
 export const selectProducts = (state: RootState) => state.products;
 
-export const { setProducts, setCurrentPage, setTotalProducts, setTotalPages, setSaleProducts } =
-  ProductsSlice.actions;
+export const {
+  setProducts,
+  setCurrentPage,
+  setTotalProducts,
+  setTotalPages,
+  setSaleProducts,
+  setBestRatingProducts,
+} = ProductsSlice.actions;
 export default ProductsSlice.reducer;

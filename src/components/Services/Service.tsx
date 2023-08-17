@@ -9,6 +9,7 @@ import {
   fetchInitialProducts,
   fetchFilteredProducts,
   getSaleProducts,
+  getRatingProducts,
 } from '../../redux/asyncActions';
 import { selectProducts } from '../../redux/slices/ProductsSlice';
 
@@ -23,12 +24,9 @@ const Service = () => {
   const isMounted = React.useRef(false);
 
   React.useEffect(() => {
-    dispatch(setSaleForMainPage());
-  }, []);
-
-  React.useEffect(() => {
     dispatch(fetchInitialProducts());
     dispatch(getSaleProducts());
+    dispatch(getRatingProducts());
   }, [dispatch, totalProducts]);
 
   React.useEffect(() => {

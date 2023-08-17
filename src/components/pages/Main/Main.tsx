@@ -4,6 +4,7 @@ import MainCategories from './MainCategories/MainCategories';
 import Collections from './Collections/Collections';
 import BestSellers from './BestSellers/BestSellers';
 import Sale from './Sale/Sale';
+import BestRating from './BestRating/BestRating';
 
 const Main: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const Main: React.FC = () => {
         <Carousel />
         <Collections />
         <Sale />
+        <BestRating />
         <BestSellers />
       </div>
     </section>

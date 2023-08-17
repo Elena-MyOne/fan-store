@@ -2,8 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { URL } from '../models/enums';
 import { RootState } from './store';
-import { setAllProducts } from './slices/FilterSlice';
+import { setAllProducts, setRatingForMainPage, setSaleForMainPage } from './slices/FilterSlice';
 import {
+  setBestRatingProducts,
   setCurrentPage,
   setProducts,
   setSaleProducts,
@@ -52,6 +53,8 @@ export const fetchInitialProducts = createAsyncThunk(
 export const getSaleProducts = createAsyncThunk(
   'products/getSaleProducts',
   async (_, { dispatch, getState }) => {
+    dispatch(setSaleForMainPage());
+
     try {
       const state: RootState = getState() as RootState;
       const { sale, sort, order } = state.filter;
@@ -61,6 +64,25 @@ export const getSaleProducts = createAsyncThunk(
       );
 
       dispatch(setSaleProducts(response.data.products));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const getRatingProducts = createAsyncThunk(
+  'products/getRatingProducts',
+  async (_, { dispatch, getState }) => {
+    dispatch(setRatingForMainPage());
+    try {
+      const state: RootState = getState() as RootState;
+      const { sort, order } = state.filter;
+
+      const response = await axios.get(
+        `${URL.PRODUCTS}?page=1&limit=50&sort=${sort}&order=${order}`
+      );
+
+      dispatch(setBestRatingProducts(response.data.products));
     } catch (error) {
       console.log(error);
     }
