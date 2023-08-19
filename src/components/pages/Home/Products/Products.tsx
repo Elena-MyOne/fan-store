@@ -15,7 +15,7 @@ const Products: React.FC = () => {
   });
 
   const ProductSkeletons = [...new Array(PRODUCTS_PER_PAGE)].map((item, i) => (
-    <Skeleton height={350} key={i} />
+    <Skeleton height={360} key={i} />
   ));
 
   return (

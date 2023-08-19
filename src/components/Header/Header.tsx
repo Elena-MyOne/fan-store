@@ -18,27 +18,27 @@ const Header: React.FC = () => {
   const favoriteItems = '';
 
   return (
-    <header className="header pt-4 border">
-      <div className="body flex justify-between container m-auto items-center flex-wrap gap-4 pb-4">
+    <header className="header pt-4 border-b px-1">
+      <div className="body flex justify-between container m-auto items-center gap-4 pb-4">
         <Link to={ROUTER_PATH.MAIN} className="logo w-[100px] md:w-[164px] md:h-[40px]">
           <img className={style.headerLogoImage} src={logo} alt="logo" />
         </Link>
-        <div className="profile flex gap-4 items-center">
-          <div className="favorite flex items-end hover:text-orange-400 duration-300">
+        <div className="profile flex gap-2 items-center">
+          <div className="favorite relative hover:text-orange-400 duration-300">
             <Link to={ROUTER_PATH.FAVORITE}>
-              <svg className="w-[30px] h-[30px]" viewBox="0 -960 960 960">
+              <svg className="md:w-[30px] w-[25px] md:h-[30px] h-[25px]" viewBox="0 -960 960 960">
                 <path
                   className="fill-current"
                   d="m480-147.54-31.769-28.923q-103.075-94.428-170.268-162.56T171.117-459.962q-39.654-52.808-55.385-95.373-15.731-42.566-15.731-85.357 0-82.294 55.5-137.8 55.5-55.507 137.192-55.507 55.846 0 103.576 28.154Q444-777.691 480-723.998q40.461-55.923 86.829-82.962 46.368-27.039 100.478-27.039 81.692 0 137.192 55.507 55.5 55.506 55.5 137.8 0 42.791-15.731 85.357-15.731 42.565-55.341 95.29-39.609 52.725-106.846 120.939-67.237 68.215-170.312 162.643L480-147.54Zm0-60.153q99.719-91.285 164.121-156.481 64.401-65.197 102.332-114.088 37.931-48.892 53.047-86.933 15.115-38.042 15.115-75.353 0-64.221-41.615-106.144-41.616-41.923-105.468-41.923-51.139 0-94.028 30.538-42.889 30.539-74.889 90.231H460.77q-31.77-59.077-74.651-89.923-42.881-30.846-93.651-30.846-63.468 0-105.275 41.923-41.808 41.923-41.808 106.443 0 37.252 15.177 75.497t52.846 87.383q37.669 49.138 102.708 113.984Q381.154-298.539 480-207.693Zm0-290.461Z"
                 />
               </svg>
             </Link>
-            <span className="-ml-1 -mb-1">{favoriteItems}</span>
+            <span className="absolute top-6 -right-0">{favoriteItems}</span>
           </div>
           <Link to={signUpPath}>
             <div className="icon text-gray-800 flex flex-col items-center">
               <svg
-                className="w-[35px] h-[35px] hover:text-orange-400 duration-300"
+                className="md:w-[35px] w-[25px] md:h-[35px] h-[25px] hover:text-orange-400 duration-300"
                 viewBox="0 -960 960 960"
               >
                 {isSignUp ? (
@@ -57,12 +57,12 @@ const Header: React.FC = () => {
           </Link>
           <Link
             to={ROUTER_PATH.CART}
-            className="cart flex items-center bg-orange-500 md:px-6 px-3 md:py-3 py-2 rounded-3xl font-semibold text-white hover:bg-orange-600 duration-300"
+            className="cart flex items-center bg-orange-500 md:px-6 px-3 md:py-3 py-2 rounded-3xl md:text-base text-sm font-semibold text-white hover:bg-orange-600 duration-300"
           >
-            <div className="sum mr-3">
+            <div className="sum md:mr-3 mr-1">
               $ <span>{totalPrice.toFixed(2)}</span>
             </div>
-            <div className="delimiter bg-white opacity-25 h-[25px] w-[1px] mr-3"></div>
+            <div className="delimiter bg-white opacity-25 h-[25px] w-[1px] md:mr-3 mr-1"></div>
             <div className="icon flex items-center gap-2">
               <svg
                 width="18"
