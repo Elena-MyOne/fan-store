@@ -17,6 +17,7 @@ import ChangePassword from './components/pages/Profile/changePassword/ChangePass
 import Account from './components/pages/Profile/Account/Account';
 import DeleteAccount from './components/pages/Profile/DeleteAccount/DeleteAccount';
 import Main from './components/pages/Main/Main';
+import Favorite from './components/pages/Favorite/Favorite';
 
 const Cart = React.lazy(
   () => import(/* webpackChunkName: "Cart" */ './components/pages/Cart/Cart')
@@ -59,6 +60,7 @@ function App() {
           <Route path={ROUTER_PATH.LOGOUT} element={<Logout />} />
           <Route path={ROUTER_PATH.DELETE_ACCOUNT} element={<DeleteAccount />} />
         </Route>
+        <Route path={ROUTER_PATH.FAVORITE} element={<Favorite />}></Route>
         <Route path={ROUTER_PATH.NOTFOUND} element={<NotFound />} />
       </Route>
     </Routes>

@@ -25,7 +25,7 @@ const Header: React.FC = () => {
         </Link>
         <div className="profile flex gap-4 items-center">
           <div className="favorite flex items-end hover:text-orange-400 duration-300">
-            <Link to={ROUTER_PATH.MAIN}>
+            <Link to={ROUTER_PATH.FAVORITE}>
               <svg className="w-[30px] h-[30px]" viewBox="0 -960 960 960">
                 <path
                   className="fill-current"

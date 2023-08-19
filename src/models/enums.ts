@@ -12,6 +12,7 @@ export enum ROUTER_PATH {
   CHANGE_PASSWORD = 'change-password',
   ACCOUNT = 'account',
   DELETE_ACCOUNT = 'delete-account',
+  FAVORITE = 'favorite',
   NOTFOUND = '*',
 }
 

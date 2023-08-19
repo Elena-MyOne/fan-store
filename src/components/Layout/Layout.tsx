@@ -9,7 +9,7 @@ const Layout = () => {
     <div className="grid grid-rows-[auto_auto_80px]">
       <Service />
       <Header />
-      <main className="min-h-[82vh]">
+      <main className="min-h-[83vh]">
         <Outlet />
       </main>
       <Footer />
