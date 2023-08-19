@@ -9,7 +9,7 @@ const BestSellers: React.FC = () => {
       <div className={style.body}>
         <div className="bg-[rgba(0,0,0,0.2)]">
           <div className="content text-white container m-auto md:text-xl">
-            <div className="lg:max-w-lg ml-auto md:py-36 py-10 px-6 text-right bg-[rgba(0,0,0,0.2)]">
+            <div className="lg:max-w-lg ml-auto md:py-36 py-10 px-6 text-right bg-[rgba(0,0,0,0.4)]">
               <h2 className="font-fjalla md:text-3xl text-xl mb-6">Best Sellers</h2>
               <p className="text ">
                 Explore a selection of best-selling Harry Potter merchandise, including exclusive

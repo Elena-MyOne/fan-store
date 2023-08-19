@@ -10,7 +10,7 @@ const StarsRating: React.FC<StarsRatingProps> = (props) => {
   return (
     <>
       <div
-        className={`${style.rating} inline-flex flex-row-reverse`}
+        className={`${style.rating} inline-flex flex-row-reverse items-center justify-center`}
         data-total-value={Math.floor(props.rate)}
       >
         <div className={`${itemStyles} ${style.item}`} data-item-value={5}>

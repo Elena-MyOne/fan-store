@@ -229,7 +229,7 @@ const SignUp: React.FC = () => {
                   <div className="registered flex gap-1 justify-center items-center flex-col mt-6">
                     <p>Already registered?</p>
                     <Link
-                      to={ROUTER_PATH.HOME + ROUTER_PATH.LOGIN}
+                      to={ROUTER_PATH.MAIN + ROUTER_PATH.LOGIN}
                       className="pointer text-orange-500 hover:text-orange-600 duration-300"
                     >
                       Sign In

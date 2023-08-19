@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CATEGORIES, FACULTY, ROUTER_PATH } from '../../../../models/enums';
+import { CATEGORIES, FACULTY, ROUTER_PATH, SORT } from '../../../../models/enums';
 import { useDispatch } from 'react-redux';
 import {
   setActiveCategory,
   setActiveFaculty,
+  setRatingForMainPage,
   setSaleForMainPage,
 } from '../../../../redux/slices/FilterSlice';
 
@@ -16,8 +17,11 @@ const SeeAll: React.FC<SeeAllProps> = (props) => {
   const dispatch = useDispatch();
 
   const onClickSeeAll = () => {
-    if (props.all === 'sale') {
+    if (props.all === SORT.SALE) {
       dispatch(setSaleForMainPage());
+    }
+    if (props.all === SORT.RATE) {
+      dispatch(setRatingForMainPage());
     }
     dispatch(setActiveFaculty(FACULTY.ALL));
     dispatch(setActiveCategory(CATEGORIES.ALL));

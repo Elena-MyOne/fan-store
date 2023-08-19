@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProductsData } from '../../../../models/interface';
+import { ProductsData } from '../../models/interface';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -8,7 +8,7 @@ import {
   selectCart,
   setEmptyCart,
   setItemsCount,
-} from '../../../../redux/slices/CartSlice';
+} from '../../redux/slices/CartSlice';
 import StarsRating from './StarsRating/StarsRating';
 
 const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {

@@ -4,7 +4,7 @@ import { selectProducts } from '../../../../redux/slices/ProductsSlice';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { STATUS } from '../../../../models/enums';
-import ProductCard from '../ProductCard/ProductCard';
+import ProductCard from '../../../ProductCard/ProductCard';
 import { ProductsData } from '../../../../models/interface';
 import SeeAll from '../SeeAll/SeeAll';
 

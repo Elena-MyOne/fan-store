@@ -3,7 +3,7 @@ import { AppDispatch } from '../../redux/store';
 import React from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { selectFilter, setFilters, setSaleForMainPage } from '../../redux/slices/FilterSlice';
+import { selectFilter, setFilters } from '../../redux/slices/FilterSlice';
 import { selectSearch, setSearchParam } from '../../redux/slices/SearchSlice';
 import {
   fetchInitialProducts,

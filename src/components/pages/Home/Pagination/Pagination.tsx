@@ -25,7 +25,7 @@ const Pagination: React.FC = () => {
         pageCount={totalPages}
         previousLabel="<"
         renderOnZeroPageCount={null}
-        className={`flex gap-2 p-1 my-4 items-center justify-center ${styles.root}`}
+        className={`flex gap-2 p-1 md:my-8 my-4 items-center justify-center ${styles.root}`}
       />
     </>
   );
