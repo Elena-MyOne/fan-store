@@ -4,11 +4,11 @@ import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProducts, setCurrentPage } from '../../../../redux/slices/ProductsSlice';
 import { AppDispatch } from '../../../../redux/store';
+import { PRODUCTS_PER_PAGE } from '../../../../models/globalVariables';
 
 const Pagination: React.FC = () => {
   const { totalPages } = useSelector(selectProducts);
   const dispatch = useDispatch<AppDispatch>();
-  const productsPerPage = 8;
 
   function handlePageClick(selectedItem: { selected: number }) {
     const activePage = selectedItem.selected + 1;
@@ -21,7 +21,7 @@ const Pagination: React.FC = () => {
         breakLabel="..."
         nextLabel=">"
         onPageChange={handlePageClick}
-        pageRangeDisplayed={productsPerPage}
+        pageRangeDisplayed={PRODUCTS_PER_PAGE}
         pageCount={totalPages}
         previousLabel="<"
         renderOnZeroPageCount={null}

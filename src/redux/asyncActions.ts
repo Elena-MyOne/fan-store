@@ -26,6 +26,7 @@ import {
   setUserLogInError,
 } from './slices/UserSlice';
 import { getUserFromLocalStorage } from '../utils/getUserFromLoocalStorage';
+import { PRODUCTS_PER_PAGE } from '../models/globalVariables';
 
 const requestConfig = {
   headers: { 'Content-Type': 'application/json' },
@@ -110,7 +111,7 @@ export const fetchFilteredProducts = createAsyncThunk(
     const currentPage = state.products.currentPage;
 
     const response = await axios.get(
-      `${URL.PRODUCTS}?page=${currentPage}&limit=8&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
+      `${URL.PRODUCTS}?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
     );
     dispatch(setCurrentPage(response.data.currentPage));
     dispatch(setTotalPages(response.data.totalPages));

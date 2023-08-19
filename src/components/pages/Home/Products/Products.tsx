@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { STATUS } from '../../../../models/enums';
 import { selectProducts } from '../../../../redux/slices/ProductsSlice';
 import ProductCard from '../../../ProductCard/ProductCard';
+import { PRODUCTS_PER_PAGE } from '../../../../models/globalVariables';
 
 const Products: React.FC = () => {
   const { products, status } = useSelector(selectProducts);
@@ -13,7 +14,9 @@ const Products: React.FC = () => {
     return <ProductCard key={product.id} {...product} />;
   });
 
-  const ProductSkeletons = [...new Array(9)].map((item, i) => <Skeleton height={350} key={i} />);
+  const ProductSkeletons = [...new Array(PRODUCTS_PER_PAGE)].map((item, i) => (
+    <Skeleton height={350} key={i} />
+  ));
 
   return (
     <div className="products grid lg:grid-cols-3 md:grid-cols-2 md:m-auto text-center gap-6 my-5">

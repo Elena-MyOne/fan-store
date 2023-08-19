@@ -29,7 +29,7 @@ const Home: React.FC = () => {
         </div>
         <div className="body flex gap-4 md:gap-6 md:mb-6 mb-4">
           <Sidebar />
-          <div className="products">
+          <div className="products grow">
             <h2 className="title font-semibold text-xl md:mb-6 mb-2">{title}</h2>
             {status === STATUS.ERROR ? <ProductsError /> : <Products />}
             {status === STATUS.SUCCESS && products.length === 0 && <ProductsEmpty />}
