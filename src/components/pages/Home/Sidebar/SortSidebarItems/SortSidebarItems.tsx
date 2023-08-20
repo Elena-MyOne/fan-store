@@ -25,83 +25,40 @@ const SortSidebarItems: React.FC = () => {
   };
 
   React.useEffect(() => {
-    switch (selectedSidebarItem) {
-      case RATING_ITEMS.DESC:
-        dispatch(setSort(SORT.RATE));
-        dispatch(setOrder(ORDER.DESC));
-        break;
-      case RATING_ITEMS.ASC:
-        dispatch(setSort(SORT.RATE));
-        dispatch(setOrder(ORDER.ASC));
-        break;
-      case RATING_ITEMS.FIVE:
-        dispatch(setSort(SORT.RATE));
-        dispatch(setOrder(ORDER.FIVE));
-        break;
-      case RATING_ITEMS.FOUR:
-        dispatch(setSort(SORT.RATE));
-        dispatch(setOrder(ORDER.FOUR));
-        break;
-      case RATING_ITEMS.THREE:
-        dispatch(setSort(SORT.RATE));
-        dispatch(setOrder(ORDER.THREE));
-        break;
-      case RATING_ITEMS.TWO:
-        dispatch(setSort(SORT.RATE));
-        dispatch(setOrder(ORDER.TWO));
-        break;
-      case RATING_ITEMS.ONE:
-        dispatch(setSort(SORT.RATE));
-        dispatch(setOrder(ORDER.ONE));
-        break;
-      case PRICE_ITEMS.DESC:
-        dispatch(setSort(SORT.PRICE));
-        dispatch(setOrder(ORDER.DESC));
-        break;
-      case PRICE_ITEMS.ASC:
-        dispatch(setSort(SORT.PRICE));
-        dispatch(setOrder(ORDER.ASC));
-        break;
-      case PRICE_ITEMS.PRICE25:
-        dispatch(setSort(SORT.PRICE));
-        dispatch(setOrder(ORDER.PRICE_25));
-        break;
-      case PRICE_ITEMS.PRICE40:
-        dispatch(setSort(SORT.PRICE));
-        dispatch(setOrder(ORDER.PRICE_40));
-        break;
-      case PRICE_ITEMS.PRICE70:
-        dispatch(setSort(SORT.PRICE));
-        dispatch(setOrder(ORDER.PRICE_70));
-        break;
-      case PRICE_ITEMS.PRICE100:
-        dispatch(setSort(SORT.PRICE));
-        dispatch(setOrder(ORDER.PRICE_100));
-        break;
-      case SALE_ITEMS.DESC:
-        dispatch(setSort(SORT.SALE));
-        dispatch(setOrder(ORDER.DESC));
-        dispatch(setSale(SALE.TRUE));
-        break;
-      case SALE_ITEMS.ASC:
-        dispatch(setSort(SORT.SALE));
-        dispatch(setOrder(ORDER.ASC));
-        dispatch(setSale(SALE.TRUE));
-        break;
-      case SALE_ITEMS.SALE30:
-        dispatch(setSort(SORT.SALE));
-        dispatch(setOrder(ORDER.SALE_30));
-        dispatch(setSale(SALE.TRUE));
-        break;
-      case SALE_ITEMS.SALE15:
-        dispatch(setSort(SORT.SALE));
-        dispatch(setOrder(ORDER.SALE_15));
-        dispatch(setSale(SALE.TRUE));
-        break;
-      default:
+    const itemToSortOrderMap = {
+      [RATING_ITEMS.DESC]: { sort: SORT.RATE, order: ORDER.DESC },
+      [RATING_ITEMS.ASC]: { sort: SORT.RATE, order: ORDER.ASC },
+      [RATING_ITEMS.FIVE]: { sort: SORT.RATE, order: ORDER.FIVE },
+      [RATING_ITEMS.FOUR]: { sort: SORT.RATE, order: ORDER.FOUR },
+      [RATING_ITEMS.THREE]: { sort: SORT.RATE, order: ORDER.THREE },
+      [RATING_ITEMS.TWO]: { sort: SORT.RATE, order: ORDER.TWO },
+      [RATING_ITEMS.ONE]: { sort: SORT.RATE, order: ORDER.ONE },
+      [PRICE_ITEMS.DESC]: { sort: SORT.PRICE, order: ORDER.DESC },
+      [PRICE_ITEMS.ASC]: { sort: SORT.PRICE, order: ORDER.ASC },
+      [PRICE_ITEMS.PRICE25]: { sort: SORT.PRICE, order: ORDER.PRICE_25 },
+      [PRICE_ITEMS.PRICE40]: { sort: SORT.PRICE, order: ORDER.PRICE_40 },
+      [PRICE_ITEMS.PRICE70]: { sort: SORT.PRICE, order: ORDER.PRICE_70 },
+      [PRICE_ITEMS.PRICE100]: { sort: SORT.PRICE, order: ORDER.PRICE_100 },
+      [SALE_ITEMS.DESC]: { sort: SORT.SALE, order: ORDER.DESC, sale: SALE.TRUE },
+      [SALE_ITEMS.ASC]: { sort: SORT.SALE, order: ORDER.ASC, sale: SALE.TRUE },
+      [SALE_ITEMS.SALE30]: { sort: SORT.SALE, order: ORDER.SALE_30, sale: SALE.TRUE },
+      [SALE_ITEMS.SALE15]: { sort: SORT.SALE, order: ORDER.SALE_15, sale: SALE.TRUE },
+    };
+
+    if (selectedSidebarItem !== null && selectedSidebarItem !== undefined) {
+      const sortAndOrder = itemToSortOrderMap[selectedSidebarItem];
+      if (sortAndOrder) {
+        const { sort, order, sale } = sortAndOrder;
+        dispatch(setSort(sort));
+        dispatch(setOrder(order));
+        if (sale !== undefined) {
+          dispatch(setSale(sale));
+        }
+      } else {
         dispatch(setSort(SORT.DEFAULT));
         dispatch(setOrder(ORDER.DEFAULT));
         dispatch(setSale(SALE.DEFAULT));
+      }
     }
   }, [dispatch, selectedSidebarItem]);
 
