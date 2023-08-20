@@ -66,6 +66,10 @@ export enum ORDER {
   ONE = '1',
   SALE_30 = '30-20',
   SALE_15 = '15-5',
+  PRICE_25 = '25-40',
+  PRICE_40 = '40-70',
+  PRICE_70 = '70-100',
+  PRICE_100 = '100',
   DEFAULT = '',
 }
 

@@ -62,6 +62,22 @@ const SortSidebarItems: React.FC = () => {
         dispatch(setSort(SORT.PRICE));
         dispatch(setOrder(ORDER.ASC));
         break;
+      case PRICE_ITEMS.PRICE25:
+        dispatch(setSort(SORT.PRICE));
+        dispatch(setOrder(ORDER.PRICE_25));
+        break;
+      case PRICE_ITEMS.PRICE40:
+        dispatch(setSort(SORT.PRICE));
+        dispatch(setOrder(ORDER.PRICE_40));
+        break;
+      case PRICE_ITEMS.PRICE70:
+        dispatch(setSort(SORT.PRICE));
+        dispatch(setOrder(ORDER.PRICE_70));
+        break;
+      case PRICE_ITEMS.PRICE100:
+        dispatch(setSort(SORT.PRICE));
+        dispatch(setOrder(ORDER.PRICE_100));
+        break;
       case SALE_ITEMS.DESC:
         dispatch(setSort(SORT.SALE));
         dispatch(setOrder(ORDER.DESC));
