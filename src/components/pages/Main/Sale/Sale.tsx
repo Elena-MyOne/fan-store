@@ -10,11 +10,16 @@ import SeeAll from '../SeeAll/SeeAll';
 
 const Sale: React.FC = () => {
   const { saleProducts, status } = useSelector(selectProducts);
-  const sale = saleProducts.slice(0, 4);
+  const productsToShow = 4;
+  const sale = saleProducts.slice(0, productsToShow);
 
   const products = sale.map((product: ProductsData) => {
     return <ProductCard key={product.id} {...product} />;
   });
+
+  const Skeletons = [
+    ...new Array(productsToShow).map((item, index) => <Skeleton height={300} key={index} />),
+  ];
 
   return (
     <section className="md:py-20 py-10 container m-auto">
@@ -24,10 +29,7 @@ const Sale: React.FC = () => {
       </div>
       {status === STATUS.LOADING ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-between gap-6">
-          <Skeleton height={300} />
-          <Skeleton height={300} />
-          <Skeleton height={300} />
-          <Skeleton height={300} />
+          {Skeletons}
         </div>
       ) : (
         <div className="body grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 text-center items-center justify-between gap-6">

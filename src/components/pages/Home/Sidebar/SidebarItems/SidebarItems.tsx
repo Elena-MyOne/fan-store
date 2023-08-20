@@ -14,7 +14,7 @@ const SidebarItems: React.FC<SidebarItemsProps> = ({ items, selectedItem, handle
           <label className="flex justify-center items-center gap-2">
             <input
               type="radio"
-              name="price"
+              name="filter"
               className="text-xl hidden"
               checked={selectedItem === item}
               value={item}

@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { ProductsData } from '../../models/interface';
 import { RootState } from '../store';
-import { ORDER, SORT } from '../../models/enums';
+import { CATEGORIES, FACULTY, SALE, SORT, ORDER } from '../../models/enums';
+import { RATING_ITEMS, SALE_ITEMS } from '../../models/globalVariables';
 
 export interface FilterState {
   activeCategory: string;
@@ -10,15 +11,17 @@ export interface FilterState {
   sort: string;
   order: string;
   sale: string;
+  selectedSidebarItem: string | null;
   allProducts: ProductsData[];
 }
 
 const initialState: FilterState = {
-  activeCategory: 'all',
-  activeFaculty: 'All',
-  sort: '',
-  order: '',
-  sale: '',
+  activeCategory: CATEGORIES.ALL,
+  activeFaculty: FACULTY.ALL,
+  sort: SORT.DEFAULT,
+  order: ORDER.DEFAULT,
+  sale: SALE.DEFAULT,
+  selectedSidebarItem: null,
   allProducts: [],
 };
 
@@ -48,15 +51,18 @@ export const filterSlice = createSlice({
     setSale(state, action: PayloadAction<string>) {
       state.sale = action.payload;
     },
-    setSaleForMainPage(state) {
+    setSaleDesc(state) {
       state.sort = SORT.SALE;
-      state.sale = 'true';
+      state.sale = SALE.TRUE;
       state.order = ORDER.DESC;
     },
-    setRatingForMainPage(state) {
+    setRatingDesc(state) {
       state.sort = SORT.RATE;
-      state.sale = '';
+      state.sale = SALE.DEFAULT;
       state.order = ORDER.DESC;
+    },
+    setSelectedSidebarItem(state, action: PayloadAction<string | null>) {
+      state.selectedSidebarItem = action.payload;
     },
   },
 });
@@ -71,7 +77,8 @@ export const {
   setSort,
   setOrder,
   setSale,
-  setSaleForMainPage,
-  setRatingForMainPage,
+  setSaleDesc,
+  setRatingDesc,
+  setSelectedSidebarItem,
 } = filterSlice.actions;
 export default filterSlice.reducer;

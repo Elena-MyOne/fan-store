@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { URL } from '../models/enums';
 import { RootState } from './store';
-import { setAllProducts, setRatingForMainPage, setSaleForMainPage } from './slices/FilterSlice';
+import { setAllProducts, setRatingDesc, setSaleDesc } from './slices/FilterSlice';
 import {
   setBestRatingProducts,
   setCurrentPage,
@@ -54,7 +54,7 @@ export const fetchInitialProducts = createAsyncThunk(
 export const getSaleProducts = createAsyncThunk(
   'products/getSaleProducts',
   async (_, { dispatch, getState }) => {
-    dispatch(setSaleForMainPage());
+    dispatch(setSaleDesc());
 
     try {
       const state: RootState = getState() as RootState;
@@ -74,7 +74,7 @@ export const getSaleProducts = createAsyncThunk(
 export const getRatingProducts = createAsyncThunk(
   'products/getRatingProducts',
   async (_, { dispatch, getState }) => {
-    dispatch(setRatingForMainPage());
+    dispatch(setRatingDesc());
     try {
       const state: RootState = getState() as RootState;
       const { sort, order } = state.filter;
@@ -106,14 +106,18 @@ export const fetchFilteredProducts = createAsyncThunk(
   'products/fetchFilteredProducts',
   async (_, { dispatch, getState }) => {
     const state: RootState = getState() as RootState;
-    const { activeCategory, activeFaculty } = state.filter;
+    const { activeCategory, activeFaculty, sort, order, sale } = state.filter;
     const searchProduct = state.search.searchProduct;
     const currentPage = state.products.currentPage;
 
     const response = await axios.get(
-      `${URL.PRODUCTS}?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
+      `${URL.PRODUCTS}?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}&sort=${sort}&order=${order}&sale=${sale}`
     );
-    dispatch(setCurrentPage(response.data.currentPage));
+
+    response.data.products <= PRODUCTS_PER_PAGE
+      ? dispatch(setCurrentPage(1))
+      : dispatch(setCurrentPage(response.data.currentPage));
+
     dispatch(setTotalPages(response.data.totalPages));
     dispatch(setProducts(response.data.products));
 

@@ -9,11 +9,16 @@ import ProductCard from '../../../ProductCard/ProductCard';
 
 const BestRating: React.FC = () => {
   const { bestRatingProducts, status } = useSelector(selectProducts);
-  const rate = bestRatingProducts.slice(0, 4);
+  const productsToShow = 4;
+  const rate = bestRatingProducts.slice(0, productsToShow);
 
   const products = rate.map((product: ProductsData) => {
     return <ProductCard key={product.id} {...product} />;
   });
+
+  const Skeletons = [
+    ...new Array(productsToShow).map((item, index) => <Skeleton height={300} key={index} />),
+  ];
 
   return (
     <section className="md:py-20 py-10 container m-auto">
@@ -23,10 +28,7 @@ const BestRating: React.FC = () => {
       </div>
       {status === STATUS.LOADING ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-between gap-6">
-          <Skeleton height={300} />
-          <Skeleton height={300} />
-          <Skeleton height={300} />
-          <Skeleton height={300} />
+          {Skeletons}
         </div>
       ) : (
         <div className="body grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 text-center items-center justify-between gap-6">

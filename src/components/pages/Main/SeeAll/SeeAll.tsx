@@ -5,9 +5,11 @@ import { useDispatch } from 'react-redux';
 import {
   setActiveCategory,
   setActiveFaculty,
-  setRatingForMainPage,
-  setSaleForMainPage,
+  setRatingDesc,
+  setSaleDesc,
+  setSelectedSidebarItem,
 } from '../../../../redux/slices/FilterSlice';
+import { RATING_ITEMS, SALE_ITEMS } from '../../../../models/globalVariables';
 
 interface SeeAllProps {
   all?: string;
@@ -18,10 +20,12 @@ const SeeAll: React.FC<SeeAllProps> = (props) => {
 
   const onClickSeeAll = () => {
     if (props.all === SORT.SALE) {
-      dispatch(setSaleForMainPage());
+      dispatch(setSaleDesc());
+      dispatch(setSelectedSidebarItem(SALE_ITEMS.DESC));
     }
     if (props.all === SORT.RATE) {
-      dispatch(setRatingForMainPage());
+      dispatch(setRatingDesc());
+      dispatch(setSelectedSidebarItem(RATING_ITEMS.DESC));
     }
     dispatch(setActiveFaculty(FACULTY.ALL));
     dispatch(setActiveCategory(CATEGORIES.ALL));

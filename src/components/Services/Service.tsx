@@ -14,7 +14,7 @@ import {
 import { selectProducts } from '../../redux/slices/ProductsSlice';
 
 const Service = () => {
-  const { activeCategory, activeFaculty } = useSelector(selectFilter);
+  const { activeCategory, activeFaculty, sort, order, sale } = useSelector(selectFilter);
   const { currentPage, totalProducts } = useSelector(selectProducts);
   const { searchProduct } = useSelector(selectSearch);
   const dispatch = useDispatch<AppDispatch>();
@@ -32,7 +32,7 @@ const Service = () => {
   React.useEffect(() => {
     dispatch(fetchFilteredProducts());
     window.scrollTo(0, 0);
-  }, [dispatch, activeCategory, activeFaculty, searchProduct, currentPage]);
+  }, [dispatch, activeCategory, activeFaculty, searchProduct, currentPage, sort, order, sale]);
 
   React.useEffect(() => {
     if (window.location.search) {

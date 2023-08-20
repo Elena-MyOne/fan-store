@@ -53,9 +53,16 @@ export enum SORT {
   SALE = 'sale',
   RATE = 'rate',
   PRICE = 'price',
+  DEFAULT = '',
 }
 
 export enum ORDER {
   DESC = 'desc',
   ASC = 'asc',
+  DEFAULT = '',
+}
+
+export enum SALE {
+  TRUE = 'true',
+  DEFAULT = '',
 }

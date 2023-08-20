@@ -1,7 +1,12 @@
 import React from 'react';
 import { CATEGORIES, FACULTY, ROUTER_PATH } from '../../../../models/enums';
 import { Link } from 'react-router-dom';
-import { setActiveCategory, setActiveFaculty } from '../../../../redux/slices/FilterSlice';
+import {
+  setActiveCategory,
+  setActiveFaculty,
+  setSaleDesc,
+  setSelectedSidebarItem,
+} from '../../../../redux/slices/FilterSlice';
 import { useDispatch } from 'react-redux';
 
 const MainCategories: React.FC = () => {
@@ -12,6 +17,7 @@ const MainCategories: React.FC = () => {
   const onClickMainCategories = (category: string): void => {
     dispatch(setActiveFaculty(FACULTY.ALL));
     dispatch(setActiveCategory(category));
+    dispatch(setSelectedSidebarItem(null));
   };
 
   return (
@@ -40,7 +46,7 @@ const MainCategories: React.FC = () => {
         </li>
         <li
           className="sale py-1 px-4 bg-gray-800 text-white rounded duration-300 cursor-pointer hover:bg-orange-500"
-          onClick={() => console.log('ok')}
+          onClick={() => dispatch(setSaleDesc())}
         >
           <Link to={ROUTER_PATH.HOME}>Sale -30%</Link>
         </li>
