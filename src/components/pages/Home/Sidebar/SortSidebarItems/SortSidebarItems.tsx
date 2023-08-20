@@ -34,6 +34,26 @@ const SortSidebarItems: React.FC = () => {
         dispatch(setSort(SORT.RATE));
         dispatch(setOrder(ORDER.ASC));
         break;
+      case RATING_ITEMS.FIVE:
+        dispatch(setSort(SORT.RATE));
+        dispatch(setOrder(ORDER.FIVE));
+        break;
+      case RATING_ITEMS.FOUR:
+        dispatch(setSort(SORT.RATE));
+        dispatch(setOrder(ORDER.FOUR));
+        break;
+      case RATING_ITEMS.THREE:
+        dispatch(setSort(SORT.RATE));
+        dispatch(setOrder(ORDER.THREE));
+        break;
+      case RATING_ITEMS.TWO:
+        dispatch(setSort(SORT.RATE));
+        dispatch(setOrder(ORDER.TWO));
+        break;
+      case RATING_ITEMS.ONE:
+        dispatch(setSort(SORT.RATE));
+        dispatch(setOrder(ORDER.ONE));
+        break;
       case PRICE_ITEMS.DESC:
         dispatch(setSort(SORT.PRICE));
         dispatch(setOrder(ORDER.DESC));
@@ -50,6 +70,16 @@ const SortSidebarItems: React.FC = () => {
       case SALE_ITEMS.ASC:
         dispatch(setSort(SORT.SALE));
         dispatch(setOrder(ORDER.ASC));
+        dispatch(setSale(SALE.TRUE));
+        break;
+      case SALE_ITEMS.SALE30:
+        dispatch(setSort(SORT.SALE));
+        dispatch(setOrder(ORDER.SALE_30));
+        dispatch(setSale(SALE.TRUE));
+        break;
+      case SALE_ITEMS.SALE15:
+        dispatch(setSort(SORT.SALE));
+        dispatch(setOrder(ORDER.SALE_15));
         dispatch(setSale(SALE.TRUE));
         break;
       default:

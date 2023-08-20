@@ -98,6 +98,8 @@ export const getRatingProducts = createAsyncThunk(
 
 //TODO rate:
 //https://fan-store-backend-elena-myone.onrender.com/products?page=1&limit=50&sort=rate&order=asc
+//starts sort
+//https://fan-store-backend-elena-myone.onrender.com/products?page=1&limit=50&sort=rate&order=4&category=souvenirs
 
 //All together
 //https://fan-store-backend-elena-myone.onrender.com/products?page=1&limit=50&sort=rate&order=asc&category=souvenirs&faculty=Hufflepuff

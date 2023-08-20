@@ -18,7 +18,7 @@ export enum ROUTER_PATH {
 
 export enum URL {
   PRODUCTS = 'https://fan-store-backend-elena-myone.onrender.com/products',
-  // PRODUCTS = 'http://localhost:4200/products',
+  // PRODUCTS = '/products?page=1&limit=50&sort=rate&order=5products',
   USERS = 'https://fan-store-backend-elena-myone.onrender.com/users',
   // USERS = 'http://localhost:4200/users',
   USERS_LOGIN = 'https://fan-store-backend-elena-myone.onrender.com/users/login',
@@ -59,6 +59,13 @@ export enum SORT {
 export enum ORDER {
   DESC = 'desc',
   ASC = 'asc',
+  FIVE = '5',
+  FOUR = '4',
+  THREE = '3',
+  TWO = '2',
+  ONE = '1',
+  SALE_30 = '30-20',
+  SALE_15 = '15-5',
   DEFAULT = '',
 }
 

@@ -17,7 +17,7 @@ const BestRating: React.FC = () => {
   });
 
   const Skeletons = [
-    ...new Array(productsToShow).map((item, index) => <Skeleton height={300} key={index} />),
+    [...new Array(productsToShow)].map((item, index) => <Skeleton height={300} key={index} />),
   ];
 
   return (
