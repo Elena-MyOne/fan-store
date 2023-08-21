@@ -12,10 +12,10 @@ const SuccessCheckoutPopup: React.FC = () => {
         The Purchase will be delivered within 7 days. Thank you for shopping with us!
       </p>
       <Link
-        to={ROUTER_PATH.HOME}
+        to={`/${ROUTER_PATH.HOME}`}
         className="mb-5 px-6 py-2 block text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl"
       >
-        Home page
+        Shop now
       </Link>
       <p className="text-red-600 mb-5">
         **The data from this page will not be stored, the &quot;Payment details&quot; form is made

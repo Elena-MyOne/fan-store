@@ -6,11 +6,11 @@ interface StarsRatingProps {
 }
 
 const StarsRating: React.FC<StarsRatingProps> = (props) => {
-  const itemStyles = 'item text-gray-300 cursor-pointer text-lg duration-300';
+  const itemStyles = 'item text-gray-300 text-lg duration-300';
   return (
     <>
       <div
-        className={`${style.rating} inline-flex flex-row-reverse items-center justify-center`}
+        className={`${style.rating} inline-flex flex-row-reverse items-center justify-center gap-1`}
         data-total-value={Math.floor(props.rate)}
       >
         <div className={`${itemStyles} ${style.item}`} data-item-value={5}>

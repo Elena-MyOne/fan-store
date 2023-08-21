@@ -9,7 +9,7 @@ import {
   setEmptyCart,
   setItemsCount,
 } from '../../redux/slices/CartSlice';
-import StarsRating from './StarsRating/StarsRating';
+import StarsRating from '../StarsRating/StarsRating';
 
 const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
   const [addWishlist, setAddWishlist] = React.useReducer((prev) => !prev, false);

@@ -11,6 +11,7 @@ import {
   setEmptyCart,
 } from '../../../redux/slices/CartSlice';
 import ProductSkeleton from './ProductSkeleton';
+import StarsRating from '../../StarsRating/StarsRating';
 
 const Product: React.FC = () => {
   const { id } = useParams();
@@ -111,7 +112,7 @@ const Product: React.FC = () => {
               <img className="" src={product.image} alt={product.name} />
             </div>
             <div className="rate text-center font-semibold pt-2">
-              {product.rate === 0 ? '' : `Rate: ${product.rate}`}
+              <StarsRating rate={product.rate} />
             </div>
           </div>
           <div className="column flex flex-col gap-3 justify-between">
@@ -147,10 +148,10 @@ const Product: React.FC = () => {
                   {cartAdd ? 'Remove from Cart' : 'Add to Cart'}
                 </button>
                 <Link
-                  to={ROUTER_PATH.HOME}
+                  to={`/${ROUTER_PATH.HOME}`}
                   className="back px-6 py-2 block border-solid border-2 text-gray-400 hover:text-orange-500 border-gray-400 hover:border-orange-500 duration-300 rounded-3xl"
                 >
-                  Go Back
+                  Shop now
                 </Link>
               </div>
             </div>
