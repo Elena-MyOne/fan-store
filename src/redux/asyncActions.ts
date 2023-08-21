@@ -2,7 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { URL } from '../models/enums';
 import { RootState } from './store';
-import { setAllProducts, setRatingDesc, setSaleDesc } from './slices/FilterSlice';
+import {
+  setAllProducts,
+  setRatingDesc,
+  setRatingSortOrderDefault,
+  setSaleDesc,
+} from './slices/FilterSlice';
 import {
   setBestRatingProducts,
   setCurrentPage,
@@ -86,6 +91,8 @@ export const getRatingProducts = createAsyncThunk(
       dispatch(setBestRatingProducts(response.data.products));
     } catch (error) {
       console.log(error);
+    } finally {
+      dispatch(setRatingSortOrderDefault());
     }
   }
 );

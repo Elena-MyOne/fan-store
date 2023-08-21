@@ -56,24 +56,29 @@ const Service = () => {
   }, [dispatch]);
 
   React.useEffect(() => {
-    const pathname = window.location.pathname;
+    // const pathname = window.location.pathname;
+    const pathname = window.location.hash;
 
-    if (isMounted.current && pathname === '/') {
+    if (isMounted.current && pathname.startsWith('#/home')) {
       const queryString = qs.stringify({
         category: activeCategory,
         faculty: activeFaculty,
         search: searchProduct,
         page: currentPage,
+        order: order,
+        sort: sort,
+        sale: sale,
       });
+      console.log(queryString);
       navigate(`?${queryString}`);
     }
 
-    if (pathname !== '/') {
+    if (!pathname.startsWith('#/home')) {
       isMounted.current = false;
     }
 
     isMounted.current = true;
-  }, [activeCategory, activeFaculty, searchProduct, currentPage, navigate]);
+  }, [activeCategory, activeFaculty, searchProduct, order, sort, sale, currentPage, navigate]);
 
   return <></>;
 };

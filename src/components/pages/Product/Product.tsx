@@ -149,7 +149,7 @@ const Product: React.FC = () => {
                 </button>
                 <Link
                   to={`/${ROUTER_PATH.HOME}`}
-                  className="back px-6 py-2 block border-solid border-2 text-gray-400 hover:text-orange-500 border-gray-400 hover:border-orange-500 duration-300 rounded-3xl"
+                  className="back px-6 py-2 block border-solid border text-gray-400 hover:text-orange-500 border-gray-400 hover:border-orange-500 duration-300 rounded-3xl"
                 >
                   Shop now
                 </Link>

@@ -6,67 +6,58 @@ import { useSelector } from 'react-redux';
 import { selectCart } from '../../redux/slices/CartSlice';
 import { selectUser } from '../../redux/store';
 import logo from '../../assets/images/logo/logo.png';
+import { userInfo } from 'os';
+import { UserData } from '../../models/interface';
 
 const Header: React.FC = () => {
   const { totalPrice, itemsCount } = useSelector(selectCart);
-  const { isSignUp } = useSelector(selectUser);
+  const { isSignUp, name } = useSelector(selectUser);
 
   const signUpPath = isSignUp
     ? `${ROUTER_PATH.PROFILE}/${ROUTER_PATH.ACCOUNT}`
     : ROUTER_PATH.SIGNUP;
 
-  const favoriteItems = '';
+  const favoriteItems = '0';
+  const userInfo = localStorage.getItem('useInfo');
+  const user: UserData = userInfo ? JSON.parse(userInfo) : { name: '', isSignUp: false, email: '' };
 
   return (
     <header className="header pt-4 border-b px-1">
       <div className="body flex justify-between container m-auto items-center gap-4 pb-4">
-        <Link to={ROUTER_PATH.MAIN} className="logo w-[100px] md:w-[164px] md:h-[40px]">
+        <Link to={ROUTER_PATH.MAIN} className="logo w-[100px] md:w-[164px]">
           <img className={style.headerLogoImage} src={logo} alt="logo" />
         </Link>
-        <div className="profile flex gap-2 items-center">
-          <div className="favorite relative hover:text-orange-400 duration-300">
+        <div className="profile flex md:gap-8 gap-2 items-center">
+          <Link to={signUpPath}>
+            <div className="icon flex flex-col items-center text-gray-800 hover:text-orange-600 duration-300">
+              <svg className="md:w-[35px] w-[30px] md:h-[35px] h-[30px]" viewBox="0 -960 960 960">
+                <path
+                  className="fill-current"
+                  d="M480-492.924q-57.749 0-95.22-37.471t-37.471-95.412q0-57.942 37.471-95.221 37.471-37.278 95.22-37.278t95.22 37.278q37.471 37.279 37.471 95.221 0 57.941-37.471 95.412-37.471 37.471-95.22 37.471Zm-299.999 305.23v-75.922q0-32.23 17.077-56.153 17.077-23.923 44.385-36.769 63.153-28.077 121.756-42.308 58.604-14.23 116.769-14.23 58.166 0 116.473 14.538Q654.769-384 717.672-356.266q28.374 12.812 45.35 36.616 16.977 23.804 16.977 56.034v75.922H180.001Zm45.384-45.384h509.23v-30.538q0-15.615-9.885-29.923-9.884-14.308-25.808-22.462-58.999-28.692-111.302-40.192-52.302-11.5-107.62-11.5-55.318 0-108.428 11.5t-111.11 40.192q-15.923 8.154-25.5 22.462t-9.577 29.923v30.538ZM480-538.307q37.461 0 62.384-24.924 24.923-24.923 24.923-62.384t-24.923-62.384Q517.461-712.922 480-712.922t-62.384 24.923q-24.923 24.923-24.923 62.384t24.923 62.384q24.923 24.924 62.384 24.924Zm0-87.308Zm0 392.537Z"
+                />
+              </svg>
+              <div className="-mt-2 md:block hidden">{isSignUp ? user.name : 'Sign up'}</div>
+            </div>
+          </Link>
+          <div className="favorite flex items-center flex items-center bg-orange-500 md:px-5 px-3 md:py-2 py-2 rounded-3xl md:text-base text-sm font-semibold text-white hover:bg-orange-600 duration-300">
             <Link to={ROUTER_PATH.FAVORITE}>
-              <svg className="md:w-[30px] w-[25px] md:h-[30px] h-[25px]" viewBox="0 -960 960 960">
+              <svg className="md:w-[25px] w-[20px] md:h-[30px] h-[20px]" viewBox="0 -960 960 960">
                 <path
                   className="fill-current"
                   d="m480-147.54-31.769-28.923q-103.075-94.428-170.268-162.56T171.117-459.962q-39.654-52.808-55.385-95.373-15.731-42.566-15.731-85.357 0-82.294 55.5-137.8 55.5-55.507 137.192-55.507 55.846 0 103.576 28.154Q444-777.691 480-723.998q40.461-55.923 86.829-82.962 46.368-27.039 100.478-27.039 81.692 0 137.192 55.507 55.5 55.506 55.5 137.8 0 42.791-15.731 85.357-15.731 42.565-55.341 95.29-39.609 52.725-106.846 120.939-67.237 68.215-170.312 162.643L480-147.54Zm0-60.153q99.719-91.285 164.121-156.481 64.401-65.197 102.332-114.088 37.931-48.892 53.047-86.933 15.115-38.042 15.115-75.353 0-64.221-41.615-106.144-41.616-41.923-105.468-41.923-51.139 0-94.028 30.538-42.889 30.539-74.889 90.231H460.77q-31.77-59.077-74.651-89.923-42.881-30.846-93.651-30.846-63.468 0-105.275 41.923-41.808 41.923-41.808 106.443 0 37.252 15.177 75.497t52.846 87.383q37.669 49.138 102.708 113.984Q381.154-298.539 480-207.693Zm0-290.461Z"
                 />
               </svg>
             </Link>
-            <span className="absolute top-6 -right-0">{favoriteItems}</span>
+            <span className="ml-1">{favoriteItems}</span>
           </div>
-          <Link to={signUpPath}>
-            <div
-              className={`icon flex flex-col items-center ${
-                isSignUp ? 'text-orange-500' : 'text-gray-800'
-              }`}
-            >
-              <svg
-                className="md:w-[35px] w-[25px] md:h-[35px] h-[25px] hover:text-orange-600 duration-300"
-                viewBox="0 -960 960 960"
-              >
-                {isSignUp ? (
-                  <path
-                    className="fill-current"
-                    d="M480-492.924q-57.749 0-95.22-37.471t-37.471-95.22q0-58.134 37.471-95.413 37.471-37.278 95.22-37.278t95.22 37.278q37.471 37.279 37.471 95.413 0 57.749-37.471 95.22T480-492.924Zm-299.999 305.23v-75.922q0-32.23 17.077-56.153 17.077-23.923 44.385-36.769 63.153-28.077 121.768-42.308 58.615-14.23 116.769-14.23t116.461 14.538q58.308 14.538 121.461 42 27.923 12.846 45 36.769t17.077 56.153v75.922H180.001Z"
-                  />
-                ) : (
-                  <path
-                    className="fill-current"
-                    d="M480-492.924q-57.749 0-95.22-37.471t-37.471-95.412q0-57.942 37.471-95.221 37.471-37.278 95.22-37.278t95.22 37.278q37.471 37.279 37.471 95.221 0 57.941-37.471 95.412-37.471 37.471-95.22 37.471Zm-299.999 305.23v-75.922q0-32.23 17.077-56.153 17.077-23.923 44.385-36.769 63.153-28.077 121.756-42.308 58.604-14.23 116.769-14.23 58.166 0 116.473 14.538Q654.769-384 717.672-356.266q28.374 12.812 45.35 36.616 16.977 23.804 16.977 56.034v75.922H180.001Zm45.384-45.384h509.23v-30.538q0-15.615-9.885-29.923-9.884-14.308-25.808-22.462-58.999-28.692-111.302-40.192-52.302-11.5-107.62-11.5-55.318 0-108.428 11.5t-111.11 40.192q-15.923 8.154-25.5 22.462t-9.577 29.923v30.538ZM480-538.307q37.461 0 62.384-24.924 24.923-24.923 24.923-62.384t-24.923-62.384Q517.461-712.922 480-712.922t-62.384 24.923q-24.923 24.923-24.923 62.384t24.923 62.384q24.923 24.924 62.384 24.924Zm0-87.308Zm0 392.537Z"
-                  />
-                )}
-              </svg>
-            </div>
-          </Link>
           <Link
             to={ROUTER_PATH.CART}
             className="cart flex items-center bg-orange-500 md:px-6 px-3 md:py-3 py-2 rounded-3xl md:text-base text-sm font-semibold text-white hover:bg-orange-600 duration-300"
           >
-            <div className="sum md:mr-3 mr-1">
+            <div className="sum md:mr-3 mr-1 md:block hidden">
               $ <span>{totalPrice.toFixed(2)}</span>
             </div>
-            <div className="delimiter bg-white opacity-25 h-[25px] w-[1px] md:mr-3 mr-1"></div>
+            <div className="delimiter bg-white opacity-25 h-[25px] w-[1px] md:mr-3 mr-1 md:block hidden"></div>
             <div className="icon flex items-center gap-2">
               <svg
                 width="18"

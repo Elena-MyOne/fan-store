@@ -20,7 +20,7 @@ const Logout: React.FC = () => {
       dispatch(reset());
     } finally {
       setIsRequestSend(true);
-      navigate(ROUTER_PATH.HOME);
+      navigate(`/${ROUTER_PATH.HOME}`);
     }
   };
 

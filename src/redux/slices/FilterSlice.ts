@@ -3,7 +3,6 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { ProductsData } from '../../models/interface';
 import { RootState } from '../store';
 import { CATEGORIES, FACULTY, SALE, SORT, ORDER } from '../../models/enums';
-import { RATING_ITEMS, SALE_ITEMS } from '../../models/globalVariables';
 
 export interface FilterState {
   activeCategory: string;
@@ -61,6 +60,11 @@ export const filterSlice = createSlice({
       state.sale = SALE.DEFAULT;
       state.order = ORDER.DESC;
     },
+    setRatingSortOrderDefault(state) {
+      state.sort = SORT.DEFAULT;
+      state.sale = SALE.DEFAULT;
+      state.order = ORDER.DEFAULT;
+    },
     setSelectedSidebarItem(state, action: PayloadAction<string | null>) {
       state.selectedSidebarItem = action.payload;
     },
@@ -80,5 +84,6 @@ export const {
   setSaleDesc,
   setRatingDesc,
   setSelectedSidebarItem,
+  setRatingSortOrderDefault,
 } = filterSlice.actions;
 export default filterSlice.reducer;
