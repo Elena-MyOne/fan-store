@@ -8,7 +8,7 @@ In the back-end, is leveraged Node.js, Express, and Axios to build a robust serv
 
 [Back-end source code](https://github.com/Elena-MyOne/fan-store-backend)
 
-![](./src/assets/images/1.png)
+![Capture](https://github.com/Elena-MyOne/fan-store/assets/74279859/73926b04-b0e2-432a-a0a0-0eec0eb224cb)
 
 ## Available Scripts
 
