@@ -6,18 +6,18 @@ import { useSelector } from 'react-redux';
 import { selectCart } from '../../redux/slices/CartSlice';
 import { selectUser } from '../../redux/store';
 import logo from '../../assets/images/logo/logo.png';
-import { userInfo } from 'os';
 import { UserData } from '../../models/interface';
+import { selectFavorite } from '../../redux/slices/FavoriteSlice';
 
 const Header: React.FC = () => {
   const { totalPrice, itemsCount } = useSelector(selectCart);
-  const { isSignUp, name } = useSelector(selectUser);
+  const { isSignUp } = useSelector(selectUser);
+  const { favoriteItemsCount } = useSelector(selectFavorite);
 
   const signUpPath = isSignUp
     ? `${ROUTER_PATH.PROFILE}/${ROUTER_PATH.ACCOUNT}`
     : ROUTER_PATH.SIGNUP;
 
-  const favoriteItems = '0';
   const userInfo = localStorage.getItem('useInfo');
   const user: UserData = userInfo ? JSON.parse(userInfo) : { name: '', isSignUp: false, email: '' };
 
@@ -44,11 +44,11 @@ const Header: React.FC = () => {
               <svg className="md:w-[25px] w-[20px] md:h-[30px] h-[20px]" viewBox="0 -960 960 960">
                 <path
                   className="fill-current"
-                  d="m480-147.54-31.769-28.923q-103.075-94.428-170.268-162.56T171.117-459.962q-39.654-52.808-55.385-95.373-15.731-42.566-15.731-85.357 0-82.294 55.5-137.8 55.5-55.507 137.192-55.507 55.846 0 103.576 28.154Q444-777.691 480-723.998q40.461-55.923 86.829-82.962 46.368-27.039 100.478-27.039 81.692 0 137.192 55.507 55.5 55.506 55.5 137.8 0 42.791-15.731 85.357-15.731 42.565-55.341 95.29-39.609 52.725-106.846 120.939-67.237 68.215-170.312 162.643L480-147.54Zm0-60.153q99.719-91.285 164.121-156.481 64.401-65.197 102.332-114.088 37.931-48.892 53.047-86.933 15.115-38.042 15.115-75.353 0-64.221-41.615-106.144-41.616-41.923-105.468-41.923-51.139 0-94.028 30.538-42.889 30.539-74.889 90.231H460.77q-31.77-59.077-74.651-89.923-42.881-30.846-93.651-30.846-63.468 0-105.275 41.923-41.808 41.923-41.808 106.443 0 37.252 15.177 75.497t52.846 87.383q37.669 49.138 102.708 113.984Q381.154-298.539 480-207.693Zm0-290.461Z"
+                  d="m480-121-41-37q-105.768-97.121-174.884-167.561Q195-396 154-451.5T96.5-552Q80-597 80-643q0-90.155 60.5-150.577Q201-854 290-854q57 0 105.5 27t84.5 78q42-54 89-79.5T670-854q89 0 149.5 60.423Q880-733.155 880-643q0 46-16.5 91T806-451.5Q765-396 695.884-325.561 626.768-255.121 521-158l-41 37Zm0-79q101.236-92.995 166.618-159.498Q712-426 750.5-476t54-89.135q15.5-39.136 15.5-77.72Q820-709 778-751.5T670.225-794q-51.524 0-95.375 31.5Q531-731 504-674h-49q-26-56-69.85-88-43.851-32-95.375-32Q224-794 182-751.5t-42 108.816Q140-604 155.5-564.5t54 90Q248-424 314-358t166 158Zm0-297Z"
                 />
               </svg>
             </Link>
-            <span className="ml-1">{favoriteItems}</span>
+            <span className="ml-1">{favoriteItemsCount}</span>
           </div>
           <Link
             to={ROUTER_PATH.CART}

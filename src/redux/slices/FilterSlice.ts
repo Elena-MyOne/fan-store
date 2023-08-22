@@ -37,9 +37,23 @@ export const filterSlice = createSlice({
     setAllProducts(state, action: PayloadAction<ProductsData[]>) {
       state.allProducts = action.payload;
     },
-    setFilters(state, action: PayloadAction<{ activeCategory: string; activeFaculty: string }>) {
+    setFilters(
+      state,
+      action: PayloadAction<{
+        activeCategory: string;
+        activeFaculty: string;
+        sort: string;
+        order: string;
+        sale: string;
+        selectedSidebarItem: string;
+      }>
+    ) {
       state.activeCategory = action.payload.activeCategory;
       state.activeFaculty = action.payload.activeFaculty;
+      state.sort = action.payload.sort;
+      state.order = action.payload.order;
+      state.sale = action.payload.sale;
+      state.selectedSidebarItem = action.payload.selectedSidebarItem;
     },
     setSort(state, action: PayloadAction<string>) {
       state.sort = action.payload;

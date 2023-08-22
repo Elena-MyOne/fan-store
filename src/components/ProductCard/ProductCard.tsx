@@ -10,27 +10,35 @@ import {
   setItemsCount,
 } from '../../redux/slices/CartSlice';
 import StarsRating from '../StarsRating/StarsRating';
+import {
+  addFavoriteItemToFavorite,
+  removeFavoriteItemFromFavorite,
+  selectFavorite,
+  setIsEmptyFavorite,
+} from '../../redux/slices/FavoriteSlice';
 
 const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
-  const [addWishlist, setAddWishlist] = React.useReducer((prev) => !prev, false);
+  const [addFavorite, setAddFavorite] = React.useState(false);
   const [addCart, setAddCart] = React.useState(false);
 
   const { items } = useSelector(selectCart);
+  const { favoriteItems } = useSelector(selectFavorite);
   const dispatch = useDispatch();
+
+  const item: ProductsData = {
+    id: props.id,
+    category: props.category,
+    faculty: props.faculty,
+    name: props.name,
+    image: props.image,
+    description: props.description,
+    price: props.price,
+    rate: props.rate,
+    sale: props.sale,
+  };
 
   function onClickCartButton() {
     setAddCart((prev) => !prev);
-    const item: ProductsData = {
-      id: props.id,
-      category: props.category,
-      faculty: props.faculty,
-      name: props.name,
-      image: props.image,
-      description: props.description,
-      price: props.price,
-      rate: props.rate,
-      sale: props.sale,
-    };
     if (addCart) {
       dispatch(removeItemFromCart(props.id));
     } else {
@@ -40,13 +48,27 @@ const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
     }
   }
 
+  function onClickFavoriteButton() {
+    setAddFavorite((prev) => !prev);
+    if (addFavorite) {
+      dispatch(removeFavoriteItemFromFavorite(props.id));
+    } else {
+      dispatch(addFavoriteItemToFavorite(item));
+      dispatch(setIsEmptyFavorite(false));
+    }
+  }
+
   React.useEffect(() => {
     items.filter((item) => item.id === props.id).forEach((item) => setAddCart(true));
+    favoriteItems.filter((item) => item.id === props.id).forEach((item) => setAddFavorite(true));
 
     if (items.length === 0) {
       dispatch(setEmptyCart(true));
     }
-  }, [dispatch, items, props.id]);
+    if (favoriteItems.length === 0) {
+      dispatch(setIsEmptyFavorite(true));
+    }
+  }, [dispatch, items, favoriteItems, props.id]);
 
   const isMounted = React.useRef(false);
 
@@ -54,9 +76,12 @@ const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
     if (isMounted.current) {
       const json = JSON.stringify(items);
       localStorage.setItem('cart', json);
+
+      const jsonFavorite = JSON.stringify(favoriteItems);
+      localStorage.setItem('favorite', jsonFavorite);
     }
     isMounted.current = true;
-  }, [items]);
+  }, [items, favoriteItems]);
 
   const iconsStyleActive = 'text-orange-400 hover:text-orange-500 duration-300';
   const iconsStyle = 'text-gray-600 hover:text-orange-500 duration-300';
@@ -70,11 +95,11 @@ const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
       <div className="top flex justify-between items-center gap-4 w-full">
         <div className="buttons cursor-pointer flex items-center gap-4 ">
           <button
-            className={addWishlist ? `wishlist ${iconsStyleActive}` : `wishlist ${iconsStyle}`}
-            onClick={setAddWishlist}
+            className={addFavorite ? `wishlist ${iconsStyleActive}` : `wishlist ${iconsStyle}`}
+            onClick={onClickFavoriteButton}
           >
             <svg className="w-[25px] h-[25px]" viewBox="0 -960 960 960">
-              {addWishlist ? (
+              {addFavorite ? (
                 <path
                   className="fill-current"
                   d="m480-147.54-31.769-28.923q-103.307-94.307-170.384-162.5-67.077-68.192-106.73-120.999-39.654-52.808-55.385-95.307-15.731-42.5-15.731-85.423 0-82.307 55.5-137.807 55.5-55.5 137.192-55.5 55.846 0 103.576 28.154Q444-777.691 480-723.998q40.461-55.923 86.884-82.962t100.423-27.039q81.692 0 137.192 55.5 55.5 55.5 55.5 137.807 0 42.923-15.731 85.423-15.731 42.499-55.385 95.307-39.653 52.807-106.73 120.999-67.077 68.193-170.384 162.5L480-147.54Z"
