@@ -2,10 +2,17 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { URL } from '../models/enums';
 import { RootState } from './store';
-import { setAllProducts } from './slices/FilterSlice';
 import {
+  setAllProducts,
+  setRatingDesc,
+  setRatingSortOrderDefault,
+  setSaleDesc,
+} from './slices/FilterSlice';
+import {
+  setBestRatingProducts,
   setCurrentPage,
   setProducts,
+  setSaleProducts,
   setTotalPages,
   setTotalProducts,
 } from './slices/ProductsSlice';
@@ -24,6 +31,7 @@ import {
   setUserLogInError,
 } from './slices/UserSlice';
 import { getUserFromLocalStorage } from '../utils/getUserFromLoocalStorage';
+import { PRODUCTS_PER_PAGE } from '../models/globalVariables';
 
 const requestConfig = {
   headers: { 'Content-Type': 'application/json' },
@@ -48,18 +56,77 @@ export const fetchInitialProducts = createAsyncThunk(
   }
 );
 
+export const getSaleProducts = createAsyncThunk(
+  'products/getSaleProducts',
+  async (_, { dispatch, getState }) => {
+    dispatch(setSaleDesc());
+
+    try {
+      const state: RootState = getState() as RootState;
+      const { sale, sort, order } = state.filter;
+
+      const response = await axios.get(
+        `${URL.PRODUCTS}?page=1&limit=50&sale=${sale}&sort=${sort}&order=${order}`
+      );
+
+      dispatch(setSaleProducts(response.data.products));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const getRatingProducts = createAsyncThunk(
+  'products/getRatingProducts',
+  async (_, { dispatch, getState }) => {
+    dispatch(setRatingDesc());
+    try {
+      const state: RootState = getState() as RootState;
+      const { sort, order } = state.filter;
+
+      const response = await axios.get(
+        `${URL.PRODUCTS}?page=1&limit=50&sort=${sort}&order=${order}`
+      );
+
+      dispatch(setBestRatingProducts(response.data.products));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(setRatingSortOrderDefault());
+    }
+  }
+);
+
+//!sale:
+//https://fan-store-backend-elena-myone.onrender.com/products?page=1&limit=50&sale=true&sort=sale&order=desc
+
+//TODO price:
+//https://fan-store-backend-elena-myone.onrender.com/products?page=1&limit=50&sort=price&order=desc
+
+//TODO rate:
+//https://fan-store-backend-elena-myone.onrender.com/products?page=1&limit=50&sort=rate&order=asc
+//starts sort
+//https://fan-store-backend-elena-myone.onrender.com/products?page=1&limit=50&sort=rate&order=4&category=souvenirs
+
+//All together
+//https://fan-store-backend-elena-myone.onrender.com/products?page=1&limit=50&sort=rate&order=asc&category=souvenirs&faculty=Hufflepuff
+
 export const fetchFilteredProducts = createAsyncThunk(
   'products/fetchFilteredProducts',
   async (_, { dispatch, getState }) => {
     const state: RootState = getState() as RootState;
-    const { activeCategory, activeFaculty } = state.filter;
-    const searchProduct = state.header.searchProduct;
+    const { activeCategory, activeFaculty, sort, order, sale } = state.filter;
+    const searchProduct = state.search.searchProduct;
     const currentPage = state.products.currentPage;
 
     const response = await axios.get(
-      `${URL.PRODUCTS}?page=${currentPage}&limit=8&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}`
+      `${URL.PRODUCTS}?page=${currentPage}&limit=${PRODUCTS_PER_PAGE}&category=${activeCategory}&faculty=${activeFaculty}&name=${searchProduct}&sort=${sort}&order=${order}&sale=${sale}`
     );
-    dispatch(setCurrentPage(response.data.currentPage));
+
+    response.data.products <= PRODUCTS_PER_PAGE
+      ? dispatch(setCurrentPage(1))
+      : dispatch(setCurrentPage(response.data.currentPage));
+
     dispatch(setTotalPages(response.data.totalPages));
     dispatch(setProducts(response.data.products));
 

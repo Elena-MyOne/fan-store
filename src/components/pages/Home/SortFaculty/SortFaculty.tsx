@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter, setActiveFaculty } from '../../../../redux/slices/FilterSlice';
 
-const Sort = () => {
+const SortFaculty = () => {
   const { activeFaculty, allProducts } = useSelector(selectFilter);
   const dispatch = useDispatch();
 
@@ -78,4 +78,4 @@ const Sort = () => {
   );
 };
 
-export default Sort;
+export default SortFaculty;

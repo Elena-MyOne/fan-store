@@ -6,10 +6,10 @@ import Service from '../Services/Service';
 
 const Layout = () => {
   return (
-    <div className="grid grid-rows-[auto_auto_60px]">
+    <div className="grid grid-rows-[auto_auto_80px]">
       <Service />
       <Header />
-      <main className="min-h-[86vh]">
+      <main className="min-h-[83vh]">
         <Outlet />
       </main>
       <Footer />

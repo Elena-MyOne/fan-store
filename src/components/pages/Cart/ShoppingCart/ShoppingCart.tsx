@@ -72,12 +72,12 @@ const ShoppingCart: React.FC = () => {
         </div>
       </div>
 
-      <div className="buttons flex w-full justify-between items-center gap-10 pt-7">
+      <div className="buttons flex w-full justify-between items-center gap-10 pt-7 px-2">
         <Link
-          to={ROUTER_PATH.HOME}
+          to={`/${ROUTER_PATH.HOME}`}
           className="back px-6 py-2 block border-solid border-2 text-gray-400 hover:text-orange-500 border-gray-400 hover:border-orange-500 duration-300 rounded-3xl"
         >
-          Go Back
+          Shop now
         </Link>
         <Link
           to={`/${ROUTER_PATH.CHECKOUT}`}

@@ -12,10 +12,10 @@ const EmptyCart = () => {
         <img src={img} alt="walking woman with empty cart" />
       </div>
       <Link
-        to={ROUTER_PATH.HOME}
+        to={`/${ROUTER_PATH.HOME}`}
         className="px-6 py-2 block text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl"
       >
-        Home page
+        Shop now
       </Link>
     </>
   );

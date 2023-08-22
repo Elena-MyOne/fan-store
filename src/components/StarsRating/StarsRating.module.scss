@@ -1,0 +1,12 @@
+// .item:hover,
+// .item:hover ~ .item {
+//   color: #9ca3af;
+// }
+
+.rating[data-total-value='1'] .item:nth-child(n + 5),
+.rating[data-total-value='2'] .item:nth-child(n + 4),
+.rating[data-total-value='3'] .item:nth-child(n + 3),
+.rating[data-total-value='4'] .item:nth-child(n + 2),
+.rating[data-total-value='5'] .item:nth-child(n + 1) {
+  color: #fb923c;
+}

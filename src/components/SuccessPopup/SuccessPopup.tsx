@@ -10,10 +10,10 @@ const SuccessPopup: React.FC = () => {
       <p className="font-semibold text-lg">Success!</p>
       <div className="buttons flex gap-4 text-center">
         <Link
-          to={ROUTER_PATH.HOME}
+          to={`/${ROUTER_PATH.HOME}`}
           className="w-44 px-6 py-2 block text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl"
         >
-          Home page
+          Shop now
         </Link>
         <Link
           to={`/${ROUTER_PATH.PROFILE}/${ROUTER_PATH.ACCOUNT}`}

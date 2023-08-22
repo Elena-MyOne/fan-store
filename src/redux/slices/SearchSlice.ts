@@ -2,16 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-export interface HeaderState {
+export interface SearchState {
   searchProduct: string;
 }
 
-const initialState: HeaderState = {
+const initialState: SearchState = {
   searchProduct: '',
 };
 
-export const headerSlice = createSlice({
-  name: 'header',
+export const SearchSlice = createSlice({
+  name: 'search',
   initialState,
   reducers: {
     setSearchProduct(state, action: PayloadAction<string>) {
@@ -23,7 +23,7 @@ export const headerSlice = createSlice({
   },
 });
 
-export const selectHeader = (state: RootState): HeaderState => state.header;
+export const selectSearch = (state: RootState): SearchState => state.search;
 
-export const { setSearchProduct, setSearchParam } = headerSlice.actions;
-export default headerSlice.reducer;
+export const { setSearchProduct, setSearchParam } = SearchSlice.actions;
+export default SearchSlice.reducer;

@@ -1,11 +1,11 @@
 import React from 'react';
 import debounce from 'lodash.debounce';
-import { selectHeader, setSearchProduct } from '../../../redux/slices/HeaderSlice';
+import { selectSearch, setSearchProduct } from '../../../../redux/slices/SearchSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from '../../../redux/store';
+import { AppDispatch } from '../../../../redux/store';
 
 const Search = () => {
-  const { searchProduct } = useSelector(selectHeader);
+  const { searchProduct } = useSelector(selectSearch);
   const dispatch = useDispatch<AppDispatch>();
 
   const inputElement = React.useRef<HTMLInputElement>(null);
