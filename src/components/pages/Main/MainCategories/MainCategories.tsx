@@ -26,6 +26,9 @@ const MainCategories: React.FC = () => {
         <li className={itemStyle} onClick={() => onClickMainCategories(CATEGORIES.ALL)}>
           <Link to={ROUTER_PATH.HOME}>All Products</Link>
         </li>
+        <li className={itemStyle} onClick={() => onClickMainCategories(CATEGORIES.TRUNKS)}>
+          <Link to={ROUTER_PATH.HOME}>Trunks</Link>
+        </li>
         <li className={itemStyle} onClick={() => onClickMainCategories(CATEGORIES.WANDS)}>
           <Link to={ROUTER_PATH.HOME}>Wands</Link>
         </li>

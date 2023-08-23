@@ -32,6 +32,7 @@ export enum STATUS {
 }
 
 export enum CATEGORIES {
+  TRUNKS = 'trunks',
   WANDS = 'wands',
   DECORATIONS = 'decorations',
   PILLOWS = 'pillows',
