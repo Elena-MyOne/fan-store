@@ -6,7 +6,7 @@ import './slick-theme.scss';
 import './Carousel.scss';
 
 import { Link } from 'react-router-dom';
-import { CATEGORIES, ROUTER_PATH } from '../../../../models/enums';
+import { ROUTER_PATH } from '../../../../models/enums';
 import { setActiveCategory } from '../../../../redux/slices/FilterSlice';
 import { useDispatch } from 'react-redux';
 import { slides } from '../../../../data/carousel';
