@@ -34,6 +34,8 @@ const Product: React.FC = () => {
     rate: 0,
     sale: 0,
     length: '',
+    new: false,
+    bestseller: false,
   });
 
   const isMounted = React.useRef(false);
@@ -61,6 +63,8 @@ const Product: React.FC = () => {
           price: response.data.price,
           rate: response.data.rate,
           sale: response.data.sale,
+          new: response.data.new,
+          bestseller: response.data.bestseller,
         });
       } catch (error) {
         console.log(error);

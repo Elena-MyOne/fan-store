@@ -15,6 +15,8 @@ export interface ProductsData {
   price: number;
   rate: number;
   sale: number;
+  new: boolean;
+  bestseller: boolean;
 }
 
 export interface CartData extends ProductsData {

@@ -35,6 +35,8 @@ const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
     price: props.price,
     rate: props.rate,
     sale: props.sale,
+    new: props.new,
+    bestseller: props.bestseller,
   };
 
   function onClickCartButton() {
