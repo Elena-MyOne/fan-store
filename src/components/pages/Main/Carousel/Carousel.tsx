@@ -25,20 +25,20 @@ const Carousel: React.FC = () => {
   };
 
   return (
-    <div className="slider px-4 pb-8 container m-auto">
-      <div className="body text-white rounded-lg">
+    <div className="slider md:px-4 pb-8 container m-auto">
+      <div className="body text-white rounded-lg overflow-hidden">
         <Slider {...settings}>
           {slides.map((slide) => (
             <div
-              className={`item item-${slide.id} flex items-start flex-col gap-4 px-20 py-10 sm:py-32`}
+              className={`item item-${slide.id} flex items-start flex-col gap-4 px-12 sm:px-20 py-10 sm:py-32`}
               key={slide.id}
             >
-              <div className="content max-w-lg">
+              <div className="content max-w-lg sm:text-left text-center">
                 <h2 className="font-fjalla md:text-3xl text-xl">{slide.title}</h2>
                 <p className="md:text-xl mt-4 md:mt-8 h-24 sm:block hidden">{slide.text}</p>
                 <p className="md:text-xl mt-4 md:mt-8 text-orange-500">-30% sale</p>
                 <Link
-                  className="text-xl inline-block bg-gray-200 hover:bg-orange-500 px-4 py-2 text-black hover:text-white rounded-3xl mt-8 mb-10 sm:mb-0 duration-300"
+                  className="md:text-xl inline-block bg-gray-200 hover:bg-orange-500 px-3 py-1 md:px-4 md:py-2 text-black hover:text-white rounded-3xl mt-8 mb-10 sm:mb-0 duration-300"
                   to={ROUTER_PATH.HOME}
                   onClick={() => dispatch(setActiveCategory(slide.link))}
                 >

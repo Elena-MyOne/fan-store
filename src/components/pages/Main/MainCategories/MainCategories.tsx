@@ -22,7 +22,7 @@ const MainCategories: React.FC = () => {
 
   return (
     <div className="container m-auto">
-      <ul className="categories container m-auto font-semibold text-lg flex items-center justify-between flex-wrap gap-x-8 gap-y-4 px-2 py-6">
+      <ul className="categories container m-auto font-semibold md:text-lg flex items-center justify-between flex-wrap gap-x-3 sm:gap-x-8 gap-y-4 px-2 py-6">
         <li className={itemStyle} onClick={() => onClickMainCategories(CATEGORIES.ALL)}>
           <Link to={ROUTER_PATH.HOME}>All Products</Link>
         </li>
