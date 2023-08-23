@@ -64,9 +64,10 @@ export const getSaleProducts = createAsyncThunk(
     try {
       const state: RootState = getState() as RootState;
       const { sale, sort, order } = state.filter;
+      const totalProducts = state.products.totalProducts;
 
       const response = await axios.get(
-        `${URL.PRODUCTS}?page=1&limit=50&sale=${sale}&sort=${sort}&order=${order}`
+        `${URL.PRODUCTS}?page=1&limit=${totalProducts}&sale=${sale}&sort=${sort}&order=${order}`
       );
 
       dispatch(setSaleProducts(response.data.products));
@@ -83,9 +84,10 @@ export const getRatingProducts = createAsyncThunk(
     try {
       const state: RootState = getState() as RootState;
       const { sort, order } = state.filter;
+      const totalProducts = state.products.totalProducts;
 
       const response = await axios.get(
-        `${URL.PRODUCTS}?page=1&limit=50&sort=${sort}&order=${order}`
+        `${URL.PRODUCTS}?page=1&limit=${totalProducts}&sort=${sort}&order=${order}`
       );
 
       dispatch(setBestRatingProducts(response.data.products));

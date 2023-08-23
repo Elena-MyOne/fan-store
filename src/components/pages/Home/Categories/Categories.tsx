@@ -16,14 +16,14 @@ const Categories: React.FC = () => {
     'xl:px-5 px-4 xl:py-2 py-1 text-white bg-gray-800 hover:bg-gray-900 duration-300 rounded-3xl cursor-pointer';
 
   const allCategories = React.useMemo(() => {
-    return allProducts.map((product) => product.category.toLowerCase());
+    return allProducts.map((product) => product.category);
   }, [allProducts]);
 
   const categories = React.useMemo(() => {
     if (allProducts.length === 0) {
       return;
     }
-    return ['all', ...new Set(allCategories)].map((category, index) => (
+    return ['All', ...new Set(allCategories)].map((category, index) => (
       <li
         className={category === activeCategory ? styleCategoryItemActive : styleCategoryItem}
         key={index}
