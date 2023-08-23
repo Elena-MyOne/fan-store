@@ -1,5 +1,10 @@
 export const PRODUCTS_PER_PAGE = 9;
 
+export const SINGLE_ITEMS = {
+  NEW: 'New',
+  BESTSELLERS: 'Best sellers',
+};
+
 export const RATING_ITEMS = {
   DESC: 'High to low Rating',
   ASC: 'Low to high Rating',
