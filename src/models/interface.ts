@@ -15,7 +15,7 @@ export interface ProductsData {
   price: number;
   rate: number;
   sale: number;
-  new: boolean;
+  newProduct: boolean;
   bestseller: boolean;
 }
 

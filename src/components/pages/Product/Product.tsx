@@ -34,7 +34,7 @@ const Product: React.FC = () => {
     rate: 0,
     sale: 0,
     length: '',
-    new: false,
+    newProduct: false,
     bestseller: false,
   });
 
@@ -63,7 +63,7 @@ const Product: React.FC = () => {
           price: response.data.price,
           rate: response.data.rate,
           sale: response.data.sale,
-          new: response.data.new,
+          newProduct: response.data.new,
           bestseller: response.data.bestseller,
         });
       } catch (error) {

@@ -36,7 +36,7 @@ const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
     price: props.price,
     rate: props.rate,
     sale: props.sale,
-    new: props.new,
+    newProduct: props.newProduct,
     bestseller: props.bestseller,
   };
 
@@ -135,7 +135,7 @@ const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
           </button>
         </div>
         <div className="flex items-center gap-4">
-          {props.bestseller && (
+          {props.newProduct === true && (
             <div className="new bottom-0 left-0 bg-red-50 text-red-400 text-lg px-2 rounded-lg">
               New
             </div>
