@@ -1,37 +1,38 @@
 {
   "files": {
-    "main.css": "/fan-store/static/css/main.c2917aaa.css",
-    "main.js": "/fan-store/static/js/main.3b37168f.js",
-    "Cart.js": "/fan-store/static/js/Cart.ef09859f.chunk.js",
+    "main.css": "/fan-store/static/css/main.4407317a.css",
+    "main.js": "/fan-store/static/js/main.d2f8c955.js",
+    "Cart.js": "/fan-store/static/js/Cart.76ef35c2.chunk.js",
     "Profile.css": "/fan-store/static/css/Profile.4ad84ba5.chunk.css",
     "Profile.js": "/fan-store/static/js/Profile.701dd221.chunk.js",
-    "static/media/1.png": "/fan-store/static/media/1.5d135f9e8394c78608a5.png",
     "static/media/2.jpg": "/fan-store/static/media/2.f3be3fcd22c0f3c9eb7c.jpg",
     "static/media/4.jpg": "/fan-store/static/media/4.9a73ab6f8cc55d355926.jpg",
     "static/media/5.jpg": "/fan-store/static/media/5.f91a269d85caf63ff049.jpg",
     "static/media/3.webp": "/fan-store/static/media/3.e6d1517ade057a6c4e98.webp",
     "static/media/6.jpg": "/fan-store/static/media/6.e75dbe3fd839989a7dd2.jpg",
     "static/media/3.jpg": "/fan-store/static/media/3.42cf36ab657027fb43e4.jpg",
+    "static/media/7.jpg": "/fan-store/static/media/7.84f51df02136327a90e2.jpg",
+    "static/media/1.png": "/fan-store/static/media/1.750b47746148fa9ff4ab.png",
     "static/media/2.webp": "/fan-store/static/media/2.b23afdf422588d7a99e8.webp",
     "static/media/bestSellers.webp": "/fan-store/static/media/bestSellers.52e5634efb91969f1348.webp",
     "static/media/4.webp": "/fan-store/static/media/4.0c7a646f5dac73689f41.webp",
     "static/media/6.webp": "/fan-store/static/media/6.e61b27b7429f9cd87843.webp",
     "static/media/5.webp": "/fan-store/static/media/5.ae11acbd9c0e0e9b3d2c.webp",
-    "static/media/7.webp": "/fan-store/static/media/7.8c5e6880d12e0032266c.webp",
+    "static/media/8.webp": "/fan-store/static/media/8.8c5e6880d12e0032266c.webp",
     "static/media/slytherin.webp": "/fan-store/static/media/slytherin.23a972182924b7d559ce.webp",
     "static/media/1.webp": "/fan-store/static/media/1.680bc1e919728b28bf02.webp",
     "static/media/ravenclaw.webp": "/fan-store/static/media/ravenclaw.fd335eedf002f1d2735a.webp",
     "static/media/hufflepuff.webp": "/fan-store/static/media/hufflepuff.ad667df6b6d2ec67898a.webp",
     "static/media/gryfindor.webp": "/fan-store/static/media/gryfindor.f0e88256acae6d2cdebf.webp",
     "index.html": "/fan-store/index.html",
-    "main.c2917aaa.css.map": "/fan-store/static/css/main.c2917aaa.css.map",
-    "main.3b37168f.js.map": "/fan-store/static/js/main.3b37168f.js.map",
-    "Cart.ef09859f.chunk.js.map": "/fan-store/static/js/Cart.ef09859f.chunk.js.map",
+    "main.4407317a.css.map": "/fan-store/static/css/main.4407317a.css.map",
+    "main.d2f8c955.js.map": "/fan-store/static/js/main.d2f8c955.js.map",
+    "Cart.76ef35c2.chunk.js.map": "/fan-store/static/js/Cart.76ef35c2.chunk.js.map",
     "Profile.4ad84ba5.chunk.css.map": "/fan-store/static/css/Profile.4ad84ba5.chunk.css.map",
     "Profile.701dd221.chunk.js.map": "/fan-store/static/js/Profile.701dd221.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c2917aaa.css",
-    "static/js/main.3b37168f.js"
+    "static/css/main.4407317a.css",
+    "static/js/main.d2f8c955.js"
   ]
 }
