@@ -1,9 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ROUTER_PATH } from '../../../../models/enums';
+import { CATEGORIES, FACULTY, ORDER, ROUTER_PATH, SALE, SORT } from '../../../../models/enums';
 import style from './BestSellers.module.scss';
+import { useDispatch } from 'react-redux';
+import {
+  setActiveCategory,
+  setActiveFaculty,
+  setOrder,
+  setSale,
+  setSelectedSidebarItem,
+  setSort,
+} from '../../../../redux/slices/FilterSlice';
+import { AppDispatch } from '../../../../redux/store';
+import { SINGLE_ITEMS } from '../../../../models/globalVariables';
 
 const BestSellers: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const onClickBestSellers = () => {
+    dispatch(setSelectedSidebarItem(SINGLE_ITEMS.BESTSELLERS));
+    dispatch(setSort(SORT.BESTSELLER));
+    dispatch(setOrder(ORDER.DEFAULT));
+    dispatch(setSale(SALE.DEFAULT));
+    dispatch(setActiveCategory(CATEGORIES.ALL));
+    dispatch(setActiveFaculty(FACULTY.ALL));
+  };
+
   return (
     <section className="pt-10">
       <div className={style.body}>
@@ -18,6 +40,7 @@ const BestSellers: React.FC = () => {
               </p>
               <Link
                 className="inline-block bg-gray-200 hover:bg-orange-500 px-4 py-2 text-black hover:text-white rounded-3xl mt-8 md:mb-10 mb-0 duration-300"
+                onClick={onClickBestSellers}
                 to={ROUTER_PATH.HOME}
               >
                 Shop Now
