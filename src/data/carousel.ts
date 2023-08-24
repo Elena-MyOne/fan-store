@@ -4,7 +4,8 @@ import pillow from '../assets/images/pages/main/slider/3.jpg';
 import sweater from '../assets/images/pages/main/slider/4.webp';
 import souvenir from '../assets/images/pages/main/slider/5.webp';
 import wand from '../assets/images/pages/main/slider/6.webp';
-import all from '../assets/images/pages/main/slider/7.webp';
+import trunk from '../assets/images/pages/main/slider/7.jpg';
+import all from '../assets/images/pages/main/slider/8.webp';
 import { CATEGORIES } from '../models/enums';
 
 export interface ISlides {
@@ -67,6 +68,14 @@ export const slides: ISlides[] = [
   },
   {
     id: 7,
+    img: trunk,
+    alt: 'trunks',
+    title: 'Trunks',
+    text: 'Explore this range of Harry Potter gift trunks, each crafted to resemble those used by Hogwarts students for travel on the Hogwarts Express.',
+    link: CATEGORIES.TRUNKS,
+  },
+  {
+    id: 8,
     img: all,
     alt: 'all products',
     title: 'All products',

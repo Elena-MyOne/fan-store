@@ -10,7 +10,12 @@ import {
 } from '../../../../../redux/slices/FilterSlice';
 import { AppDispatch } from '../../../../../redux/store';
 import { ORDER, SALE, SORT } from '../../../../../models/enums';
-import { PRICE_ITEMS, RATING_ITEMS, SALE_ITEMS } from '../../../../../models/globalVariables';
+import {
+  PRICE_ITEMS,
+  RATING_ITEMS,
+  SALE_ITEMS,
+  SINGLE_ITEMS,
+} from '../../../../../models/globalVariables';
 
 const SortSidebarItems: React.FC = () => {
   const { selectedSidebarItem } = useSelector(selectFilter);
@@ -18,14 +23,14 @@ const SortSidebarItems: React.FC = () => {
 
   const titleStyles = 'title font-semibold py-4';
 
-  const singleItems = ['New', 'Best sellers'];
-
   const handleItemClick = (item: string) => {
     dispatch(setSelectedSidebarItem(item));
   };
 
   React.useEffect(() => {
     const itemToSortOrderMap = {
+      [SINGLE_ITEMS.NEW]: { sort: SORT.NEW, order: ORDER.DEFAULT },
+      [SINGLE_ITEMS.BESTSELLERS]: { sort: SORT.BESTSELLER, order: ORDER.DEFAULT },
       [RATING_ITEMS.DESC]: { sort: SORT.RATE, order: ORDER.DESC },
       [RATING_ITEMS.ASC]: { sort: SORT.RATE, order: ORDER.ASC },
       [RATING_ITEMS.FIVE]: { sort: SORT.RATE, order: ORDER.FIVE },
@@ -66,7 +71,7 @@ const SortSidebarItems: React.FC = () => {
     <>
       <ul className="single">
         <SidebarItems
-          items={singleItems}
+          items={Object.values(SINGLE_ITEMS)}
           selectedItem={selectedSidebarItem}
           handleItemClick={handleItemClick}
         />

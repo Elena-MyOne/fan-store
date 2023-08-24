@@ -16,6 +16,7 @@ import {
   selectFavorite,
   setIsEmptyFavorite,
 } from '../../redux/slices/FavoriteSlice';
+import { SORT } from '../../models/enums';
 
 const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
   const [addFavorite, setAddFavorite] = React.useState(false);
@@ -35,6 +36,8 @@ const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
     price: props.price,
     rate: props.rate,
     sale: props.sale,
+    newProduct: props.newProduct,
+    bestseller: props.bestseller,
   };
 
   function onClickCartButton() {
@@ -89,7 +92,7 @@ const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
 
   return (
     <div
-      className="product hover:shadow-lg duration-300 border py-4 border-gray-300 px-4 rounded-lg flex flex-col gap-2 items-center"
+      className="product hover:shadow-lg duration-300 border py-4 border-gray-300 px-4 rounded-lg flex flex-col gap-2 items-center relative"
       key={props.id}
     >
       <div className="top flex justify-between items-center gap-4 w-full">
@@ -131,7 +134,15 @@ const ProductCard: React.FC<ProductsData> = (props: ProductsData) => {
             </svg>
           </button>
         </div>
-        <div className="sale text-lg text-orange-400">{sale}</div>
+        <div className="flex items-center gap-4">
+          {props.newProduct === true && (
+            <div className="new bottom-0 left-0 bg-red-50 text-red-400 text-lg px-2 rounded-lg">
+              New
+            </div>
+          )}
+
+          {props.sale !== 0 && <div className="sale text-lg text-orange-400">{sale}</div>}
+        </div>
       </div>
 
       <div className="image h-[190px] m-auto">

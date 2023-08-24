@@ -30,7 +30,6 @@ const Home: React.FC = () => {
   React.useEffect(() => {
     if (window.location.search) {
       const param = qs.parse(window.location.search.substring(1));
-      console.log(param);
 
       dispatch(
         setFilters({
@@ -68,7 +67,6 @@ const Home: React.FC = () => {
         sale: sale,
         selected: selectedSidebarItem,
       });
-      console.log(queryString);
       navigate(`?${queryString}`);
     }
 

@@ -32,20 +32,21 @@ export enum STATUS {
 }
 
 export enum CATEGORIES {
-  WANDS = 'wands',
-  DECORATIONS = 'decorations',
-  PILLOWS = 'pillows',
-  SWEATERS = 'sweaters',
-  SOUVENIRS = 'souvenirs',
-  ROBES = 'robes',
-  ALL = 'all',
+  TRUNKS = 'Trunks',
+  WANDS = 'Wands',
+  DECORATIONS = 'Decorations',
+  PILLOWS = 'Pillows',
+  SWEATERS = 'Sweaters',
+  SOUVENIRS = 'Souvenirs',
+  ROBES = 'Robes',
+  ALL = 'All',
 }
 
 export enum FACULTY {
-  GRYFFINDOR = 'gryffindor',
-  HUFFLEPUFF = 'hufflepuff',
-  RAVENCLAW = 'ravenclaw',
-  SLYTHERIN = 'slytherin',
+  GRYFFINDOR = 'Gryffindor',
+  HUFFLEPUFF = 'Hufflepuff',
+  RAVENCLAW = 'Ravenclaw',
+  SLYTHERIN = 'Slytherin',
   ALL = 'All',
 }
 
@@ -53,6 +54,8 @@ export enum SORT {
   SALE = 'sale',
   RATE = 'rate',
   PRICE = 'price',
+  NEW = 'new',
+  BESTSELLER = 'bestseller',
   DEFAULT = '',
 }
 
